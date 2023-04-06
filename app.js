@@ -17,5 +17,5 @@ app.use(express.static(path.join(__dirname,'media')));
 app.use('/', require('./router'));
 
 app.listen(5000, ()=>{
-    console.log("server corriendo aloo");
+    console.log("Server corriendo en el puerto 5000, buenas");
 });

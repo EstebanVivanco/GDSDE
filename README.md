@@ -8,7 +8,7 @@ Lo primero es tener instalado Node, obviamente, después hacen el pull del repo 
 
 Luego de eso debemos instalar las dependencias que vamos a ocupar, de momento no estan todas pero son las siguientes: 
 
-    1. npm i  ejs express nodemon 
+    1. npm i  ejs express nodemon mysql
 
 Este comando estara sujeto a cambios en el futuro, con esto podemos ejecutar el comando para levantar el servidor
 
