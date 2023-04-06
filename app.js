@@ -11,6 +11,9 @@ app.use(express(json));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'));
 
+//Permitir ver imagenes señores
+app.use(express.static(path.join(__dirname,'media')));
+
 app.use('/', require('./router'));
 
 app.listen(5000, ()=>{
