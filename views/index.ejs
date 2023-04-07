@@ -42,25 +42,25 @@
     </nav>
     <!-- FIN NAV-->
     <br>
-    <div class="container-fluid">
-        <div class="row p-5">
-            <div class="container col-12">
-                <div class="card" style="width: 20rem;">
+
+
+    <div class="container-fluid p-8">
+        <div class="row">
+            <% results.forEach((salas) => { %>
+            <div class="col-md-4">
+                <div class="card mt-5" style="width: 35rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Sala de estudio numero 1</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Estado: disponible</h6>
-                        <p class="card-text">Esta sala de estudio tiene capacidad para 5 personas</p>
+                        <h5 class="card-title">Sala de estudio numero <%= salas.numero_sala %></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Estado: <%= salas.estado %></h6>
+                        <p class="card-text">Esta sala de estudio tiene capacidad para <%= salas.capacidad %> personas</p>
                         <a href="#" class="btn btn-primary">Solicitar sala de estudio</a>
                     </div>
                 </div>
             </div>
+            <%})%>
         </div>
     </div>
     </div>
 
-
-
-
 </body>
-
 </html>

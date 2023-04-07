@@ -1,13 +1,20 @@
 const express = require('express');
 const conexion = require('./database/bd');
-
 const router = express.Router();
 
 //Settings
 
 router.get('/',  (req, res)=>{
 
-    res.render('form');
+    conexion.query('SELECT * FROM salas', (error, results) => {
+
+        if (error){
+            throw error;            
+        }else{
+            res.render('index', {results: results});
+        }
+
+    });
 
 })
 
