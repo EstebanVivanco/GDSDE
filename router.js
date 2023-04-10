@@ -18,4 +18,15 @@ router.get('/',  (req, res)=>{
 
 })
 
+
+router.get('/solicitud',  (req, res)=>{
+
+    res.render('solicitud');
+
+})
+
+
+const crud = require('./controllers/crud');
+router.post('/GuardarSolicitud',crud.GuardarSolicitud);
+
 module.exports = router;
