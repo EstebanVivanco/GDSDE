@@ -8,7 +8,6 @@ function addelement(){
     ruts.push(rut);
     rutinput.value = "";
 
-    console.log('ruts :>> ', ruts);
 
 
     let resultado = document.getElementById('resultado');

@@ -5,12 +5,79 @@
   <meta charset="UTF-8">
   <title>Formulario Bootstrap</title>
   <!-- Incluir los estilos de Bootstrap -->
-  <script src="userlist.js"></script>
+  <script>
+     
+var ruts = [];
+
+function addelement(){
+
+    let rut = document.getElementById('rut').value;
+    let rutinput = document.getElementById('rut');
+    ruts.push(rut);
+    rutinput.value = "";
+
+
+
+    let resultado = document.getElementById('resultado');
+    resultado.innerHTML = '';
+    var cont = 1;
+
+    for( const ruta of ruts){
+
+
+        let datoparrafo = document.createElement('input');
+        let pretext = document.createElement('p');
+        pretext.innerText = cont + '. Datos de ingresante: '
+        datoparrafo.value = ruta;
+        cont = cont + 1;
+
+        resultado.appendChild(pretext).appendChild(datoparrafo);
+
+    }
+
+    let container = document.getElementById('contenedordatos');
+    container.value = ruts;
+
+
+}
+  </script>
+
+
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    
+  
+  
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Datos de la Sala</h4>
+          </div>
+          <div class="card-body">
+            
+            
+              <div class="form-group">
+                
+                  <%  if(sala){%>
+
+                    <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
+
+                    <label> NUMERO DE LA SALA <%= sala.numero_sala %>  </label><br>
+                    <label> ESTADO DE LA SALA <%= sala.estado %>       </label><br>
+                    <label> CAPACIDAD DE LA SALA<%= sala.capacidad %>  </label>
+
+                  <%  }%>
+
+                
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -38,7 +105,6 @@
     </div>
   </div>
 
-
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -50,11 +116,17 @@
             
             <form method="POST" action="/GuardarSolicitud">
 
+              <%  if(sala){%>
+
+                <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
+
+              <%  }%>
+
               <div id="resultado">
 
               </div>
 
-              <input type="text" value="" id="contenedordatos">
+              <input type="text" value="" id="contenedordatos" name="contenedordatos" hidden>
               <br>
               <button type="submit" class="btn btn-primary mt-2 ">Generar Solicitud</button>
             </form>
