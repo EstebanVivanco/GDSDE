@@ -19,10 +19,14 @@ exports.GuardarSolicitud = (req,res)=>{
 
                 alumno_id = results[0]['alumno_id'] ;
 
+<<<<<<< HEAD
                 //https://momentjs.com/ (formatos de fecha)
                 let currentDate = moment().format("hh:mm:ss");
 
                 conexion.query('INSERT INTO solicitud SET ?', { alumno_id: alumno_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : 'AAA-VC', hora_inicio : '2024-10-12' ,hora_termino: '2024-12-12'} , (error, results) => {
+=======
+                conexion.query('INSERT INTO solicitud SET ?', { alumno_id: alumno_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : 'AAA-VC', fecha_solicitud : '2023-11-04' ,hora_inicio : '22:00:00', hora_final : '23:00:00'} , (error, results) => {
+>>>>>>> 9b610646e47b919a6cbfdb2e3ce139fd53f7badf
 
                     if (error){
                         throw error;            

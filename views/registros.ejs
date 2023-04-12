@@ -41,33 +41,42 @@
             </a>
         </div>
     </nav>
-    <!-- FIN NAV-->
     <br>
 
-    <div class="container-fluid p-8">
-        <div class="row">
-            <% results.forEach((salas) => { %>
-            <div class="col-md-4">
-                <div class="card mt-5" style="width: 35rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Sala de estudio numero <%= salas.numero_sala %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Estado: <%= salas.estado %></h6>
-                        <p class="card-text">Esta sala de estudio tiene capacidad para <%= salas.capacidad %> personas</p>
-                        
-                        <% if(salas.estado == 'Disponible'){ %>
-                        <a href="/solicitud/<%= salas.sala_id %>" class="btn btn-primary">Solicitar sala de estudio</a>
-                        <% }else if(salas.estado == 'Deshabilitada'){ %>
-                          <a class="btn btn-danger">Imposible Solicitar</a>
-                        <% }else{%>
-                            <a class="btn btn-warning">Ocupada en este momento</a>
-                        <% }%>
-                    </div>
-                </div>
-            </div>
-            <%})%>
-        </div>
+    <div class="container">
+        <h1>Tabla de Solicitudes</h1>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID SOLICITUD</th>
+                    <th>ALUMNO</th>
+                    <th>SALA ID</th>
+                    <th>BIBLIOTECARIO</th>
+                    <th>CODIGO DE SOLICITUD</th>
+                    <th>FECHA DE SOLICITUD</th>
+                    <th>HORA DE INICIO</th>
+                    <th>HORA DE SALIDA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% results.forEach((solicitud) => { %>
+                <tr>
+                    <td> <%= solicitud.solicitud_id %> </td>
+                    <td> <%= solicitud.nombre %> </td>
+                    <td> <%= solicitud.numero_sala %> </td>
+                    <td> <%= solicitud.nombreadm %> </td>
+                    <td> <%= solicitud.codigo_solicitud%> </td>
+                    <td> <%= solicitud.fecha_solicitud%> </td>
+                    <td> <%= solicitud.hora_inicio %> </td>
+                    <td> <%= solicitud.hora_final %> </td>
+                </tr>
+                <% }) %>
+                <!-- Agrega más filas según tus necesidades -->
+            </tbody>
+        </table>
     </div>
-    </div>
+
+
 
 </body>
 </html>
