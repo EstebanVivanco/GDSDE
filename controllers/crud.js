@@ -6,6 +6,7 @@ exports.GuardarSolicitud = (req,res)=>{
     const ruts = req.body.contenedordatos;
     const sala_id = req.body.idsala;
     const arrayruts = ruts.split(",");
+    const moment = require('moment')
     let alumno_id;
 
     for (const rutovich of arrayruts) {
@@ -17,8 +18,14 @@ exports.GuardarSolicitud = (req,res)=>{
             }else{
 
                 alumno_id = results[0]['alumno_id'] ;
+                //https://momentjs.com/ (formatos de fecha)
+                let fecha_solicitud = moment().add(0, 'hours').format("YYYY:MM:DD");     
+                let hora_inicio = moment().format("hh:mm:ss");
+                let hora_final = moment().add(2, 'hours').format('hh:mm:ss')
 
-                conexion.query('INSERT INTO solicitud SET ?', { alumno_id: alumno_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : 'AAA-VC', fecha_solicitud : '2023-11-04' ,hora_inicio : '22:00:00', hora_final : '23:00:00'} , (error, results) => {
+                
+
+                conexion.query('INSERT INTO solicitud SET ?', { alumno_id: alumno_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : 'AAA-VC', fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
 
                     if (error){
                         throw error;            
