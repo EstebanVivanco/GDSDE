@@ -32,6 +32,7 @@ router.get('/registros',  (req, res)=>{
             throw error;            
         }else{
             res.render('registros', {results: results});
+            console.log('results :>> ', results);
         }
 
     });

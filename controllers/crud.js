@@ -28,7 +28,7 @@ exports.GuardarSolicitud = (req,res)=>{
                     if (error){
                         throw error;            
                     }else{
-                        res.send('Registro finalizado exitosamente épico señores, nada más que decir' + currentDate)
+                        res.send('Registro finalizado exitosamente épico señores, nada más que decir')
                     }
             
                 });
