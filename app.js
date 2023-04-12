@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'));
 
 //Permitir ver imagenes señores
-app.use(express.static(path.join(__dirname,'media')));
+app.use(express.static(path.join(__dirname,'public')));
 app.use(express.static(path.join(__dirname,'helpers')));
 
 app.use('/', require('./router'));

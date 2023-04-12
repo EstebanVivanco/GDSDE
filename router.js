@@ -28,9 +28,6 @@ router.get('/registros',  (req, res)=>{
 
     conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, solicitud.fecha_solicitud,solicitud.hora_inicio,solicitud.hora_final, alumnos.nombre, salas.numero_sala, admin.nombre AS "nombreadm" FROM solicitud INNER JOIN alumnos ON solicitud.alumno_id = alumnos.alumno_id INNER JOIN salas ON solicitud.sala_id = salas.sala_id INNER JOIN admin ON solicitud.admin_id = admin.admin_id', (error, results) => {
 
-
-
-
         if (error){
             throw error;            
         }else{
