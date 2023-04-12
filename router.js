@@ -64,6 +64,13 @@ router.get('/solicitud/:id',  (req, res)=>{
 
 
 
+
+
+
+
+
+
+
 const crud = require('./controllers/crud');
 router.post('/GuardarSolicitud',crud.GuardarSolicitud);
 
