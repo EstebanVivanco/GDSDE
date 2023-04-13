@@ -1,7 +1,8 @@
  
-var ruts = [];
 
 function addelement(){
+    
+    var ruts = [];
 
     let rut = document.getElementById('rut').value;
     let rutinput = document.getElementById('rut');
@@ -13,7 +14,6 @@ function addelement(){
     let resultado = document.getElementById('resultado');
     resultado.innerHTML = '';
     var cont = 1;
-
     for( const ruta of ruts){
 
 
@@ -32,6 +32,8 @@ function addelement(){
 
 
 }
+
+
 
 
 
