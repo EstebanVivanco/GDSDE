@@ -24,6 +24,7 @@ exports.GuardarSolicitud = (req,res)=>{
 
                 //https://momentjs.com/ (formatos de fecha)
 
+
                 let fecha_solicitud = moment().add(0, 'hours').format("YYYY:MM:DD");     
                 let hora_inicio = moment().format("hh:mm:ss");
                 let hora_final = moment().add(2, 'hours').format('hh:mm:ss')
