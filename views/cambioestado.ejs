@@ -24,9 +24,24 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-center">
-        
-    </div>
+                  <div class="form-group">
+
+                    <form method="POST" action="/CambioEstadoSala">
+                    
+                      <%  if(sala){%>
+    
+                        <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala"><br>
+                        <input type="text" value="<%= sala.estado_id%>" id="estadosala" name="estadosala"><br>
+    
+                      <%  }%>
+                      <button type="submit" class="btn btn-primary mt-2 ">Generar Cambio estado</button>
+                    </form>
+    
+              </div>
+
+      <form>
+
+      
 
     <script>
         const carga = function() {
