@@ -56,12 +56,21 @@ router.get('/solicitud/:id',  (req, res)=>{
 
 })
 
+router.get('/cambioestado/:id',  (req, res)=>{
 
+    const id = req.params.id;
 
+    conexion.query('SELECT * FROM salas WHERE sala_id = ?', [id] , (error, results) => {
 
+        if (error){
+            throw error;            
+        }else{
+            res.render('cambioestado', { sala : results[0]});
+        }
 
+    });
 
-
+})
 
 
 

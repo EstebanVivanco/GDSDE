@@ -154,7 +154,7 @@ function addelement(){
 
               <input type="text" value="" id="contenedordatos" name="contenedordatos" hidden>
               <br>
-              <button type="submit" class="btn btn-primary mt-2 ">Generar Solicitud</button>
+              <button onclick="paginaEstado()" type="submit" class="btn btn-primary mt-2 ">Generar Solicitud</button>
             </form>
 
 
@@ -163,6 +163,14 @@ function addelement(){
       </div>
     </div>
   </div>
+
+    <!--Script para refireccionar a /view registro finalizado, y tambien para abrir una pestaña aparte donde se ejecuta la funcion
+  que hace automatico el cambio de estado de la sala (como para simular un servidor)-->
+  <script>
+    const paginaEstado = function(){
+      window.open('/cambioestado/<%= sala.numero_sala  %>', '_blank');
+    }
+  </script>
 
   <!-- Incluir los scripts de Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
