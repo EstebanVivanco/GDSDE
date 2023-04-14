@@ -41,12 +41,21 @@ exports.GuardarSolicitud = (req,res)=>{
 
                                     let fecha_solicitud = moment().add(0, 'hours').format("YYYY:MM:DD");     
                                     let hora_inicio = moment().format("hh:mm:ss");
-                                    let hora_final = moment().add(2, 'hours').format('hh:mm:ss')
+                                    let hora_final = moment().add(1, 'minutes').format('hh:mm:ss')
 
                                     conexion.query('INSERT INTO solicitud SET ?', { alumno_id: alumno_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
                                         
                                         if (error){
                                             throw error;            
+                                        }else{
+                                            
+
+                                            conexion.query('UPDATE salas SET estado_id = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
+                                                if(error){
+                                                    throw error;
+                                                }
+                                            }); 
+
                                         }
                                     });
 
@@ -82,15 +91,13 @@ exports.GuardarSolicitud = (req,res)=>{
         conexion.query('UPDATE salas SET ? WHERE sala_id = ?; ', [{estado_id:estado_id}, sala_id], (error, results) => {
             if(error){
                 throw error;
-            }else{
+            }
+            else{
                 res.redirect('/');
             }
         }) 
 
     }
-
-
-
 
 
 

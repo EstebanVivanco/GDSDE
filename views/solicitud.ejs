@@ -94,12 +94,13 @@ function addelement(){
 
                     <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
                     <label> NUMERO DE LA SALA <%= sala.numero_sala %>  </label><br>
-                    <label> ESTADO DE LA SALA <%= sala.estado_id %> </label><br>
+                    <label id="estadini"> ESTADO DE LA SALA <%= sala.estado_id %> </label><br>
                     <label> CAPACIDAD DE LA SALA <%= sala.capacidad %>  </label>
 
 
                      <script>
                         const paginaEstado = function(){
+
                           window.open('/cambioestado/<%= sala.numero_sala  %>', '_blank');
                         }
                     </script>
@@ -172,6 +173,10 @@ function addelement(){
     </div>
   </div>
 
+
+
+
+
     <!--Script para refireccionar a /view registro finalizado, y tambien para abrir una pestaña aparte donde se ejecuta la funcion
   que hace automatico el cambio de estado de la sala (como para simular un servidor)-->
 
@@ -181,7 +186,7 @@ function addelement(){
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   
+  
 </body>
 
 </html>
