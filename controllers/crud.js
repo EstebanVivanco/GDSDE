@@ -17,7 +17,8 @@ exports.GuardarSolicitud = (req,res)=>{
         conexion.query('SELECT alumno_id FROM alumnos WHERE RUT = ? ', [rutovich] , (error, results) => {
 
             if (error){
-                throw error;            
+                throw error;     
+
             }else{
 
                 alumno_id = results[0]['alumno_id'] ;
@@ -34,7 +35,8 @@ exports.GuardarSolicitud = (req,res)=>{
                 conexion.query('INSERT INTO solicitud SET ?', { alumno_id: alumno_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
                     
                     if (error){
-                        throw error;            
+                        throw error;     
+  
                     }else{
                         res.render('registrofinalizado');
                     }
