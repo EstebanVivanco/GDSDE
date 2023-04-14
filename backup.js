@@ -47,7 +47,10 @@ exports.GuardarSolicitud = (req,res)=>{
                                         
                                         if (error){
                                             throw error;            
+                                        }else{
+                                            res.render('registrofinalizado');
                                         }
+                                
                                     });
 
                                 }
@@ -56,9 +59,6 @@ exports.GuardarSolicitud = (req,res)=>{
                         }); 
                         
                     }
-
-                    res.render('registrofinalizado');  
-
 
                 }else{
                     res.render('error',{msg : ruts})
@@ -73,6 +73,7 @@ exports.GuardarSolicitud = (req,res)=>{
 
         
     }
+    
 
     exports.CambioEstadoSala = (req , res) =>{
         const sala_id = req.body.idsala;

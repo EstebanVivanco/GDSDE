@@ -6,7 +6,6 @@
   <title>Formulario Bootstrap</title>
   <!-- Incluir los estilos de Bootstrap -->
 
-
   <script>
      
 var ruts = [];
@@ -15,7 +14,7 @@ function addelement(){
 
     let rut = document.getElementById('rut').value;
     let rutinput = document.getElementById('rut');
-    ruts.push(rut);
+    ruts.push( rut);
     rutinput.value = "";
 
     let resultado = document.getElementById('resultado');
@@ -40,6 +39,7 @@ function addelement(){
 
 
 }
+
 
   </script>
 
@@ -94,8 +94,15 @@ function addelement(){
 
                     <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
                     <label> NUMERO DE LA SALA <%= sala.numero_sala %>  </label><br>
-                    <label> ESTADO DE LA SALA <%= sala.estado %>       </label><br>
+                    <label> ESTADO DE LA SALA <%= sala.estado_id %> </label><br>
                     <label> CAPACIDAD DE LA SALA <%= sala.capacidad %>  </label>
+
+
+                     <script>
+                        const paginaEstado = function(){
+                          window.open('/cambioestado/<%= sala.numero_sala  %>', '_blank');
+                        }
+                    </script>
 
                   <%  }%>
 
@@ -114,13 +121,14 @@ function addelement(){
           <div class="card-body">
 
 
-            <form>
+            <form >
               <div class="form-group">
 
                 <label for="rut">RUT</label>
-                <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut">
-              
+                <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" required>
+
               </div>
+              <div id="verificacionmsg"></div>
               <button type="button" onclick="addelement();" class="btn btn-primary">Agregar</button>
             </form>
 
@@ -152,7 +160,7 @@ function addelement(){
 
               </div>
 
-              <input type="text" value="" id="contenedordatos" name="contenedordatos" hidden>
+              <input type="text" value="" id="contenedordatos" name="contenedordatos" >
               <br>
               <button onclick="paginaEstado()" type="submit" class="btn btn-primary mt-2 ">Generar Solicitud</button>
             </form>
@@ -166,18 +174,14 @@ function addelement(){
 
     <!--Script para refireccionar a /view registro finalizado, y tambien para abrir una pestaña aparte donde se ejecuta la funcion
   que hace automatico el cambio de estado de la sala (como para simular un servidor)-->
-  <script>
-    const paginaEstado = function(){
-      window.open('/cambioestado/<%= sala.numero_sala  %>', '_blank');
-    }
-  </script>
+
+
 
   <!-- Incluir los scripts de Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+   
 </body>
 
 </html>
