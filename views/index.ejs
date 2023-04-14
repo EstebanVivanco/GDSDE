@@ -15,7 +15,7 @@
     <!-- INICIO NAV-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index">SALAS DE ESTUDIO</a>
+            <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,21 +45,22 @@
     <br>
 
     <div class="container-fluid p-5">
+        
         <div class="row">
             <% results.forEach((salas) => { %>
             <div class="col-md-4">
-                <div class="card mt-3 w-auto p-3 " style="width: 35rem;">
+                <div class="card text-dark bg-light mt-5 " style="width: 28rem;">
                     <div class="card-body">
                         <h5 class="card-title">Sala de estudio numero <%= salas.numero_sala %></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Estado: <%= salas.estado %></h6>
-                        <p class="card-text">Esta sala de estudio tiene capacidad para <%= salas.capacidad %> personas</p>
+                        <p class="card-text">Sala de estudio con capacidad para <%= salas.capacidad %> personas</p>
                         
                         <% if(salas.estado == 'Disponible'){ %>
-                        <a href="/solicitud/<%= salas.sala_id %>" class="btn btn-primary">Solicitar sala de estudio</a>
+                        <a href="/solicitud/<%= salas.sala_id %>" class="btn btn-primary w-100 pt-2 ">Solicitar sala de estudio</a>
                         <% }else if(salas.estado == 'Deshabilitada'){ %>
-                          <a class="btn btn-danger">Imposible Solicitar</a>
+                          <a class="btn btn-danger w-75">Imposible Solicitar</a>
                         <% }else{%>
-                            <a class="btn btn-warning">Ocupada en este momento</a>
+                            <a class="btn btn-warning w-75">Ocupada en este momento</a>
                         <% }%>
                     </div>
                 </div>
@@ -67,7 +68,7 @@
             <%})%>
         </div>
     </div>
-    </div>
+    
 
 </body>
 </html>

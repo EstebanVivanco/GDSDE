@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/',  (req, res)=>{
 
-    conexion.query('SELECT * FROM salas INNER JOIN estadosalas ON estadosalas.estado_id = salas.estado_id', (error, results) => {
+    conexion.query('SELECT * FROM salas INNER JOIN estadosalas ON estadosalas.estado_id = salas.estado_id order by numero_sala asc ', (error, results) => {
 
         if (error){
             throw error;            
@@ -34,11 +34,9 @@ router.get('/registros',  (req, res)=>{
 
 router.get('/registrofinalizado',  (req, res)=>{
 
-    res.render('registrofinalizado');
+    res.redirect('registrofinalizado');
 
 })
-
-
 
 router.get('/solicitud/:id',  (req, res)=>{
 
@@ -56,16 +54,33 @@ router.get('/solicitud/:id',  (req, res)=>{
 
 })
 
+router.get('/cambioestado/:id',  (req, res)=>{
 
+    const id = req.params.id;
 
+    conexion.query('SELECT * FROM salas WHERE sala_id = ?', [id] , (error, results) => {
 
+        if (error){
+            throw error;            
+        }else{
+            res.render('cambioestado', { sala : results[0]});
+        }
 
+    });
 
+})
 
+router.get('/error',  (req, res)=>{
+
+       res.render('error');
+ 
+})
 
 
 
 const crud = require('./controllers/crud');
+
 router.post('/GuardarSolicitud',crud.GuardarSolicitud);
+router.post('/CambioEstadoSala',crud.CambioEstadoSala);
 
 module.exports = router;

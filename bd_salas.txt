@@ -1,0 +1,89 @@
+
+CREATE TABLE Alumnos (
+    alumno_id int AUTO_INCREMENT PRIMARY KEY,
+    rut varchar(50) NOT NULL,
+    nombre varchar(50) NOT NULL
+    );
+
+CREATE TABLE EstadoSalas(
+    estado_id int AUTO_INCREMENT PRIMARY KEY,
+    estado varchar(50)
+    );
+
+CREATE TABLE Salas(
+    sala_id int AUTO_INCREMENT PRIMARY KEY,
+    numero_sala int NOT NULL,
+    estado_id int NOT NULL,
+    capacidad int NOT NULL,
+    FOREIGN KEY(estado_id) REFERENCES EstadoSalas(estado_id)
+    );
+
+CREATE TABLE Admin(
+    admin_id int AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(50) NOT NULL,
+    contraseña varchar(50) NOT NULL
+    );
+
+CREATE TABLE Solicitud(
+    solicitud_id int AUTO_INCREMENT PRIMARY KEY,
+    alumno_id int NOT NULL,
+    sala_id int NOT NULL,
+    admin_id int NOT NULL,
+    codigo_solicitud varchar(50) NOT NULL,
+    fecha_solicitud date NOT NULL,
+    hora_inicio time NOT NULL,
+    hora_final time NOT NULL,
+    FOREIGN KEY(alumno_id) REFERENCES alumnos(alumno_id),
+    FOREIGN KEY(sala_id) REFERENCES salas(sala_id),
+    FOREIGN KEY(admin_id) REFERENCES admin(admin_id)
+    );
+
+INSERT INTO alumnos VALUES (NULL, "11.111.111-1", "Esteban");
+INSERT INTO alumnos VALUES (NULL, "22.222.222-2", "Matias");
+INSERT INTO alumnos VALUES (NULL, "33.333.333-3", "Gaston");
+INSERT INTO alumnos VALUES (NULL, "44.444.444-4", "Santaigo");
+
+INSERT INTO admin VALUES (NULL, "buenas", "123");
+INSERT INTO admin VALUES (NULL, "tardes", "123");
+
+INSERT INTO EstadoSalas VALUES(NULL, "Disponible");
+INSERT INTO EstadoSalas VALUES(NULL, "Ocupada");
+INSERT INTO EstadoSalas VALUES(NULL, "Deshabilitada");
+
+INSERT INTO salas VALUES (NULL, 1, 1, 5);
+INSERT INTO salas VALUES (NULL, 2, 2, 5);
+INSERT INTO salas VALUES (NULL, 3, 3, 5);
+
+
+Procedimiento almacenado
+
+DELIMITER //
+CREATE PROCEDURE insertar_con_foranea (
+  IN a_rut VARCHAR(15), -- Rut a insertar
+  IN a_nombre VARCHAR(50), -- Nombre a insertar
+  IN s_sala_id INT,
+  IN s_admin_id INT,
+  IN s_codigo_solicitud VARCHAR(50),
+  IN s_fecha_solicitud DATE,
+  IN s_hora_inicio time,
+  IN s_hora_final time
+)
+BEGIN
+  DECLARE v_count INT;
+
+  DECLARE na_alumno_id INT;
+
+  -- Verificar si el rut existe en la tabla de alumnos
+  SELECT COUNT(*) INTO v_count FROM alumnos WHERE rut = a_rut;
+
+  IF v_count = 0 THEN
+    -- Insertar el alumno en la tabla de alumnos
+    INSERT INTO alumnos (rut, nombre) VALUES (a_rut, a_nombre);
+  END IF;
+  -- OBTENER EL ID DEL ALUMNO INGRESADO--
+  SELECT alumno_id INTO na_alumno_id FROM alumnos WHERE rut = a_rut;
+  -- Insertar la solicitud en la tabla de solicitudes
+  INSERT INTO solicitud (alumno_id,sala_id,admin_id,codigo_solicitud,fecha_solicitud,hora_inicio,hora_final) VALUES (na_alumno_id,s_sala_id,s_admin_id,s_codigo_solicitud,s_fecha_solicitud,s_hora_inicio,s_hora_final);
+  SELECT 'Solicitud insertada con éxito' AS mensaje;
+END //
+DELIMITER ;
