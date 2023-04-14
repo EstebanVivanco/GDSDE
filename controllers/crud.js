@@ -77,8 +77,9 @@ exports.GuardarSolicitud = (req,res)=>{
     exports.CambioEstadoSala = (req , res) =>{
         const sala_id = req.body.idsala;
         const estado_id = req.body.estadosala;
-        
-        conexion.query('UPDATE salas SET  ? WHERE sala_id = ?; ', [{estado_id:estado_id}, sala_id], (error, results) => {
+
+        console.log(estado_id);
+        conexion.query('UPDATE salas SET ? WHERE sala_id = ?; ', [{estado_id:estado_id}, sala_id], (error, results) => {
             if(error){
                 throw error;
             }else{
