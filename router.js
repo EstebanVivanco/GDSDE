@@ -76,6 +76,11 @@ router.get('/error',  (req, res)=>{
  
 })
 
+router.get('/crudusuario',(req, res) =>{
+
+    res.render('crudusuario');
+})
+
 
 
 const crud = require('./controllers/crud');
