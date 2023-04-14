@@ -97,7 +97,7 @@ function addelement(){
 
                     <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
                     <label> NUMERO DE LA SALA <%= sala.numero_sala %>  </label><br>
-                    <label id="estadini"> ESTADO DE LA SALA <%= sala.estado_id %> </label><br>
+                    <label id="estadini" hidden> ESTADO DE LA SALA <%= sala.estado_id %> </label><br>
                     <label> CAPACIDAD DE LA SALA <%= sala.capacidad %>  </label>
 
 
@@ -164,7 +164,7 @@ function addelement(){
 
               </div>
 
-              <input type="text" value="" id="contenedordatos" name="contenedordatos" >
+              <input type="text" value="" id="contenedordatos" name="contenedordatos" hidden >
               <br>
               <button onclick="paginaEstado()" type="submit" class="btn btn-primary mt-2 ">Generar Solicitud</button>
             </form>
