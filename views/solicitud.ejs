@@ -7,6 +7,8 @@
   <!-- Incluir los estilos de Bootstrap -->
 
   <script>
+
+import {  validate, clean, format, getCheckDigit } from 'rut.js'
      
 var ruts = [];
 
@@ -14,7 +16,7 @@ function addelement(){
 
     let rut = document.getElementById('rut').value;
     let rutinput = document.getElementById('rut');
-    ruts.push( rut);
+    ruts.push(rut);
     rutinput.value = "";
 
     let resultado = document.getElementById('resultado');

@@ -38,6 +38,13 @@ router.get('/registrofinalizado',  (req, res)=>{
 
 })
 
+
+router.get('/CrudUser',  (req, res)=>{
+
+    res.redirect('CrudUser');
+
+})
+
 router.get('/solicitud/:id',  (req, res)=>{
 
     const id = req.params.id;

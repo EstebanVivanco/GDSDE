@@ -35,7 +35,6 @@ exports.GuardarSolicitud = (req,res)=>{
                                 }else{
 
                                     alumno_id = results[0]['alumno_id'] ;
-                                    console.log('alumno_id :>> ', alumno_id);
 
                                     //https://momentjs.com/ (formatos de fecha)
 
