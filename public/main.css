@@ -1,0 +1,17 @@
+.bg-mi-color {
+    background-color: white;
+    border-bottom: 1px solid #e3e3e3;
+
+}
+
+.transUp {
+    transition: .5s, color .10s;
+    -webkit-transition: .5s, color .10s;
+    -moz-transition: .5s, color .10s;
+}
+
+.transUp:hover {
+    transform: translatey(-20px);
+    -webkit-transform: translatey(-20px);
+    -moz-transform: translatey(-20px);
+}
