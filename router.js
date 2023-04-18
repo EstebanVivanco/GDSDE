@@ -76,6 +76,12 @@ router.get('/error',  (req, res)=>{
  
 })
 
+router.get('/camaccess',  (req, res)=>{
+
+    res.render('camaccess');
+
+})
+
 router.get('/crudusuario',(req, res) =>{
 
     res.render('crudusuario');
