@@ -18,5 +18,8 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.22",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "html5-qrcode": "^2.3.8"
   }
 }
