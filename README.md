@@ -14,6 +14,10 @@ Para el manejo de las fechas y horas tenemos que instalar la dependencia momentj
 
     1. npm install moment --save
 
+Librería para la validación y formateo de RUTS
+
+    1. npm install --save rut.js
+
 Este comando estara sujeto a cambios en el futuro, con esto podemos ejecutar el comando para levantar el servidor
 
     1. npm run a
