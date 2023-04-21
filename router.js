@@ -87,6 +87,11 @@ router.get('/crudusuario',(req, res) =>{
     res.render('crudusuario');
 })
 
+router.get('/login', (req, res) =>{
+
+    res.render('login');
+})
+
 
 
 const crud = require('./controllers/crud');
