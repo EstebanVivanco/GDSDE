@@ -94,9 +94,22 @@ router.get('/crudusuario',(req, res) =>{
     res.render('crudusuario');
 })
 
+
 router.get('/login', (req, res) =>{
 
     res.render('login');
+})
+
+
+router.get('/crudtipo', (req,res)=>{
+
+    conexion.query('SELECT * FROM tipousuario',(error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('crudtipo', {results:results});
+        }
+    })
 })
 
 
