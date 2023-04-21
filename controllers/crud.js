@@ -105,6 +105,14 @@ exports.GuardarSolicitud = (req,res)=>{
     }
 
 
+   // exports.cambiarTipoUsuario = (req, res)=>{
+      //  const id = req.body.id;
+      //  const nombre = req.body.nombre;
+
+
+   // }
+
+
 
 
 

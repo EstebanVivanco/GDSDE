@@ -112,6 +112,17 @@ router.get('/crudtipo', (req,res)=>{
     })
 })
 
+router.get('/editarTipoUsuario/:id', (req, res)=>{
+    const id = req.params.id;
+    conexion.query('SELECT * FROM tipousuario WHERE id = ?',[id], (error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('editarTipoUsuario', (tipo,results[0]));
+        }
+    })
+})
+
 
 
 const crud = require('./controllers/crud');
