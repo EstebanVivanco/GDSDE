@@ -14,9 +14,15 @@ Para el manejo de las fechas y horas tenemos que instalar la dependencia momentj
 
     1. npm install moment --save
 
+<<<<<<< HEAD
 Dependencia para acceder a la camara y scanear el QR
 
     1. npm install --save-dev html5-qrcode
+=======
+Librería para la validación y formateo de RUTS
+
+    1. npm install --save rut.js
+>>>>>>> 070fc1af67f192b7a6ee96fe46fd28dcefe17e8d
 
 Este comando estara sujeto a cambios en el futuro, con esto podemos ejecutar el comando para levantar el servidor
 

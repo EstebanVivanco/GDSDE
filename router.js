@@ -25,7 +25,6 @@ router.get('/registros',  (req, res)=>{
             throw error;            
         }else{
             res.render('registros', {results: results});
-            console.log('results :>> ', results);
         }
 
     });
@@ -35,6 +34,13 @@ router.get('/registros',  (req, res)=>{
 router.get('/registrofinalizado',  (req, res)=>{
 
     res.redirect('registrofinalizado');
+
+})
+
+
+router.get('/CrudUser',  (req, res)=>{
+
+    res.redirect('CrudUser');
 
 })
 
@@ -85,6 +91,35 @@ router.get('/camaccess',  (req, res)=>{
 router.get('/crudusuario',(req, res) =>{
 
     res.render('crudusuario');
+})
+
+
+router.get('/login', (req, res) =>{
+
+    res.render('login');
+})
+
+
+router.get('/crudtipo', (req,res)=>{
+
+    conexion.query('SELECT * FROM tipousuario',(error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('crudtipo', {results:results});
+        }
+    })
+})
+
+router.get('/editarTipoUsuario/:id', (req, res)=>{
+    const id = req.params.id;
+    conexion.query('SELECT * FROM tipousuario WHERE id = ?',[id], (error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('editarTipoUsuario', (tipo,results[0]));
+        }
+    })
 })
 
 

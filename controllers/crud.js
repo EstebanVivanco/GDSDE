@@ -1,5 +1,6 @@
 const { query } = require('../database/bd');
 const conexion = require('../database/bd');
+const { validate, clean, format, getCheckDigit } = require('rut.js')
 const router = require('../router');
 const moment = require('moment')
 const { v4: uuidv4 } = require('uuid');
@@ -25,9 +26,14 @@ exports.GuardarSolicitud = (req,res)=>{
                 console.log('error :>> ', error);
             }else{
                 
+
                 if (sexo === counts) {
                     
                     for (const rutovich of arrayruts){
+
+
+                        console.log(rutovich);
+
                             conexion.query('SELECT alumno_id FROM alumnos WHERE RUT = ? ', [rutovich] , (error, results) => {
 
                                 if (error){
@@ -35,7 +41,6 @@ exports.GuardarSolicitud = (req,res)=>{
                                 }else{
 
                                     alumno_id = results[0]['alumno_id'] ;
-                                    console.log('alumno_id :>> ', alumno_id);
 
                                     //https://momentjs.com/ (formatos de fecha)
 
@@ -81,7 +86,7 @@ exports.GuardarSolicitud = (req,res)=>{
 
 
         
-    }
+}
 
     exports.CambioEstadoSala = (req , res) =>{
         const sala_id = req.body.idsala;
@@ -98,6 +103,14 @@ exports.GuardarSolicitud = (req,res)=>{
         }) 
 
     }
+
+
+   // exports.cambiarTipoUsuario = (req, res)=>{
+      //  const id = req.body.id;
+      //  const nombre = req.body.nombre;
+
+
+   // }
 
 
 

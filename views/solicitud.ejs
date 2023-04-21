@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <title>Formulario Bootstrap</title>
   <!-- Incluir los estilos de Bootstrap -->
-
   <script>
+
      
 var ruts = [];
 
@@ -14,7 +14,7 @@ function addelement(){
 
     let rut = document.getElementById('rut').value;
     let rutinput = document.getElementById('rut');
-    ruts.push( rut);
+    ruts.push(rut);
     rutinput.value = "";
 
     let resultado = document.getElementById('resultado');
@@ -42,9 +42,8 @@ function addelement(){
 
 
   </script>
-
-
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
 </head>
 
 <body>
@@ -122,7 +121,18 @@ function addelement(){
           <div class="card-body">
 
 
-            <form >
+            <div id="qr-reader" style="width: 600px"></div>
+
+            <div class="row">
+              <div class="col">
+                <div style="width:500px;" id="reader"></div>
+              </div>
+              <div class="col" style="padding:30px;">
+                <div id="result"></div>
+              </div>
+            </div>
+
+            <!-- <form >
               <div class="form-group">
 
                 <label for="rut">RUT</label>
@@ -131,7 +141,7 @@ function addelement(){
               </div>
               <div id="verificacionmsg"></div>
               <button type="button" onclick="addelement();" class="btn btn-primary">Agregar</button>
-            </form>
+            </form> -->
 
 
           </div>
@@ -149,7 +159,7 @@ function addelement(){
           </div>
           <div class="card-body">
             
-            <form method="POST" action="/GuardarSolicitud">
+            <form >
 
               <%  if(sala){%>
 
@@ -161,7 +171,7 @@ function addelement(){
 
               </div>
 
-              <input type="text" value="" id="contenedordatos" name="contenedordatos" hidden >
+              <input type="text" value="" id="contenedordatos" name="contenedordatos"  >
               <br>
               <button onclick="paginaEstado()" type="submit" class="btn btn-primary mt-2 ">Generar Solicitud</button>
             </form>
@@ -187,6 +197,44 @@ function addelement(){
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
+
+      
+<script type="text/javascript">
+
+  var ruts = [];
+
+
+  function obtenerRUN(url) {
+    const regex = /RUN=([^&]*)/;
+    const match = url.match(regex);
+    if (match) {
+      return match[1];
+    } else {
+      return null;
+    }
+  }
+
+  function onScanSuccess(qrCodeMessage) {
+
+      const rutovich = obtenerRUN(qrCodeMessage);
+      let container = document.getElementById('contenedordatos');
+      ruts.push(rutovich);
+
+      document.getElementById('result').innerHTML = '<span class="result"> Se ha añadido el rut: '+rutovich+'</span>';
+      container.value = ruts;
+
+  }
+
+  function onScanError(errorMessage) {
+    //handle scan error
+  }
+
+  var html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader", { fps: 10, qrbox: 250 });
+  html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+</script>
+
 </body>
 
 </html>

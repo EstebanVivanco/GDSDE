@@ -1,3 +1,14 @@
+<script src="html5-qrcode.min.js"></script>
+<style>
+  .result{
+    background-color: green;
+    color:#fff;
+    padding:20px;
+  }
+  .row{
+    display:flex;
+  }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +22,49 @@
 
   <div id="qr-reader" style="width: 600px"></div>
 
-  <script>
-    function onScanSuccess(decodedText, decodedResult) {
-    console.log(`Code scanned = ${decodedText}`, decodedResult);
+<div class="row">
+  <div class="col">
+    <div style="width:500px;" id="reader"></div>
+  </div>
+  <div class="col" style="padding:30px;">
+    <h4>ABRIR CAMARA</h4>
+    <div id="result">RESULTOVICH</div>
+  </div>
+</div>
+
+<input type="text" id="res">
+
+
+<script type="text/javascript">
+
+  function obtenerRUN(url) {
+    const regex = /RUN=([^&]*)/;
+    const match = url.match(regex);
+    if (match) {
+      return match[1];
+    } else {
+      return null;
     }
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-      "qr-reader", { fps: 10, qrbox: 250 });
-    html5QrcodeScanner.render(onScanSuccess);
-  </script>
-  
+  }
+function onScanSuccess(qrCodeMessage) {
+
+    const rutovich = obtenerRUN(qrCodeMessage);
+    let container = document.getElementById('contenedordatos');
+    ruts.push(rutovich);
+    document.getElementById('result').innerHTML = '<span class="result">'+rutovich+'</span>';
+
+    container.value = ruts;
+
+}
+function onScanError(errorMessage) {
+  //handle scan error
+}
+var html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+</script>
+
+
 </body>
 </html>
