@@ -1,5 +1,6 @@
 const { query } = require('../database/bd');
 const conexion = require('../database/bd');
+const { validate, clean, format, getCheckDigit } = require('rut.js')
 const router = require('../router');
 const moment = require('moment')
 const { v4: uuidv4 } = require('uuid');
@@ -25,9 +26,14 @@ exports.GuardarSolicitud = (req,res)=>{
                 console.log('error :>> ', error);
             }else{
                 
+
                 if (sexo === counts) {
                     
                     for (const rutovich of arrayruts){
+
+
+                        console.log(rutovich);
+
                             conexion.query('SELECT alumno_id FROM alumnos WHERE RUT = ? ', [rutovich] , (error, results) => {
 
                                 if (error){
