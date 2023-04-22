@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/',  (req, res)=>{
 
-    conexion.query('SELECT * FROM salas INNER JOIN estadosalas ON estadosalas.estado_id = salas.estado_id order by numero_sala asc ', (error, results) => {
+    conexion.query('SELECT * FROM salas INNER JOIN estadosalas ON estadosalas.estado_sala_id = salas.estado_sala_id_fk order by numero_sala asc ', (error, results) => {
 
         if (error){
             throw error;            
@@ -19,7 +19,7 @@ router.get('/',  (req, res)=>{
 
 router.get('/registros',  (req, res)=>{
 
-    conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, solicitud.fecha_solicitud,solicitud.hora_inicio,solicitud.hora_final, alumnos.nombre, salas.numero_sala, admin.nombre AS "nombreadm" FROM solicitud INNER JOIN alumnos ON solicitud.alumno_id = alumnos.alumno_id INNER JOIN salas ON solicitud.sala_id = salas.sala_id INNER JOIN admin ON solicitud.admin_id = admin.admin_id', (error, results) => {
+    conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, solicitud.fecha_solicitud,solicitud.hora_inicio,solicitud.hora_final, usuarios.nombre, salas.numero_sala, usuarios.rut AS "nombreadm" FROM solicitud INNER JOIN usuarios ON solicitud.usuario_id_fk = usuarios.usuario_id INNER JOIN salas ON solicitud.sala_id_fk = salas.sala_id', (error, results) => {
 
         if (error){
             throw error;            
