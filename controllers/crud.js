@@ -15,9 +15,9 @@ exports.GuardarSolicitud = (req,res)=>{
     const arrayruts = ruts.split(",");
 
 
-    let alumno_id;
+    let usuario_id;
     
-    conexion.query('SELECT COUNT(*) AS count FROM alumnos WHERE rut IN (?)',[arrayruts] , (error, results) => {
+    conexion.query('SELECT COUNT(*) AS count FROM usuarios WHERE rut IN (?)',[arrayruts] , (error, results) => {
             
         const counts = results[0].count;
         const sexo = arrayruts.length;
@@ -34,13 +34,13 @@ exports.GuardarSolicitud = (req,res)=>{
 
                         console.log(rutovich);
 
-                            conexion.query('SELECT alumno_id FROM alumnos WHERE RUT = ? ', [rutovich] , (error, results) => {
+                            conexion.query('SELECT usuario_id FROM usuarios WHERE RUT = ? ', [rutovich] , (error, results) => {
 
                                 if (error){
                                     throw error;            
                                 }else{
 
-                                    alumno_id = results[0]['alumno_id'] ;
+                                    usuario_id = results[0]['usuario_id'] ;
 
                                     //https://momentjs.com/ (formatos de fecha)
 
@@ -48,14 +48,14 @@ exports.GuardarSolicitud = (req,res)=>{
                                     let hora_inicio = moment().format("hh:mm:ss");
                                     let hora_final = moment().add(1, 'minutes').format('hh:mm:ss')
 
-                                    conexion.query('INSERT INTO solicitud SET ?', { alumno_id: alumno_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
+                                    conexion.query('INSERT INTO solicitud SET ?', { usuario_id_fk: usuario_id, sala_id_fk: sala_id, codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
                                         
                                         if (error){
                                             throw error;            
                                         }else{
                                             
 
-                                            conexion.query('UPDATE salas SET estado_id = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
+                                            conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
                                                 if(error){
                                                     throw error;
                                                 }
@@ -93,7 +93,7 @@ exports.GuardarSolicitud = (req,res)=>{
         const estado_id = req.body.estadosala;
 
         console.log(estado_id);
-        conexion.query('UPDATE salas SET ? WHERE sala_id = ?; ', [{estado_id:estado_id}, sala_id], (error, results) => {
+        conexion.query('UPDATE salas SET ? WHERE sala_id = ?; ', [{estado_sala_id_fk:estado_id}, sala_id], (error, results) => {
             if(error){
                 throw error;
             }
@@ -134,13 +134,13 @@ exports.GuardarSolicitud = (req,res)=>{
 
 
 
-//     conexion.query('SELECT alumno_id FROM alumnos WHERE RUT = ? ', [rutovich] , (error, results) => {
+//     conexion.query('SELECT usuario_id FROM usuarios WHERE RUT = ? ', [rutovich] , (error, results) => {
 
 //         if (error){
 //             throw error;            
 //         }else{
 
-//             alumno_id = results[0]['alumno_id'] ;
+//             usuario_id = results[0]['usuario_id'] ;
 
 //             //https://momentjs.com/ (formatos de fecha)
 
@@ -151,7 +151,7 @@ exports.GuardarSolicitud = (req,res)=>{
 
 
 
-//             conexion.query('INSERT INTO solicitud SET ?', { alumno_id: alumno_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
+//             conexion.query('INSERT INTO solicitud SET ?', { usuario_id: usuario_id, sala_id: sala_id, admin_id : '1', codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
                 
 //                 if (error){
 //                     throw error;            

@@ -19,7 +19,7 @@ router.get('/',  (req, res)=>{
 
 router.get('/registros',  (req, res)=>{
 
-    conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, solicitud.fecha_solicitud,solicitud.hora_inicio,solicitud.hora_final, usuarios.nombre, salas.numero_sala, usuarios.rut AS "nombreadm" FROM solicitud INNER JOIN usuarios ON solicitud.usuario_id_fk = usuarios.usuario_id INNER JOIN salas ON solicitud.sala_id_fk = salas.sala_id', (error, results) => {
+    conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, solicitud.fecha_solicitud,solicitud.hora_inicio,solicitud.hora_final, usuarios.nombre, salas.numero_sala, usuarios.rut FROM solicitud INNER JOIN usuarios ON solicitud.usuario_id_fk = usuarios.usuario_id INNER JOIN salas ON solicitud.sala_id_fk = salas.sala_id', (error, results) => {
 
         if (error){
             throw error;            
@@ -102,7 +102,7 @@ router.get('/login', (req, res) =>{
 
 router.get('/crudtipo', (req,res)=>{
 
-    conexion.query('SELECT * FROM tipousuario',(error, results)=>{
+    conexion.query('SELECT * FROM tipousuarios',(error, results)=>{
         if(error){
             throw error;
         }else{
@@ -113,7 +113,7 @@ router.get('/crudtipo', (req,res)=>{
 
 router.get('/editarTipoUsuario/:id', (req, res)=>{
     const id = req.params.id;
-    conexion.query('SELECT * FROM tipousuario WHERE id = ?',[id], (error, results)=>{
+    conexion.query('SELECT * FROM tipousuarios WHERE id = ?',[id], (error, results)=>{
         if(error){
             throw error;
         }else{

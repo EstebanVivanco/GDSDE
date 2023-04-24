@@ -7,7 +7,7 @@
   <!-- Incluir los estilos de Bootstrap -->
   <script>
 
-     
+
 var ruts = [];
 
 function addelement(){
@@ -132,7 +132,8 @@ function addelement(){
               </div>
             </div>
 
-            <!-- <form >
+            <!-- <form >    FORMULARIO PARA SOLICITAR SALA          </form> -->
+
               <div class="form-group">
 
                 <label for="rut">RUT</label>
@@ -141,7 +142,6 @@ function addelement(){
               </div>
               <div id="verificacionmsg"></div>
               <button type="button" onclick="addelement();" class="btn btn-primary">Agregar</button>
-            </form> -->
 
 
           </div>
@@ -159,7 +159,7 @@ function addelement(){
           </div>
           <div class="card-body">
             
-            <form >
+            <form action="/GuardarSolicitud" method="POST">
 
               <%  if(sala){%>
 
