@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
     <title>Editar</title>
 </head>
@@ -44,26 +45,24 @@
 
 
 
-    <!-- ACÁ
     <% if(tipo){ %>
-    <div class="container mt-4">
-        <div class="card border-secondary">
-            <div class="card-header">Editar registro</div>
-            <div class="card-body">
-                <form action="/cambiarTipoUsuario" method="POST">
-                    <input type="text" id="id" name="id" value="<%= tipo.id %>" hidden>
-                    <div class="mb-3">
-                        <label for="user" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" tabindex="1" value="<%= tipo.nombre %>">
-                    </div>
-                    <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
-                    <a href="/" class="btn brn-secondary">Cancelar</a>
-                </form>
+        <div class="container mt-4">
+            <div class="card border-secondary">
+                <div class="card-header">Editar registro</div>
+                <div class="card-body">
+                    <form action="/updateUserType" method="POST">
+                        <input id="id" name="id" value="<%= tipo.tipo_id %>" hidden>
+                        <div class="mb-3">
+                            <label for="user" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="<%= tipo.nombre %>" tabindex='1'">
+                        </div>
+                        <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
+                        <a href="/crudtipo" class="btn brn-secondary">Cancelar</a>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <% } %>
-    -->
+        <% } %>
     
 </body>
 </html>

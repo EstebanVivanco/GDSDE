@@ -111,13 +111,15 @@ router.get('/crudtipo', (req,res)=>{
     })
 })
 
-router.get('/editarTipoUsuario/:id', (req, res)=>{
+
+router.get('/editusertype/:id', (req, res)=>{
+
     const id = req.params.id;
-    conexion.query('SELECT * FROM tipousuarios WHERE id = ?',[id], (error, results)=>{
+    conexion.query('SELECT * FROM tipousuarios WHERE tipo_id = ?', [id], (error, results)=>{
         if(error){
             throw error;
         }else{
-            res.render('editarTipoUsuario', (tipo,results[0]));
+            res.render('editusertype', {tipo:results[0]});
         }
     })
 })
@@ -128,5 +130,7 @@ const crud = require('./controllers/crud');
 
 router.post('/GuardarSolicitud',crud.GuardarSolicitud);
 router.post('/CambioEstadoSala',crud.CambioEstadoSala);
+
+router.post('/updateUserType', crud.updateUserType);
 
 module.exports = router;

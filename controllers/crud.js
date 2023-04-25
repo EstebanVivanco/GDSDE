@@ -105,12 +105,21 @@ exports.GuardarSolicitud = (req,res)=>{
     }
 
 
-   // exports.cambiarTipoUsuario = (req, res)=>{
-      //  const id = req.body.id;
-      //  const nombre = req.body.nombre;
+//EDITAR TIPO DE USUARIO
 
+exports.updateUserType = (req, res)=>{
+    const id = req.body.id;
+    const nombre = req.body.nombre;
 
-   // }
+    conexion.query('UPDATE tipousuarios SET ? WHERE tipo_id = ?', [{nombre:nombre}, id], (error, results)=>{
+        if(error){
+            throw error;
+        }
+        else{
+            res.redirect('crudtipo');
+        }
+    })
+}
 
 
 
