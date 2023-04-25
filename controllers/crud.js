@@ -121,6 +121,20 @@ exports.updateUserType = (req, res)=>{
     })
 }
 
+//CREAR NUEVO TIPO DE USUARIO
+
+exports.createUserType = (req, res)=>{
+    const nombre = req.body.nombre;
+    const fk = 1;
+
+    conexion.query('INSERT INTO tipousuarios SET ?',{nombre:nombre, estadoTipousuario_id_fk:fk}, (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{
+            res.redirect('crudtipo');
+        }
+    })
+}
 
 
 

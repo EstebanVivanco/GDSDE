@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
-    <title>Editar</title>
+    <title>Ingreso de un nuevo tipo de usuario</title>
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg bg-mi-color">
         <div class="container-fluid">
             <a class="navbar-brand" href="">
@@ -43,26 +43,26 @@
     </nav>
 
 
+    <!--comienzo del formulario de nuevo tipo de usuario-->
 
-
-    <% if(tipo){ %>
-        <div class="container mt-4">
-            <div class="card border-secondary">
-                <div class="card-header">Editar registro</div>
-                <div class="card-body">
-                    <form action="/updateUserType" method="POST">
-                        <input id="id" name="id" value="<%= tipo.tipo_id %>" hidden>
-                        <div class="mb-3">
-                            <label for="user" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<%= tipo.nombre %>" tabindex='1'">
-                        </div>
-                        <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
-                        <a href="/crudtipo" class="btn btn-secondary">Cancelar</a>
-                    </form>
-                </div>
+    <div class="container mt-4">
+        <div class="card border-secondary">
+            <div class="card-header">Ingresar nuevo tipo de usuario</div>
+            <div class="card-body">
+                <form action="/createUserType" method="POST">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"  tabindex='1'>
+                    </div>
+                    <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
+                    <a href="/crudtipo" class="btn btn-secondary">Cancelar</a>
+                </form>
             </div>
         </div>
-        <% } %>
+    </div>
+
+
+
     
 </body>
 </html>

@@ -44,12 +44,13 @@
 
     <!--Inicio lista de tipos de usuario-->
 
-    <div class="container">
-        <!--ACA VA EL BOTON PARA INGRESAR-->
-    </div>
+    
     <br>
-
+    
     <div class="container-fluid">
+
+            <a href="/ingresarTipoUsuario" class="btn btn-outline-info">Añadir un nuevo tipo de usuario</a>
+  
         <table class="table table-success table-striped table-responsive  text-center mt-4">
             <thead>
                 <tr>
@@ -71,7 +72,7 @@
                         </td>
                         <td>
                             <a href="/editusertype/<%= tipo.tipo_id %>" class="btn btn-outline-info">editar</a>
-                            <a href="/delete" class="btn btn-outline-danger">eliminar</a>
+                            <a href="/deleteUserType/<%= tipo.tipo_id %>" class="btn btn-outline-danger">eliminar</a>
                         </td>
 
                     </tr>

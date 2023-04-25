@@ -102,7 +102,7 @@ router.get('/login', (req, res) =>{
 
 router.get('/crudtipo', (req,res)=>{
 
-    conexion.query('SELECT * FROM tipousuarios',(error, results)=>{
+    conexion.query('SELECT * FROM tipousuarios WHERE estadoTipoUsuario_id_fk = 1;',(error, results)=>{
         if(error){
             throw error;
         }else{
@@ -111,7 +111,7 @@ router.get('/crudtipo', (req,res)=>{
     })
 })
 
-
+//RUTA PARA EDITAR TIPO DE USUARIO
 router.get('/editusertype/:id', (req, res)=>{
 
     const id = req.params.id;
@@ -124,6 +124,26 @@ router.get('/editusertype/:id', (req, res)=>{
     })
 })
 
+//RUTA PARA CAMBIAR EL ESTADO DEL TIPO DE USUARIO
+
+router.get('/deleteUserType/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('UPDATE tipousuarios SET estadoTipoUsuario_id_fk = 2 WHERE tipo_id = ? ', [id], (error)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('crudtipo');
+        }
+    })
+})
+
+//RUTA PARA AÑADIR UN NUEVO TIPO DE USUARIO
+
+router.get('/ingresarTipoUsuario', (req,res)=>{
+    res.render('ingresarTipoUsuario');
+})
+
 
 
 const crud = require('./controllers/crud');
@@ -132,5 +152,6 @@ router.post('/GuardarSolicitud',crud.GuardarSolicitud);
 router.post('/CambioEstadoSala',crud.CambioEstadoSala);
 
 router.post('/updateUserType', crud.updateUserType);
+router.post('/createUserType',crud.createUserType)
 
 module.exports = router;
