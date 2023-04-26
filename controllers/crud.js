@@ -88,6 +88,7 @@ exports.GuardarSolicitud = (req,res)=>{
         
 }
 
+
     exports.CambioEstadoSala = (req , res) =>{
         const sala_id = req.body.idsala;
         const estado_id = req.body.estadosala;
@@ -104,9 +105,44 @@ exports.GuardarSolicitud = (req,res)=>{
 
     }
 
+//CREAR NUEVO USUARIO
+exports.CrearNuevoUsuario = (req, res)=>{
+    const rut = req.body.rut;
+    const nombre = req.body.nombre;
+    const tipo = req.body.tipo;
+    const estado = 1;
+    const correo = req.body.correo;
+    
+    console.log(nombre);
+    conexion.query('INSERT INTO usuarios SET ?',{rut: rut, nombre:nombre, correo:correo, estado_usuario_id_fk:estado, tipo_id_fk: tipo}, (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{
+            res.redirect('/');
+        }
+    })
+}
+
+//EDITAR USUARIO
+exports.updateUsuario = (req, res)=>{
+    const id = req.body.id;
+    const rut = req.body.rut;
+    const nombre = req.body.nombre;
+    const tipo = req.body.tipo;
+    const estado = 1;
+    const correo = req.body.correo;
+
+    conexion.query('UPDATE usuarios SET ? WHERE usuario_id = ?', [{rut:rut, nombre:nombre, estado_usuario_id_fk: estado, tipo_id_fk:tipo}, id], (error, results)=>{
+        if(error){
+            throw error;
+        }
+        else{
+            res.redirect('crudusuario');
+        }
+    })
+}
 
 //EDITAR TIPO DE USUARIO
-
 exports.updateUserType = (req, res)=>{
     const id = req.body.id;
     const nombre = req.body.nombre;
