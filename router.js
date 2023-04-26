@@ -19,7 +19,7 @@ router.get('/',  (req, res)=>{
 
 router.get('/registros',  (req, res)=>{
 
-    conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, solicitud.fecha_solicitud,solicitud.hora_inicio,solicitud.hora_final, usuarios.nombre, salas.numero_sala, usuarios.rut FROM solicitud INNER JOIN usuarios ON solicitud.usuario_id_fk = usuarios.usuario_id INNER JOIN salas ON solicitud.sala_id_fk = salas.sala_id', (error, results) => {
+    conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, solicitud.fecha_solicitud,solicitud.hora_inicio,solicitud.hora_final, usuarios.nombre, salas.numero_sala, usuarios.rut, usuarios.correo FROM solicitud INNER JOIN usuarios ON solicitud.usuario_id_fk = usuarios.usuario_id INNER JOIN salas ON solicitud.sala_id_fk = salas.sala_id', (error, results) => {
 
         if (error){
             throw error;            
@@ -88,9 +88,47 @@ router.get('/camaccess',  (req, res)=>{
 
 })
 
+router.get('/crearNuevoUsuario',(req, res) =>{
+
+    res.render('crearNuevoUsuario');
+})
+
+//RUTA PARA LISTAR Y LOS USUARIOS
 router.get('/crudusuario',(req, res) =>{
 
-    res.render('crudusuario');
+    conexion.query('SELECT * FROM usuarios WHERE estado_usuario_id_fk = 1',(error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('crudusuario', {results:results});
+        }
+    })
+})
+
+//RUTA PARA EDITAR USUARIO
+router.get('/editarUsuarios/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('SELECT * FROM usuarios WHERE usuario_id = ?', [id], (error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('editarUsuarios', {user:results[0]});
+        }
+    })
+})
+
+//DESHABILITAR USUARIO
+router.get('/deshabilitarUsuario/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('UPDATE usuarios SET estado_usuario_id_fk = 2 WHERE usuario_id = ? ', [id], (error)=>{
+        if(error){
+            throw error;
+        }else{
+            res.redirect('/crudusuario')
+        }
+    })
 })
 
 
@@ -99,7 +137,7 @@ router.get('/login', (req, res) =>{
     res.render('login');
 })
 
-
+//TABLA DE VISTA Y ACCIONES PARA EDITAR EL TIPO DE USUARIO
 router.get('/crudtipo', (req,res)=>{
 
     conexion.query('SELECT * FROM tipousuarios WHERE estadoTipoUsuario_id_fk = 1;',(error, results)=>{
@@ -107,6 +145,20 @@ router.get('/crudtipo', (req,res)=>{
             throw error;
         }else{
             res.render('crudtipo', {results:results});
+        }
+    })
+})
+
+//RUTA PARA CAMBIAR EL ESTADO DEL TIPO DE USUARIO
+
+router.get('/deleteUserType/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('UPDATE tipousuarios SET estadoTipoUsuario_id_fk = 2 WHERE tipo_id = ? ', [id], (error)=>{
+        if(error){
+            throw error;
+        }else{
+            res.redirect('/crudtipo')
         }
     })
 })
@@ -133,7 +185,7 @@ router.get('/deleteUserType/:id', (req, res)=>{
         if(error){
             throw error;
         }else{
-            res.render('crudtipo');
+            res.redirect('/crudtipo')
         }
     })
 })
@@ -150,6 +202,9 @@ const crud = require('./controllers/crud');
 
 router.post('/GuardarSolicitud',crud.GuardarSolicitud);
 router.post('/CambioEstadoSala',crud.CambioEstadoSala);
+
+router.post('/CrearNuevoUsuario',crud.CrearNuevoUsuario);
+router.post('/updateUsuario', crud.updateUsuario);
 
 router.post('/updateUserType', crud.updateUserType);
 router.post('/createUserType',crud.createUserType)
