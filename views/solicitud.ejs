@@ -25,7 +25,9 @@ function addelement(){
 
 
         let datoparrafo = document.createElement('input');
-        let pretext = document.createElement('p');
+        let pretext = document.createElement('li');
+        pretext.className = 'list-group-item';
+        datoparrafo.style.border = 'none';
         pretext.innerText = cont + '. Datos de ingresante: '
         datoparrafo.value = ruta;
         cont = cont + 1;
@@ -37,15 +39,13 @@ function addelement(){
     let container = document.getElementById('contenedordatos');
     container.value = ruts;
 
-
 }
-
 
   </script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
 </head>
-
 <body>
 
       <!-- INICIO NAV-->
@@ -77,114 +77,108 @@ function addelement(){
         </div>
       </nav>
       <!-- FIN NAV-->
-  
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="mb-0">Datos de la Sala</h4>
-          </div>
-          <div class="card-body">
-            
-              <div class="form-group">
-                
-                  <%  if(sala){%>
 
-                    <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
-                    <label> NUMERO DE LA SALA <%= sala.numero_sala %>  </label><br>
-                    <label id="estadini" hidden> ESTADO DE LA SALA <%= sala.estado_id %> </label><br>
-                    <label> CAPACIDAD DE LA SALA <%= sala.capacidad %>  </label>
-
-
-                     <script>
-                        const paginaEstado = function(){
-
-                          window.open('/cambioestado/<%= sala.numero_sala  %>', '_blank');
-                        }
-                    </script>
-
-                  <%  }%>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="mb-0">Formulario de Ingreso</h4>
-          </div>
-          <div class="card-body">
-
-
-            <div id="qr-reader" style="width: 600px"></div>
-
-            <div class="row">
-              <div class="col">
-                <div style="width:500px;" id="reader"></div>
+      <div class="container-fluid mt-3">
+        <div class="row">
+          <div class="col-lg-3 col-md-12"> 
+            <div class="card">
+              <div class="card-header">
+                <h4 class="mb-0">Datos de la Sala</h4>
               </div>
-              <div class="col" style="padding:30px;">
-                <div id="result"></div>
+              <div class="card-body">
+                  <div class="form-group">
+                      <%  if(sala){%>
+                        <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
+                        <H5 class="modal-title"> | Número de la sala: <%= sala.numero_sala %>  </H5> 
+                        <!-- <span><i class="fa-solid fa-arrow-down-1-9 fa-xl" > </i></span> -->
+                        <hr>
+                        <label id="estadini" hidden> ESTADO DE LA SALA <%= sala.estado_id %> </label><br>
+                        <!-- <i class="fa-solid fa-users fa-xl"> </i> -->
+                        <H5 class="modal-title">| CAPACIDAD DE LA SALA <%= sala.capacidad %>  </H5> 
+                        <script>
+                            const paginaEstado = function(){
+    
+                              window.open('/cambioestado/<%= sala.numero_sala  %>', '_blank');
+                            }
+                        </script>
+                      <%  }%>
+              </div>
+            </div>
+            </div>
+          </div>
+      
+          <div class="col-lg-6 col-md-6"> 
+            <div class="card">
+              <div class="card-header">
+                <h4 class="mb-0">Formulario de Ingreso</h4>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">ESCANEAR QR CEDULA DE IDENTIDAD</h5>
+                <div id="qr-reader"> </div>
+                
+                <HR></HR>
+
+                <div class="row">
+                      <div style="width: 100%" id="reader">
+                      </div>
+                </div>
+
+                <div class="row" style="padding:30px;">
+                    <div id="result"></div>
+                </div>
+
+
+
+                <hr>
+                <h5 class="card-title">INGRESO MANUAL DE RUT</h5>
+                <hr>
+
+    
+                  <div class="form-group">
+    
+                    <label for="rut">RUT</label>
+                    <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" required>
+    
+                  </div>
+
+                  <div id="verificacionmsg"></div>
+                  <button type="button" onclick="addelement();" class="btn btn-primary btn-block">Agregar</button>
+    
+              </div>
+            </div>
+          </div>
+      
+          <div class="col-lg-3 col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="mb-0">Alumnos Ingresados </h4>
+              </div>
+              <div class="card-body">
+                
+                <form action="/GuardarSolicitud" method="POST">
+    
+                  <%  if(sala){%>
+    
+                    <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
+    
+                  <%  }%>
+    
+                  <div id="resultado">
+             
+                  </div>
+    
+                  <input type="text" value="" id="contenedordatos" name="contenedordatos"  hidden>
+                  <br>
+                  <button onclick="paginaEstado()" type="submit" class="btn btn-primary mt-2 btn-block">Generar Solicitud</button>
+                </form>
+    
+    
               </div>
             </div>
 
-            <!-- <form >    FORMULARIO PARA SOLICITAR SALA          </form> -->
-
-              <div class="form-group">
-
-                <label for="rut">RUT</label>
-                <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" required>
-
-              </div>
-              <div id="verificacionmsg"></div>
-              <button type="button" onclick="addelement();" class="btn btn-primary">Agregar</button>
-
-
-          </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="mb-0">Alumnos Ingresados </h4>
-          </div>
-          <div class="card-body">
-            
-            <form action="/GuardarSolicitud" method="POST">
-
-              <%  if(sala){%>
-
-                <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>
-
-              <%  }%>
-
-              <div id="resultado">
-
-              </div>
-
-              <input type="text" value="" id="contenedordatos" name="contenedordatos"  >
-              <br>
-              <button onclick="paginaEstado()" type="submit" class="btn btn-primary mt-2 ">Generar Solicitud</button>
-            </form>
-
-
-          </div>
-        </div>
       </div>
-    </div>
-  </div>
-
-
-
 
 
     <!--Script para refireccionar a /view registro finalizado, y tambien para abrir una pestaña aparte donde se ejecuta la funcion
@@ -221,7 +215,30 @@ function addelement(){
       ruts.push(rutovich);
 
       document.getElementById('result').innerHTML = '<span class="result"> Se ha añadido el rut: '+rutovich+'</span>';
+
       container.value = ruts;
+
+
+      let resultado = document.getElementById('resultado');
+      resultado.innerHTML = '';
+      var cont = 1;
+
+      for( const ruta of ruts){
+
+
+          let datoparrafo = document.createElement('input');
+          let pretext = document.createElement('li');
+          pretext.className = 'list-group-item';
+          datoparrafo.style.border = 'none';
+          pretext.innerText = cont + '. Datos de ingresante: '
+          datoparrafo.value = ruta;
+          cont = cont + 1;
+
+          resultado.appendChild(pretext).appendChild(datoparrafo);
+
+      }
+
+
 
   }
 
