@@ -10,26 +10,28 @@
 </head>
 <body>
 
-    <!-- INICIO NAV-->
-    <nav class="navbar navbar-expand-lg bg-mi-color">
+     <!-- INICIO NAV-->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">
-                <img src="logotipo.png" style="width: 150px; height: 30px;" alt="">
-            </a>
+            <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav">
 
                 <ul class="navbar-nav px-5">
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link negro" style="color: #02416d" href="/"> INICIO </a>
+                        <a class="nav-link" href="/"> INICIO </a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link negro"  style="color:#02416d" href="registros"> REGISTROS </a>
+                        <a class="nav-link" href="/crudusuario"> USUARIOS </a>
                     </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/crudtipo"> TIPO DE USUARIO</a>
+                    </li>
+
 
                 </ul>
             </div>
@@ -54,6 +56,10 @@
             margin: 2% 0% 2% 0%;
         }
 
+        #hidden_div {
+            display: none;
+        }
+
     </style>
 
     <div class="container text-center martop">
@@ -73,22 +79,25 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 mar">
-                    <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo">
+                    <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo" onchange="showDiv('hidden_div', this)">
                         <option selected>Seleccione un tipo de usuario</option>
-                        <option value="1">Alumno</option>
-                        <option value="2">Profesor</option>
-                        <option value="3">Admin</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Docente</option>
+                        <option value="3">Alumno</option>
                         <option value="4">Visita</option>
                     </select>
                 </div>
-                    <div class="col-md-6 col-sm-12 mar" hidden>
-                        <input type="password" class="form-control form-control-lg" id="inputPassword" placeholder="Password">
-                    </div>
-
 
                 <div class="col-md-6 col-sm-12 mar">
                     <button type="submit" class="btn btn-primary mt-2 ">Crear usuario</button>
                 </div>
+
+                <div id="hidden_div" class="col-md-6 col-sm-12 mar">
+                    <input type="password" class="form-control form-control-lg" placeholder="Password" id="pass" name="pass" >
+                </div>
+
+
+                
             
 
 
@@ -96,7 +105,12 @@
         </form>
     </div>
 
-
+    <script>
+        function showDiv(divId, element)
+        {
+            document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 </html>

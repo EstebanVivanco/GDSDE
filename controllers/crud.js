@@ -112,9 +112,10 @@ exports.CrearNuevoUsuario = (req, res)=>{
     const tipo = req.body.tipo;
     const estado = 1;
     const correo = req.body.correo;
+    const pass = req.body.pass;
     
     console.log(nombre);
-    conexion.query('INSERT INTO usuarios SET ?',{rut: rut, nombre:nombre, correo:correo, estado_usuario_id_fk:estado, tipo_id_fk: tipo}, (error, results)=>{
+    conexion.query('INSERT INTO usuarios SET ?',{rut: rut, nombre:nombre, correo:correo, estado_usuario_id_fk:estado, tipo_id_fk: tipo, admin_pass:pass}, (error, results)=>{
         if(error){
             console.log(error);
         }else{

@@ -93,7 +93,7 @@ router.get('/crearNuevoUsuario',(req, res) =>{
     res.render('crearNuevoUsuario');
 })
 
-//RUTA PARA LISTAR Y LOS USUARIOS
+//LISTAR USUARIOS Y DESHABILITARLOS
 router.get('/crudusuario',(req, res) =>{
 
     conexion.query('SELECT * FROM usuarios WHERE estado_usuario_id_fk = 1',(error, results)=>{
@@ -104,6 +104,19 @@ router.get('/crudusuario',(req, res) =>{
         }
     })
 })
+//CRUD DE USUARIOS
+//LISTAR USUARIOS DESHABILITADOS
+router.get('/usuarioDeshabilitado',(req, res) =>{
+
+    conexion.query('SELECT * FROM usuarios WHERE estado_usuario_id_fk = 2',(error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('usuarioDeshabilitado', {results:results});
+        }
+    })
+})
+
 
 //RUTA PARA EDITAR USUARIO
 router.get('/editarUsuarios/:id', (req, res)=>{
@@ -131,11 +144,25 @@ router.get('/deshabilitarUsuario/:id', (req, res)=>{
     })
 })
 
+//HABILITAR USUARIOS
+router.get('/habilitarUsuario/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('UPDATE usuarios SET estado_usuario_id_fk = 1 WHERE usuario_id = ? ', [id], (error)=>{
+        if(error){
+            throw error;
+        }else{
+            res.redirect('/usuarioDeshabilitado')
+        }
+    })
+})
+//FIN CRUD DE USUARIOS
+
 router.get('/login', (req, res) =>{
     res.render('login');
 })
 
-
+//CRUD DE TIPO
 router.get('/crudtipo', (req,res)=>{
 
     conexion.query('SELECT * FROM tipousuarios WHERE estadoTipoUsuario_id_fk = 1;',(error, results)=>{
@@ -195,7 +222,7 @@ router.get('/ingresarTipoUsuario', (req,res)=>{
 })
 
 
-//RUTA PARA USUARIOS DESHABILITADOS
+//RUTA PARA TIPOS DE USUARIOS DESHABILITADOS
 
 router.get('/tipoUserDeshabilitado', (req,res)=>{
 
@@ -221,7 +248,7 @@ router.get('/habilitar/:id', (req, res)=>{
         }
     })
 })
-
+//FIN CRUD DE TIPOUSUARIOS
 
 const crud = require('./controllers/crud');
 

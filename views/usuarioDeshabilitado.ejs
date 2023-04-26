@@ -48,39 +48,55 @@
     </nav>
     <!-- FIN NAV-->
 
-    <!--Inicio lista de tipos de usuario-->
+    <!--Inicio lista de usuarios-->
 
     
     <br>
     
     <div class="container-fluid">
 
-            <a href="/ingresarTipoUsuario" class="btn btn-outline-info">Añadir un nuevo tipo de usuario</a>
-            <a href="/tipoUserDeshabilitado" class="btn btn-outline-info">Tipo de usuarios deshabilitados</a>
-  
+            <a href="/crearNuevoUsuario" class="btn btn-outline-info">Crear nuevo usuario</a>
+            <a href="/crearNuevoUsuario" class="btn btn-outline-info">Habilitar usuario</a>
         <table class="table table-success table-striped table-responsive  text-center mt-4">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">Rut</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Tipo</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
-                <% results.forEach((tipo)=>{ %>
+                <% results.forEach((user)=>{ %>
 
                     <tr>
                         <td>
-                            <%= tipo.tipo_id %>
+                            <%= user.usuario_id %>
                         </td>
                         <td>
-                            <%= tipo.nombre %>
+                            <%= user.rut %>
                         </td>
                         <td>
-                            <a href="/editusertype/<%= tipo.tipo_id %>" class="btn btn-outline-info">editar</a>
-                            <a href="/deleteUserType/<%= tipo.tipo_id %>" class="btn btn-outline-danger">eliminar</a>
+                            <%= user.nombre %>
                         </td>
+                        <td>
+                            <%= user.correo %>
+                        </td>
+                        <td>
+                            <%= user.estado_usuario_id_fk %>
+                        </td>
+                        <td>
+                            <%= user.tipo_id_fk %>
+                        </td>
+                        <td>
+                            <a href="/editarUsuarios/<%= user.usuario_id %>" class="btn btn-outline-info">editar</a>
+                            <a href="/habilitarUsuario/<%= user.usuario_id %>" class="btn btn-outline-secondary">habilitar</a>
+                        </td>
+                        
 
                     </tr>
                     <% }) %>
