@@ -173,6 +173,25 @@ exports.createUserType = (req, res)=>{
 }
 
 
+//PROBANDO AUTENTIFICACION
+
+//exports.login= (req, res) =>{
+    //const correo = req.body.correo;
+    //const pass = req.body.password;
+
+   // if(correo && pass){
+        //conexion.query('SELECT * FROM `usuarios` WHERE correo = ? and admin_pass = ? and tipo_id_fk = 1;', [correo],[pass],(error, results)=>{
+
+            //if(results.length==0){
+               // res.send('Usuario o contraseña incorrectos')
+           // }else{
+              //  res.send('Todo bien chavisa')
+          //  }
+       // })
+   // }
+//}
+
+
 
 
 

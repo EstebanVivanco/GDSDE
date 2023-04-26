@@ -195,6 +195,33 @@ router.get('/ingresarTipoUsuario', (req,res)=>{
 })
 
 
+//RUTA PARA USUARIOS DESHABILITADOS
+
+router.get('/tipoUserDeshabilitado', (req,res)=>{
+
+    conexion.query('SELECT * FROM tipousuarios WHERE estadoTipoUsuario_id_fk = 2;',(error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('tipoUsuariosDeshabilitados', {results:results});
+        }
+    })
+})
+
+//RUTA PARA HABILITAR TIPOS DE USUARIO
+
+router.get('/habilitar/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('UPDATE tipousuarios SET estadoTipoUsuario_id_fk = 1 WHERE tipo_id = ? ', [id], (error)=>{
+        if(error){
+            throw error;
+        }else{
+            res.redirect('/tipoUsuariosDeshabilitados');
+        }
+    })
+})
+
 
 const crud = require('./controllers/crud');
 
@@ -206,5 +233,9 @@ router.post('/updateUsuario', crud.updateUsuario);
 
 router.post('/updateUserType', crud.updateUserType);
 router.post('/createUserType',crud.createUserType)
+
+//router.post('/login',crud.login);
+
+
 
 module.exports = router;
