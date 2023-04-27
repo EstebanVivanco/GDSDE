@@ -36,47 +36,20 @@ function addelement(){
   <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
   <title>Sala de estudio</title>
 </head>
-<body>
+<body style="background-color: white;">
 
       <!-- INICIO NAV-->
-    <nav class="navbar navbar-expand-lg bg-mi-color">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="">
-                <img src="logotipo.png" style="width: 150px; height: 30px;" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse " id="navbarNav">
 
-                <ul class="navbar-nav px-5">
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link negro" style="color: #02416d" href="/"> INICIO </a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link negro"  style="color:#02416d" href="registros"> REGISTROS </a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-        <div>
-
-            <a class="navbar-brand" href="/login">
-                <img src="usuario.png" style="width: 40px; height: 40px;" alt="">
-            </a>
-        </div>
-    </nav>
       <!-- FIN NAV-->
 
       <div class="container-fluid mt-3">
         <div class="row">
-          <div class="col-lg-3 col-md-12"> 
-            <div class="card">
-              <div class="card-header">
-                <h4 class="mb-0">Datos de la Sala</h4>
+
+          <div class="col-lg-3 col-md-12 "> 
+            
+            <div class="card" >
+              <div class="card-header" style="background-color: #5D4037; color: white;">
+                <h4 class="mb-0" >Datos de la Sala</h4>
               </div>
               <div class="card-body">
                   <div class="form-group">
@@ -87,7 +60,7 @@ function addelement(){
                         <hr>
                         <label id="estadini" hidden> ESTADO DE LA SALA <%= sala.estado_id %> </label><br>
                         <!-- <i class="fa-solid fa-users fa-xl"> </i> -->
-                        <H5 class="modal-title">| CAPACIDAD DE LA SALA <%= sala.capacidad %>  </H5> 
+                        <H5 class="modal-title">| Capacidad de la sala: <%= sala.capacidad %>  </H5> 
                         <script>
                             const paginaEstado = function(){
     
@@ -100,51 +73,77 @@ function addelement(){
             </div>
           </div>
       
-          <div class="col-lg-6 col-md-6"> 
+          <div class="col-lg-6 col-md-6 "> 
+
             <div class="card">
-              <div class="card-header">
+
+              <div class="card-header" style="background-color: #5D4037; color: white;">
                 <h4 class="mb-0">Formulario de Ingreso</h4>
               </div>
-              <div class="card-body">
-                <h5 class="card-title">ESCANEAR QR CEDULA DE IDENTIDAD</h5>
-                <div id="qr-reader"> </div>
-                
-                <HR></HR>
 
-                <div class="row">
-                      <div style="width: 100%" id="reader">
-                      </div>
-                </div>
+              <div style="padding: 4%;">
+                  <a class="btn" style="background-color: #607D8B; color: white; width: 100%;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Registrar Mediante Escaneo QR
+                  </a>
 
-                <div class="row" style="padding:30px;">
-                    <div id="result"></div>
-                </div>
+                  <a class="btn mt-2" style="background-color: #607D8B; color: white; width: 100%;" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Registrar Mediante  Ingreso Manual
+                  </a>
+
+              </div>
 
 
 
-                <hr>
-                <h5 class="card-title">INGRESO MANUAL DE RUT</h5>
-                <hr>
+            
 
-    
-                  <div class="form-group">
-    
-                    <label for="rut">RUT</label>
-                    <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" required maxlength="10">
-                    <span id="validacion-rut"></span>
-    
+
+            <div class="row mt-2">
+              <div class="collapse" id="collapseExample">
+                <div class="card-body">
+                  <h5 class="card-title">ESCANEAR QR CEDULA DE IDENTIDAD</h5>
+                  <HR></HR>
+                  <div style="padding: 1%;">
+
+                    <div id="qr-reader"> </div>
+
+                    <div class="row">
+                          <div style="width: 100%" id="reader"></div>
+                    </div>
+
+                    <div class="row" style="padding:30px;">
+                        <div id="result"></div>
+                    </div>
+
                   </div>
-
-                  <div id="verificacionmsg"></div>
-                  <button type="button" onclick="addelement();" id="submit-btn" class="btn btn-primary mt-4 btn-block">Agregar</button>
-    
+                </div>
               </div>
             </div>
+
+                <div class="collapse" id="collapseExample2">
+                <div class="card"> 
+                  <div class="card-body">
+                  <h5 class="card-title">INGRESO MANUAL DE RUT</h5>
+                  <hr>
+                    <div class="form-group">
+      
+                      <label for="rut">RUT</label>
+                      <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" required maxlength="10">
+                      <span id="validacion-rut"></span>
+      
+                    </div>
+
+                    <div id="verificacionmsg"></div>
+                    <button type="button" onclick="addelement();" id="submit-btn" class="btn mt-4 btn-block" style="background-color: #607D8B; color: white; width: 100%;">Agregar</button>
+                  </div>
+                </div>
+                </div>
+            </div>
+
           </div>
       
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-3 col-md-6 ">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header" style="background-color: #5D4037; color: white;">
                 <h4 class="mb-0">Alumnos Ingresados </h4>
               </div>
               <div class="card-body">
@@ -163,15 +162,17 @@ function addelement(){
     
                   <input type="text" value="" id="contenedordatos" name="contenedordatos"  hidden>
                   <br>
-                  <button onclick="paginaEstado()" type="submit" class="btn btn-primary mt-2 btn-block">Generar Solicitud</button>
+                  <button onclick="paginaEstado()" type="submit" class="btn mt-2 btn-block" style="background-color: #607D8B; color: white; width: 100%;">Generar Solicitud</button>
                 </form>
     
     
               </div>
             </div>
 
+          </div>
+
+        
         </div>
-      </div>
       </div>
 
 

@@ -46,26 +46,6 @@
     <!-- FIN NAV-->
     <br>
 
-
-    <div class="container mt-5">
-        <div class="row transUp" >
-          <div class="col-md-4">
-            <!-- Imagen de la tarjeta -->
-            <img src="https://images.pexels.com/photos/2861798/pexels-photo-2861798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="img-fluid" alt="Imagen de la tarjeta">
-          </div>
-          <div class="col-md-8" >
-            <div class="card" style="height: 100%;">
-              <center>
-                  <div class="card-body">
-                    INFO POR DEFINIR
-                  </div>
-                </center>
-                </div>
-          </div>
-        </div>
-      </div>
-
-
     <div class="container-fluid p-5">
         
         <div class="row">
@@ -80,9 +60,9 @@
                         <% if(salas.estado == 'Disponible'){ %>
                         <a href="/solicitud/<%= salas.sala_id %>" class="btn btn-primary w-100 pt-2 btn-101">Solicitar sala de estudio</a>
                         <% }else if(salas.estado == 'Deshabilitada'){ %>
-                          <a class="btn btn-danger w-75">Imposible Solicitar</a>
+                          <a class="btn btn-danger w-100">Imposible Solicitar</a>
                         <% }else{%>
-                            <a class="btn btn-warning w-75">Ocupada en este momento</a>
+                            <a class="btn btn-warning w-100">Ocupada en este momento</a>
                         <% }%>
                     </div>
                 </div>
