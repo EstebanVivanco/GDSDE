@@ -19,7 +19,7 @@ router.get('/',  (req, res)=>{
 
 router.get('/registros',  (req, res)=>{
 
-    conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, solicitud.fecha_solicitud,solicitud.hora_inicio,solicitud.hora_final, usuarios.nombre, salas.numero_sala, usuarios.rut, usuarios.correo FROM solicitud INNER JOIN usuarios ON solicitud.usuario_id_fk = usuarios.usuario_id INNER JOIN salas ON solicitud.sala_id_fk = salas.sala_id', (error, results) => {
+    conexion.query('SELECT solicitud.solicitud_id, solicitud.codigo_solicitud, DATE_FORMAT(solicitud.fecha_solicitud, "%m/%d/%Y") AS fechasoli,solicitud.hora_inicio,solicitud.hora_final, usuarios.nombre, salas.numero_sala, usuarios.rut, usuarios.correo FROM solicitud INNER JOIN usuarios ON solicitud.usuario_id_fk = usuarios.usuario_id INNER JOIN salas ON solicitud.sala_id_fk = salas.sala_id', (error, results) => {
 
         if (error){
             throw error;            
