@@ -58,19 +58,19 @@
                         <p class="card-text">Sala de estudio con capacidad para <%= salas.capacidad %> personas</p>
                         
                         <% if(salas.estado == 'Disponible'){ %>
-                        <a href="/solicitud/<%= salas.sala_id %>" class="btn btn-primary w-100 pt-2 btn-101">Solicitar sala de estudio</a>
+                        <a href="/solicitud/<= salas.sala_id %>" class="btn btn-primary w-100 pt-2 btn-101">Solicitar sala de estudio</a>
                         <% }else if(salas.estado == 'Deshabilitada'){ %>
                           <a class="btn btn-danger w-100">Imposible Solicitar</a>
                         <% }else{%>
                             <a class="btn btn-warning w-100">Ocupada en este momento</a>
                         <% }%>
+                        
                     </div>
                 </div>
             </div>
             <%})%>
         </div>
     </div>
-    
 
 </body>
 </html>
