@@ -125,7 +125,7 @@ router.get('/editarUsuarios/:id', (req, res)=>{
 
     const id = req.params.id;
 
-    conexion.query('SELECT * FROM usuarios WHERE usuario_id = ?', [id], (error, results)=>{
+    conexion.query('SELECT * FROM usuarios WHERE usuario_id = ? ', [id], (error, results)=>{
 
         if(error) throw error;
 
@@ -133,8 +133,9 @@ router.get('/editarUsuarios/:id', (req, res)=>{
 
             if (errortipo) throw errortipo;
 
-            res.render('editarUsuarios', {results:results , tipos:tipos})
-            console.log(results + " --- " + tipos)
+            res.render('editarUsuarios', { results : results[0] , tipox:tipos} )
+
+            console.log(results)
 
         })
     })

@@ -127,6 +127,7 @@ exports.CrearNuevoUsuario = (req, res)=>{
 
 //EDITAR USUARIO
 exports.updateUsuario = (req, res)=>{
+
     const id = req.body.id;
     const rut = req.body.rut;
     const nombre = req.body.nombre;
@@ -134,7 +135,7 @@ exports.updateUsuario = (req, res)=>{
     const estado = 1;
     const correo = req.body.correo;
 
-    conexion.query('UPDATE usuarios SET ? WHERE usuario_id = ?', [{rut:rut, nombre:nombre, estado_usuario_id_fk: estado, tipo_id_fk:tipo}, id], (error, results)=>{
+    conexion.query('UPDATE usuarios SET ? WHERE usuario_id = ?', [{rut:rut, nombre:nombre, correo:correo, estado_usuario_id_fk: estado, tipo_id_fk:tipo}, id], (error, results)=>{
         if(error){
             throw error;
         }
