@@ -31,6 +31,8 @@ router.get('/registros',  (req, res)=>{
 
 })
 
+
+
 router.get('/registrofinalizado',  (req, res)=>{
 
     res.redirect('registrofinalizado');
@@ -122,14 +124,22 @@ router.get('/usuarioDeshabilitado',(req, res) =>{
 router.get('/editarUsuarios/:id', (req, res)=>{
 
     const id = req.params.id;
+
     conexion.query('SELECT * FROM usuarios WHERE usuario_id = ?', [id], (error, results)=>{
-        if(error){
-            throw error;
-        }else{
-            res.render('editarUsuarios', {user:results[0]});
-        }
+
+        if(error) throw error;
+
+        conexion.query('SELECT * FROM tipousuarios',(errortipo, tipos)=>{
+
+            if (errortipo) throw errortipo;
+
+            res.render('editarUsuarios', {results:results , tipos:tipos})
+            console.log(results + " --- " + tipos)
+
+        })
     })
 })
+
 
 //DESHABILITAR USUARIO
 router.get('/deshabilitarUsuario/:id', (req, res)=>{
@@ -244,7 +254,7 @@ router.get('/habilitar/:id', (req, res)=>{
         if(error){
             throw error;
         }else{
-            res.redirect('/tipoUsuariosDeshabilitados');
+            res.redirect('/tipoUserDeshabilitado')
         }
     })
 })
@@ -261,7 +271,7 @@ router.post('/updateUsuario', crud.updateUsuario);
 router.post('/updateUserType', crud.updateUserType);
 router.post('/createUserType',crud.createUserType)
 
-//router.post('/login',crud.login);
+router.post('/login', crud.login);
 
 
 

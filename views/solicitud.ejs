@@ -38,9 +38,39 @@ function addelement(){
 </head>
 <body style="background-color: white;">
 
-      <!-- INICIO NAV-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
 
-      <!-- FIN NAV-->
+            <ul class="navbar-nav px-5">
+
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/"> INICIO </a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/crudusuario"> USUARIOS </a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/crudtipo"> TIPO DE USUARIO</a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+    <div>
+
+        <a class="navbar-brand" href="">
+            <img src="usuario.png" style="width: 40px; height: 40px;" alt="">
+        </a>
+    </div>
+</nav>
+<!-- FIN NAV-->
 
       <div class="container-fluid mt-3">
         <div class="row">
@@ -157,7 +187,7 @@ function addelement(){
                   <%  }%>
     
                   <div id="resultado">
-             
+                    
                   </div>
     
                   <input type="text" value="" id="contenedordatos" name="contenedordatos"  hidden>

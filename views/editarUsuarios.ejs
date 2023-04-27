@@ -51,7 +51,7 @@
         </div>
     </nav>
  
-    <% if(user){ %>
+    <% if(results){ %>
         <div class="container mt-4">
             <div class="card border-secondary">
                 <div class="card-header">Editar Usuario</div>
@@ -60,27 +60,27 @@
 
                         <div class="row">
 
-                            <input id="id" name="id" value="<%= user.usuario_id %>" hidden>
+                            <input id="id" name="id" value="<%= results.usuario_id %>" hidden>
                             <div class="col-md-6 col-sm-12 mar">
-                                <input class="form-control form-control-lg" type="text" placeholder="Nombre" value="<%= user.nombre %>" id="nombre" name="nombre">
+                                <input class="form-control form-control-lg" type="text" placeholder="Nombre" value="<%= results.nombre %>" id="nombre" name="nombre">
                             </div>
 
                             <div class="col-md-6 col-sm-12 mar">
-                                <input class="form-control form-control-lg" type="text" placeholder="Rut" value="<%= user.rut %>" id="rut" name="rut">
+                                <input class="form-control form-control-lg" type="text" placeholder="Rut" value="<%= results.rut %>" id="rut" name="rut">
                             </div>
 
                             <div class="col-md-6 col-sm-12 mar">
-                                <input type="email" class="form-control form-control-lg" placeholder="correo@electronico.com" value="<%= user.correo %>" id="correo" name="correo" >
+                                <input type="email" class="form-control form-control-lg" placeholder="correo@electronico.com" value="<%= results.correo %>" id="correo" name="correo" >
                             </div>
 
                             <div class="col-md-6 col-sm-12 mar">
+                                
                                 <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo">
-                                    <option selected>Seleccione un tipo de usuario</option>
-                                    <option value="1">Alumno</option>
-                                    <option value="2">Profesor</option>
-                                    <option value="3">Admin</option>
-                                    <option value="4">Visita</option>
+                                <% tipos.forEach((tipos)=>{ %>
+                                    <option value=" <%= tipos.tipo_id %> "><%= tipos.nombre %></option>
+                                <%})%>
                                 </select>
+                                
                             </div>
                                 <div class="col-md-6 col-sm-12 mar" hidden>
                                     <input type="password" class="form-control form-control-lg" id="inputPassword" placeholder="Password">
