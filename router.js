@@ -254,7 +254,7 @@ router.get('/habilitar/:id', (req, res)=>{
         if(error){
             throw error;
         }else{
-            res.redirect('/tipoUsuariosDeshabilitados');
+            res.redirect('/tipoUserDeshabilitado')
         }
     })
 })
@@ -271,7 +271,7 @@ router.post('/updateUsuario', crud.updateUsuario);
 router.post('/updateUserType', crud.updateUserType);
 router.post('/createUserType',crud.createUserType)
 
-//router.post('/login',crud.login);
+router.post('/login', crud.login);
 
 
 
