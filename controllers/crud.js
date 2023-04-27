@@ -115,6 +115,7 @@ exports.CrearNuevoUsuario = (req, res)=>{
     const pass = req.body.pass;
     
     console.log(nombre);
+    //INSERT INTO usuarios SET rut = "22222", nombre= "adminnn", correo = "a@o", estado_usuario_id_fk = 1, tipo_id_fk = 1, admin_pass = "12345";
     conexion.query('INSERT INTO usuarios SET ?',{rut: rut, nombre:nombre, correo:correo, estado_usuario_id_fk:estado, tipo_id_fk: tipo, admin_pass:pass}, (error, results)=>{
         if(error){
             console.log(error);
