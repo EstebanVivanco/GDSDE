@@ -107,7 +107,7 @@ router.get('/crearNuevoUsuario',(req, res) =>{
 //LISTAR USUARIOS Y DESHABILITARLOS
 router.get('/crudusuario',(req, res) =>{
 
-    conexion.query('SELECT * FROM usuarios WHERE estado_usuario_id_fk = 1',(error, results)=>{
+    conexion.query('SELECT usuarios.usuario_id, usuarios.rut, usuarios.nombre, usuarios.correo, usuarios.estado_usuario_id_fk, usuarios.tipo_id_fk, usuarios.admin_pass, tipousuarios.tipo_id, tipousuarios.nombre AS tiponombre FROM usuarios INNER JOIN tipousuarios ON tipousuarios.tipo_id = usuarios.tipo_id_fk WHERE estado_usuario_id_fk = 1',(error, results)=>{
         if(error){
             throw error;
         }else{
@@ -119,7 +119,7 @@ router.get('/crudusuario',(req, res) =>{
 //LISTAR USUARIOS DESHABILITADOS
 router.get('/usuarioDeshabilitado',(req, res) =>{
 
-    conexion.query('SELECT * FROM usuarios WHERE estado_usuario_id_fk = 2',(error, results)=>{
+    conexion.query('SELECT usuarios.usuario_id, usuarios.rut, usuarios.nombre, usuarios.correo, usuarios.estado_usuario_id_fk, usuarios.tipo_id_fk, usuarios.admin_pass, tipousuarios.tipo_id, tipousuarios.nombre AS tiponombre FROM usuarios INNER JOIN tipousuarios ON tipousuarios.tipo_id = usuarios.tipo_id_fk WHERE estado_usuario_id_fk = 2',(error, results)=>{
         if(error){
             throw error;
         }else{
