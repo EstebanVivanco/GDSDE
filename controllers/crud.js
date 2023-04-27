@@ -13,8 +13,6 @@ exports.GuardarSolicitud = (req,res)=>{
     const sala_id = req.body.idsala;
     const codigo_solicitud = uuidv4().replace(/-/g, ''); 
     const arrayruts = ruts.split(",");
-
-
     let usuario_id;
     
     conexion.query('SELECT COUNT(*) AS count FROM usuarios WHERE rut IN (?)',[arrayruts] , (error, results) => {
@@ -99,7 +97,7 @@ exports.GuardarSolicitud = (req,res)=>{
                 throw error;
             }
             else{
-                res.redirect('/');
+                res.redirect('/inicio');
             }
         }) 
 
@@ -120,7 +118,7 @@ exports.CrearNuevoUsuario = (req, res)=>{
         if(error){
             console.log(error);
         }else{
-            res.redirect('/');
+            res.redirect('/inicio');
         }
     })
 }
@@ -187,7 +185,7 @@ exports.login = (req,res)=>{
                 console.log('error :>> ', error);
             }else{
                 if(results.length > 0){
-                    res.redirect('/')
+                    res.redirect('/inicio')
                 }
 
 

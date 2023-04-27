@@ -5,6 +5,15 @@ const router = express.Router();
 
 router.get('/',  (req, res)=>{
 
+
+ 
+            res.render('login');
+ 
+
+})
+
+router.get('/inicio',  (req, res)=>{
+
     conexion.query('SELECT * FROM salas INNER JOIN estadosalas ON estadosalas.estado_sala_id = salas.estado_sala_id_fk order by numero_sala asc ', (error, results) => {
 
         if (error){
