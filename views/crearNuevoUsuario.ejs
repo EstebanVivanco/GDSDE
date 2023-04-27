@@ -55,6 +55,9 @@
         .mar{
             margin: 2% 0% 2% 0%;
         }
+        .centrar{
+            text-align: center;
+        }
 
         #hidden_div {
             display: none;
@@ -62,39 +65,56 @@
 
     </style>
 
+
+<div class="container mt-4">
+    <div class="card border-secondary">
+        <div class="card-header">CREAR NUEVO USUARIO</div>
+        <div class="card-body">
+            <form action="/CrearNuevoUsuario" method="POST">
+                <div class="row">
+            
+                    <div class="col-md-6 col-sm-12 mar">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre Completo</label>
+                        <input class="form-control form-control-lg" type="text" placeholder="Nombre y Apellido" aria-label="default input example" id="nombre" name="nombre" required>
+                    </div>
+    
+                    <div class="col-md-6 col-sm-12 mar">
+                        <label for="exampleFormControlInput1" class="form-label">Rut</label>
+                        <input class="form-control form-control-lg" type="text" placeholder="Rut" aria-label="default input example" id="rut" name="rut" required>
+                    </div>
+    
+                    <div class="col-md-6 col-sm-12 mar">
+                        <label for="exampleFormControlInput1" class="form-label">Correo Electronico</label>
+                        <input type="email" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="correo@electronico.com" id="correo" name="correo" required>
+                    </div>
+    
+                    <div class="col-md-6 col-sm-12 mar">
+                        <label for="exampleFormControlInput1" class="form-label">Tipo de Usuario</label>
+                        <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo" onchange="showDiv('hidden_div', this)" required>
+                            <option selected>Seleccione un tipo de usuario</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Docente</option>
+                            <option value="3">Alumno</option>
+                            <option value="4">Visita</option>
+                        </select>
+                    </div>
+    
+                    <div class="col-md-6 col-sm-12 mar centrar">
+                        <button type="submit" class="btn btn-primary mt-2 ">Crear usuario</button>
+                    </div>
+    
+                    <div id="hidden_div" class="col-md-6 col-sm-12">
+                        <label for="exampleFormControlInput1" class="form-label">Contraseña de Admin</label>
+                        <input type="password" class="form-control form-control-lg" placeholder="Contraseña" id="pass" name="pass">
+                    </div>
+        </div>
+    </div>
+</div>
+
     <div class="container text-center martop">
-        <form action="/CrearNuevoUsuario" method="POST">
-            <div class="row">
         
-                <div class="col-md-6 col-sm-12 mar">
-                    <input class="form-control form-control-lg" type="text" placeholder="Nombre y Apellido" aria-label="default input example" id="nombre" name="nombre">
-                </div>
 
-                <div class="col-md-6 col-sm-12 mar">
-                    <input class="form-control form-control-lg" type="text" placeholder="Rut" aria-label="default input example" id="rut" name="rut">
-                </div>
-
-                <div class="col-md-6 col-sm-12 mar">
-                    <input type="email" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="correo@electronico.com" id="correo" name="correo">
-                </div>
-
-                <div class="col-md-6 col-sm-12 mar">
-                    <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo" onchange="showDiv('hidden_div', this)">
-                        <option selected>Seleccione un tipo de usuario</option>
-                        <option value="1">Admin</option>
-                        <option value="2">Docente</option>
-                        <option value="3">Alumno</option>
-                        <option value="4">Visita</option>
-                    </select>
-                </div>
-
-                <div class="col-md-6 col-sm-12 mar">
-                    <button type="submit" class="btn btn-primary mt-2 ">Crear usuario</button>
-                </div>
-
-                <div id="hidden_div" class="col-md-6 col-sm-12 mar">
-                    <input type="password" class="form-control form-control-lg" placeholder="Contraseña" id="pass" name="pass">
-                </div>
+                
 
 
                 
@@ -108,7 +128,8 @@
     <script>
         function showDiv(divId, element)
         {
-            document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+            document.getElementById(divId).style.display = element.value != 1 ? 'none' : 'block';
+            document.getElementById("pass").value = element.value != 1 ? '' : '';
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
