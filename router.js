@@ -98,10 +98,18 @@ router.get('/camaccess',  (req, res)=>{
     res.render('camaccess');
 
 })
-
+ 
 router.get('/crearNuevoUsuario',(req, res) =>{
 
-    res.render('crearNuevoUsuario');
+
+    conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('crearNuevoUsuario', {results:results});
+        }
+    })
+
 })
 
 //LISTAR USUARIOS Y DESHABILITARLOS
@@ -138,13 +146,21 @@ router.get('/editarUsuarios/:id', (req, res)=>{
 
         if(error) throw error;
 
-        conexion.query('SELECT * FROM tipousuarios',(errortipo, tipos)=>{
+        conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(errortipo, tipos)=>{
 
             if (errortipo) throw errortipo;
 
-            res.render('editarUsuarios', { results : results[0] , tipox:tipos} )
 
-            console.log(results)
+            conexion.query('SELECT tipo_id_fk FROM usuarios where usuario_id = ?',[id],(errortipo, aidi)=>{
+
+                if (errortipo) throw errortipo;
+    
+                res.render('editarUsuarios', { results : results[0] , tipox:tipos, aidi:aidi} )
+                
+                
+    
+            })
+         
 
         })
     })

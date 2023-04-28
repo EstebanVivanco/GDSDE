@@ -113,7 +113,11 @@ exports.CrearNuevoUsuario = (req, res)=>{
     const pass = req.body.pass;
     console.log(nombre);
     //INSERT INTO usuarios SET rut = "22222", nombre= "adminnn", correo = "a@o", estado_usuario_id_fk = 1, tipo_id_fk = 1, admin_pass = "12345";
-    conexion.query('INSERT INTO usuarios SET ?',{rut: rut, nombre:nombre, correo:correo, estado_usuario_id_fk:estado, tipo_id_fk: tipo, admin_pass:pass}, (error, results)=>{
+    conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(error, results)=>{
+ 
+    conexion.query('INSERT INTO usuarios SET ?',{rut: rut, nombre:nombre, correo:correo, estado_usuario_id_fk:estado, tipo_id_fk: tipo, admin_pass:pass}, (error, results2)=>{
+        if(error) throw(error);
+        
         if(error){
             console.log(error);
         }else{
@@ -125,9 +129,11 @@ exports.CrearNuevoUsuario = (req, res)=>{
             alertIcon:'succes',
             showConfirmButton: false,
             timer: 1500,
-            ruta: 'inicio'
+            ruta: 'crudusuario',
+            results:results
         })
         }
+    })
     })
 }
 
@@ -140,30 +146,41 @@ exports.updateUsuario = (req, res)=>{
     const tipo = req.body.tipo;
     const estado = 1;
     const correo = req.body.correo;
-    conexion.query('SELECT * FROM usuarios WHERE usuario_id = ? ', [id], (error, results)=>{
+    const pass = req.body.pass;
 
-        if(error) throw(error);
-    conexion.query('SELECT * FROM tipousuarios',(errortipo, tipos)=>{ 
-    conexion.query('UPDATE usuarios SET ? WHERE usuario_id = ?', [{rut:rut, nombre:nombre, correo:correo, estado_usuario_id_fk: estado, tipo_id_fk:tipo}, id], (error, results2)=>{
-        if(error){
-            throw error;
-        }
-        else{
-            res.render('editarUsuarios',{
-                alert:true,
-                alertTitle: 'Todo correcto',
-                alertMessage: 'Usuario actualizado correctamente!',
-                alertIcon:'succes',
-                showConfirmButton: false,
-                timer: 1500,
-                ruta: 'crudusuario',
-                results:results,
-                tipox:tipos
+    conexion.query('SELECT * FROM usuarios WHERE usuario_id = ? ', [id], (error, results)=>{
+        conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(errortipo, tipos)=>{
+            conexion.query('SELECT tipo_id_fk FROM usuarios where usuario_id = ?',[id],(errortipo, aidi)=>{
+
+                conexion.query('UPDATE usuarios SET ? WHERE usuario_id = ?', [{rut:rut, nombre:nombre, correo:correo, estado_usuario_id_fk: estado, tipo_id_fk:tipo, admin_pass:pass}, id], (error, results)=>{
+                    if(error){
+                        throw error;
+                    }
+                    else{
+                        //res.redirect('crudusuario');
+                        res.render('editarUsuarios',{
+                            alert:true,
+                            alertTitle: 'Todo correcto',
+                            alertMessage: 'Nuevo usuario ingresado correctamente!',
+                            alertIcon:'succes',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            ruta: 'crudusuario',
+                            results:results,
+                            tipox:tipos,
+                            aidi:aidi
+                        })
+                    }
+                })
+
             })
-        }
+
+
+        })
+
+
     })
-})
-})
+
 }
 
 //EDITAR TIPO DE USUARIO

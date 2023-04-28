@@ -54,15 +54,13 @@
         </nav>
         <!-- FIN NAV-->
 
-
     <!--Inicio lista de tipos de usuario-->
-
-    
     <br>
     
     <div class="container-fluid">  
         <a href="/crudtipo" class="btn btn-outline-info">Volver</a>
-        <table class="table table-success table-striped table-responsive  text-center mt-4">
+        <table class="table table-striped text-center mt-4">
+
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -84,9 +82,9 @@
                         <td>
                             <a href="/habilitar/<%= tipo.tipo_id %>" class="btn btn-outline-info">Habilitar</a>
                         </td>
-
                     </tr>
-                    <% }) %>
+
+                <% }) %>
             </tbody>
 
         </table>
