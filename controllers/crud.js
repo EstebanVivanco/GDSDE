@@ -117,7 +117,16 @@ exports.CrearNuevoUsuario = (req, res)=>{
         if(error){
             console.log(error);
         }else{
-            res.redirect('/inicio');
+           // res.redirect('/inicio');
+           res.render('crearNuevoUsuario',{
+            alert:true,
+            alertTitle: 'Todo correcto',
+            alertMessage: 'Nuevo usuario ingresado correctamente!',
+            alertIcon:'succes',
+            showConfirmButton: false,
+            timer: 1500,
+            ruta: 'inicio'
+        })
         }
     })
 }
@@ -131,15 +140,30 @@ exports.updateUsuario = (req, res)=>{
     const tipo = req.body.tipo;
     const estado = 1;
     const correo = req.body.correo;
+    conexion.query('SELECT * FROM usuarios WHERE usuario_id = ? ', [id], (error, results)=>{
 
-    conexion.query('UPDATE usuarios SET ? WHERE usuario_id = ?', [{rut:rut, nombre:nombre, correo:correo, estado_usuario_id_fk: estado, tipo_id_fk:tipo}, id], (error, results)=>{
+        if(error) throw(error);
+    conexion.query('SELECT * FROM tipousuarios',(errortipo, tipos)=>{ 
+    conexion.query('UPDATE usuarios SET ? WHERE usuario_id = ?', [{rut:rut, nombre:nombre, correo:correo, estado_usuario_id_fk: estado, tipo_id_fk:tipo}, id], (error, results2)=>{
         if(error){
             throw error;
         }
         else{
-            res.redirect('crudusuario');
+            res.render('editarUsuarios',{
+                alert:true,
+                alertTitle: 'Todo correcto',
+                alertMessage: 'Usuario actualizado correctamente!',
+                alertIcon:'succes',
+                showConfirmButton: false,
+                timer: 1500,
+                ruta: 'crudusuario',
+                results:results,
+                tipox:tipos
+            })
         }
     })
+})
+})
 }
 
 //EDITAR TIPO DE USUARIO
@@ -152,7 +176,15 @@ exports.updateUserType = (req, res)=>{
             throw error;
         }
         else{
-            res.redirect('crudtipo');
+            res.render('ingresarTipoUsuario',{
+                alert:true,
+                alertTitle: 'Todo correcto',
+                alertMessage: 'Tipo de usuario actualizado correctamente!',
+                alertIcon:'succes',
+                showConfirmButton: false,
+                timer: 1500,
+                ruta: 'crudtipo'
+            })
         }
     })
 }
@@ -167,7 +199,16 @@ exports.createUserType = (req, res)=>{
         if(error){
             console.log(error);
         }else{
-            res.redirect('crudtipo');
+            res.render('ingresarTipoUsuario',{
+                alert:true,
+                alertTitle: 'Todo correcto',
+                alertMessage: 'Tipo de usuario ingresado correctamente!',
+                alertIcon:'succes',
+                showConfirmButton: false,
+                timer: 1500,
+                ruta: 'crudtipo'
+            })
+            //res.redirect('crudtipo');
         }
     })
 }

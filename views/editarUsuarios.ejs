@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="col-md-6 col-sm-12 mar">
-                                <input class="form-control form-control-lg" type="text" placeholder="Rut" value="<%= results.rut %>" id="rut" name="rut">
+                                <input class="form-control form-control-lg" type="text" placeholder="Rut" value="<%= results.rut %>" id="rut" name="rut" readonly>
                             </div>
 
                             <div class="col-md-6 col-sm-12 mar">
@@ -105,7 +105,21 @@
                         </div>
                     </form>
         </div>
-        <% } %>
-    
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <% if(typeof alert != "undefined"){ %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle%>',
+                text: '<%= alertMessage%>',
+                icon: '<%= alertIcon%>',
+                showConfirmButton: <%= showConfirmButton%> ,
+                timer: <%= timer%>
+            }).then(()=>{
+                window.location='/<%= ruta%>'
+            })
+        </script>
+    <% } %>
+
 </body>
 </html>
