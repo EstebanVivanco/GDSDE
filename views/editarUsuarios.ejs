@@ -12,18 +12,6 @@
 </head>
 <body>
 
-    <style>
-            .martop{
-                margin-top: 8%;
-            }
-            .mar{
-                margin: 2% 0% 2% 0%;
-            }
-
-            #hidden_div {
-                display: none;
-            }
-    </style>
     <!-- INICIO NAV-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -75,42 +63,46 @@
                         <div class="row">
 
                             <input id="id" name="id" value="<%= results.usuario_id %>" hidden>
-                            <div class="col-md-6 col-sm-12 mar">
+                            <div class="col-md-6 col-sm-12 mt-4">
                                 <input class="form-control form-control-lg" type="text" placeholder="Nombre" value="<%= results.nombre %>" id="nombre" name="nombre">
                             </div>
 
-                            <div class="col-md-6 col-sm-12 mar">
+                            <div class="col-md-6 col-sm-12 mt-4">
                                 <input class="form-control form-control-lg" type="text" placeholder="Rut" value="<%= results.rut %>" id="rut" name="rut">
                             </div>
 
-                            <div class="col-md-6 col-sm-12 mar">
+                            <div class="col-md-6 col-sm-12 mt-4">
                                 <input type="email" class="form-control form-control-lg" placeholder="correo@electronico.com" value="<%= results.correo %>" id="correo" name="correo" >
                             </div>
 
-                            <div class="col-md-6 col-sm-12 mar">
+                            <div class="col-md-6 col-sm-12 mt-4">
                                 
-                                <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo" onchange="showDiv('hidden_div', this)">
-
+                                <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo" onchange="buenastardes()">
                                 <% tipox.forEach((tipos)=>{ %>
 
                                     <option  <%= results.tipo_id_fk == tipos.tipo_id ? "selected" : "" %> value="<%= tipos.tipo_id %>" > <%= tipos.nombre %> </option>
 
                                 <%})%>
-
-
                                 </select>
                                 
                             </div>
-                            <div id="hidden_div" class="col-md-6 col-sm-12">
-                                <label for="exampleFormControlInput1" class="form-label">Contraseña de Admin</label>
-                                <input type="password"  class="form-control form-control-lg" value="<%= results.admin_pass %>" placeholder="Contraseña" id="pass" name="pass">
-                            </div>
+
+                            <% if(aidi[0].tipo_id_fk  == 1){ %>
+
+                                <div id="miDiv" class="col-md-6 col-sm-12 mt-4">
+                                    <label for="exampleFormControlInput1" class="form-label">Contraseña de Admin</label>
+                                    <input type="password"  class="form-control form-control-lg" value="<%= results.admin_pass %>" placeholder="Contraseña" id="pass" name="pass">
+                                </div>
+
+                            <% } %>
 
                             <div class="row">
-                                <div class="col-md-6 col-sm-12 mar">
+
+                                <div class="col-md-6 col-sm-12 mt-4">
                                     <button type="submit" class="btn btn-primary form-control form-control-sm" tabindex="5">Guardar</button>
                                 </div>
-                                <div class="col-md-6 col-sm-12 mar">
+
+                                <div class="col-md-6 col-sm-12 mt-4">
                                     <a href="/crudusuario" class="btn btn-secondary form-control form-control-sm">Cancelar</a>
                                 </div>
                                     
@@ -129,12 +121,44 @@
         
     
         <script>
-            function showDiv(divId, element)
-            {
-                console.log(document.getElementById("tipo").value);
-                document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
-                document.getElementById("pass").value = element.value != 1 ? '' : '';
+
+            function buenastardes(){
+
+                const miSelect = document.getElementById('tipo');
+                const divpass = document.getElementById('miDiv');
+                const valorSeleccionado = miSelect.value;
+                const passx = document.getElementById('pass');
+
+                
+
+                        if (valorSeleccionado != 1) {
+
+                            console.log('valorSeleccionado', valorSeleccionado)
+                            divpass.style.display = 'none';
+                            passx.value = "";
+
+                            
+                        }else{
+                            divpass.style.display = 'block'
+                        }
+
+
+
+
             }
+
+
+
+
+
+
+
+
+
+
+ 
+
+
         </script>
 </body>
 </html>
