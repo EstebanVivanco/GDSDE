@@ -70,7 +70,6 @@
                     <th scope="col">Rut</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Estado</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Acciones</th>
                 </tr>
@@ -95,9 +94,7 @@
                         <td>
                             <%= user.tiponombre %>
                         </td>
-                        <td>
-                            <%= user.tipo_id_fk %>
-                        </td>
+ 
                         <td>
                             <a href="/editarUsuarios/<%= user.usuario_id %>" class="btn btn-outline-info">editar</a>
                             <a href="/deshabilitarUsuario/<%= user.usuario_id %>" class="btn btn-outline-danger">eliminar</a>

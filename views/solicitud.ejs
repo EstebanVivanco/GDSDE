@@ -159,7 +159,7 @@ function addelement(){
                     <div class="form-group">
       
                       <label for="rut">RUT</label>
-                      <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" required maxlength="10">
+                      <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" maxlength="10" required>
                       <span id="validacion-rut"></span>
       
                     </div>
@@ -194,7 +194,8 @@ function addelement(){
     
                   <input type="text" value="" id="contenedordatos" name="contenedordatos"  hidden>
                   <br>
-                  <button onclick="paginaEstado()" type="submit" class="btn mt-2 btn-block" style="background-color: #607D8B; color: white; width: 100%;">Generar Solicitud</button>
+
+                  <button onclick="paginaEstado()" id="btn-gen" type="submit" class="btn mt-2 btn-block" style="background-color: #607D8B; color: white; width: 100%;">Generar Solicitud</button>
                 </form>
     
     
@@ -234,11 +235,29 @@ function addelement(){
     }
   }
 
+  // function ocultarbtn(){
+
+  //   let containers = document.getElementById('contenedordatos');
+  //   let btnreg = document.getElementById('btn-gen'); 
+
+  //   if (containers.value.trim() === "") {
+  //     btnreg.style.display = "none";
+  //   } else {
+  //     btnreg.style.display = "block";
+  //   }
+
+  // }
+
+
+
   function onScanSuccess(qrCodeMessage) {
 
       const rutovich = obtenerRUN(qrCodeMessage);
       let container = document.getElementById('contenedordatos');
+      let btnreg = document.getElementById('btn-gen');
       ruts.push(rutovich);
+
+
 
       document.getElementById('result').innerHTML = '<span class="result"> Se ha añadido el rut: '+rutovich+'</span>';
 
@@ -248,6 +267,8 @@ function addelement(){
       let resultado = document.getElementById('resultado');
       resultado.innerHTML = '';
       var cont = 1;
+
+
 
       for( const ruta of ruts){
 

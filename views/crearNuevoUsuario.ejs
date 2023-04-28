@@ -81,12 +81,12 @@
             
                     <div class="col-md-6 col-sm-12 mar">
                         <label for="exampleFormControlInput1" class="form-label">Nombre Completo</label>
-                        <input class="form-control form-control-lg" type="text" placeholder="Nombre y Apellido" aria-label="default input example" id="nombre" name="nombre" required>
+                        <input class="form-control form-control-lg" type="text" placeholder="Nombre - Apellido" aria-label="default input example" id="nombre" name="nombre" required>
                     </div>
     
                     <div class="col-md-6 col-sm-12 mar">
                         <label for="exampleFormControlInput1" class="form-label">Rut</label>
-                        <input class="form-control form-control-lg" type="text" placeholder="Rut" aria-label="default input example" id="rut" name="rut" required>
+                        <input class="form-control form-control-lg" type="text" placeholder="xxxxxxxx-x" aria-label="default input example" id="rut" name="rut" required>
                     </div>
     
                     <div class="col-md-6 col-sm-12 mar">
@@ -97,21 +97,25 @@
                     <div class="col-md-6 col-sm-12 mar">
                         <label for="exampleFormControlInput1" class="form-label">Tipo de Usuario</label>
                         <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo" onchange="showDiv('hidden_div', this)" required>
-                            <option selected>Seleccione un tipo de usuario</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Docente</option>
-                            <option value="3">Alumno</option>
-                            <option value="4">Visita</option>
+                            
+                            <option selected> Seleccione una opción: </option>
+
+
+                            <% results.forEach((tipos)=>{ %>
+                                <option value="<%= tipos.tipo_id %>" > <%= tipos.nombre %> </option>
+                            <%})%>
                         </select>
                     </div>
     
-                    <div class="col-md-6 col-sm-12 mar centrar">
-                        <button type="submit" class="btn btn-primary mt-2 ">Crear usuario</button>
-                    </div>
+
     
                     <div id="hidden_div" class="col-md-6 col-sm-12">
                         <label for="exampleFormControlInput1" class="form-label">Contraseña de Admin</label>
                         <input type="password" class="form-control form-control-lg" placeholder="Contraseña" id="pass" name="pass">
+                    </div>
+
+                    <div class="">
+                        <button type="submit" class="btn btn-primary mt-3 w-100" id="submit-btn">Crear usuario</button>
                     </div>
         </div>
     </div>
@@ -137,6 +141,52 @@
             document.getElementById(divId).style.display = element.value != 1 ? 'none' : 'block';
             document.getElementById("pass").value = element.value != 1 ? '' : '';
         }
+
+    let rutInput = document.getElementById('rut');
+    let submitBtn = document.getElementById('submit-btn');
+    let validacionRut = document.getElementById('validacion-rut');
+
+rutInput.addEventListener('input', function() {
+
+  let rut = this.value;
+
+  if (/^[0-9]{7,8}-[0-9Kk]{1}$/.test(rut) && validarRut(rut) && !esRutConDigitosIguales(rut)) {
+    submitBtn.disabled = false;
+    validacionRut.innerHTML = '<i class="fas fa-check-circle" style="color: #21252B;"></i>';
+} else {
+    submitBtn.disabled = true;
+    validacionRut.innerHTML = '<i class="fas fa-times-circle" style="color: #21252B;"></i>';
+}
+});
+
+function validarRut(rut) {
+
+  
+
+    let [numero, digitoVerificador] = rut.split('-');
+    let suma = 0;
+    let multiplicador = 2;
+
+    for (let i = numero.length - 1; i >= 0; i--) {
+      suma += multiplicador * numero.charAt(i);
+      multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
+    }
+
+    let resto = suma % 11;
+    let digitoCalculado = 11 - resto;
+    if (digitoCalculado === 11) {
+      digitoCalculado = '0';
+    } else if (digitoCalculado === 10) {
+      digitoCalculado = 'K';
+    }
+
+    return digitoCalculado.toString() === digitoVerificador.toUpperCase();
+  }
+
+  function esRutConDigitosIguales(rut) {
+    let [numero] = rut.split('-');
+    return numero.split('').every(d => d === numero[0]);
+   }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>

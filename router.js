@@ -101,7 +101,15 @@ router.get('/camaccess',  (req, res)=>{
 
 router.get('/crearNuevoUsuario',(req, res) =>{
 
-    res.render('crearNuevoUsuario');
+
+    conexion.query('SELECT * FROM tipousuarios',(error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('crearNuevoUsuario', {results:results});
+        }
+    })
+
 })
 
 //LISTAR USUARIOS Y DESHABILITARLOS
