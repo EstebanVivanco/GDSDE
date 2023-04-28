@@ -111,7 +111,6 @@ exports.CrearNuevoUsuario = (req, res)=>{
     const estado = 1;
     const correo = req.body.correo;
     const pass = req.body.pass;
-    
     console.log(nombre);
     //INSERT INTO usuarios SET rut = "22222", nombre= "adminnn", correo = "a@o", estado_usuario_id_fk = 1, tipo_id_fk = 1, admin_pass = "12345";
     conexion.query('INSERT INTO usuarios SET ?',{rut: rut, nombre:nombre, correo:correo, estado_usuario_id_fk:estado, tipo_id_fk: tipo, admin_pass:pass}, (error, results)=>{
@@ -185,7 +184,29 @@ exports.login = (req,res)=>{
                 console.log('error :>> ', error);
             }else{
                 if(results.length > 0){
-                    res.redirect('/inicio')
+                    //ENTRA
+                    res.render('login',{
+                        alert:true,
+                        alertTitle: 'Conexion exitosa',
+                        alertMessage: 'Credenciales correctas!',
+                        alertIcon:'succes',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        ruta: 'inicio'
+                    })
+                
+                }else{
+
+                    //NO ENTRA
+                    res.render('login',{
+                        alert:true,
+                        alertTitle: 'Error',
+                        alertMessage: 'Nombre o contraseña incorrectos!',
+                        alertIcon:'error',
+                        showConfirmButton: true,
+                        timer: false,
+                        ruta: 'login'
+                    })
                 }
 
 
