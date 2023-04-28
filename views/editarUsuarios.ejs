@@ -19,25 +19,37 @@
             .mar{
                 margin: 2% 0% 2% 0%;
             }
+
+            #hidden_div {
+                display: none;
+            }
     </style>
-    <nav class="navbar navbar-expand-lg bg-mi-color">
+    <!-- INICIO NAV-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="">
-                <img src="logotipo.png" style="width: 150px; height: 30px;" alt="">
-            </a>
+            <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav">
 
                 <ul class="navbar-nav px-5">
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link negro" style="color: #02416d" href="/"> INICIO </a>
+                        <a class="nav-link" href="/inicio"> INICIO </a>
                     </li>
+
                     <li class="nav-item mx-2">
-                        <a class="nav-link negro"  style="color:#02416d" href="registros"> REGISTROS </a>
+                        <a class="nav-link" href="registros"> REGISTROS </a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/crudusuario"> USUARIOS </a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/crudtipo"> TIPOS USUARIOS </a>
                     </li>
 
                 </ul>
@@ -45,12 +57,14 @@
         </div>
         <div>
 
-            <a class="navbar-brand" href="/login">
+            <a class="navbar-brand" href="">
                 <img src="usuario.png" style="width: 40px; height: 40px;" alt="">
             </a>
         </div>
     </nav>
- 
+    <!-- FIN NAV-->
+
+
     <% if(results){ %>
         <div class="container mt-4">
             <div class="card border-secondary">
@@ -75,7 +89,7 @@
 
                             <div class="col-md-6 col-sm-12 mar">
                                 
-                                <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo">
+                                <select class="form-select form-control-lg" aria-label="Default select example" id="tipo" name="tipo" onchange="showDiv('hidden_div', this)">
 
                                 <% tipox.forEach((tipos)=>{ %>
 
@@ -87,25 +101,40 @@
                                 </select>
                                 
                             </div>
-                                <div class="col-md-6 col-sm-12 mar" hidden>
-                                    <input type="password" class="form-control form-control-lg" id="inputPassword" placeholder="Password">
-                                </div>
+                            <div id="hidden_div" class="col-md-6 col-sm-12">
+                                <label for="exampleFormControlInput1" class="form-label">Contraseña de Admin</label>
+                                <input type="password"  class="form-control form-control-lg" value="<%= results.admin_pass %>" placeholder="Contraseña" id="pass" name="pass">
                             </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12 mar">
-                                        <button type="submit" class="btn btn-primary form-control form-control-sm" tabindex="5">Guardar</button>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 mar">
-                                        <a href="/crudusuario" class="btn btn-secondary form-control form-control-sm">Cancelar</a>
-                                    </div>
-                                        
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 mar">
+                                    <button type="submit" class="btn btn-primary form-control form-control-sm" tabindex="5">Guardar</button>
                                 </div>
+                                <div class="col-md-6 col-sm-12 mar">
+                                    <a href="/crudusuario" class="btn btn-secondary form-control form-control-sm">Cancelar</a>
+                                </div>
+                                    
                             </div>
+
+                            
+
 
                         </div>
                     </form>
+                </div>
+            </div>
         </div>
         <% } %>
+
+        
     
+        <script>
+            function showDiv(divId, element)
+            {
+                console.log(document.getElementById("tipo").value);
+                document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+                document.getElementById("pass").value = element.value != 1 ? '' : '';
+            }
+        </script>
 </body>
 </html>
