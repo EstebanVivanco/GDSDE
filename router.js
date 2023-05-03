@@ -66,7 +66,6 @@ router.get('/crearsalas',  (req, res)=>{
             throw error;            
         }else{
             res.render('crearsalas', {results: results});
-            console.log('results', results)
         }
 
     });
@@ -128,7 +127,6 @@ router.get('/editarSalas/:id', (req, res)=>{
             throw error;
         }else{
             res.render('updateSalas' , {results: results[0]})
-            console.log('results', results[0])
         }
     })
 

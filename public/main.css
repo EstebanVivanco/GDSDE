@@ -1,9 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 .bg-mi-color {
     background-color: white;
     border-bottom: 1px solid #e3e3e3;
 
 }
 
+.morado {
+    background-color: #172cd7;
+}
+
+.moradoclaro {
+    background-color: #78a3f1;
+}
 
 
 
