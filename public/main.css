@@ -14,7 +14,13 @@
     background-color: #78a3f1;
 }
 
+.text-c{
+    text-align: center;
+}
 
+.text-c h1{
+    font-family: bebas neue; color: #3a4cd5;
+}
 
 .transUp {
     transition: .5s, color .10s;
@@ -26,4 +32,19 @@
     transform: translatey(-20px);
     -webkit-transform: translatey(-20px);
     -moz-transform: translatey(-20px);
+}
+
+#titlecard{
+    background-color: #3a4cd5;
+    color: white;
+}
+
+#submit-btn{
+    background-color:   #0656ce ;
+    color: white;
+}
+
+#cancel-btn{
+    background-color:   #648c9c;
+    color: white;
 }

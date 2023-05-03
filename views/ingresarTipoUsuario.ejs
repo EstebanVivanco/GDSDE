@@ -12,7 +12,7 @@
 <body>
 
         <!-- INICIO NAV-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark morado">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -39,6 +39,10 @@
                             <a class="nav-link" href="/crudtipo"> TIPOS USUARIOS </a>
                         </li>
 
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="/crudsalas"> SALAS </a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -50,21 +54,30 @@
             </div>
         </nav>
         <!-- FIN NAV-->
+        
+    <br>
 
+    <DIV>
+        <div class="text-c">
+            <H1>FORMULARIO DE REGISTRO DE NUEVO TIPO DE USUARIO</H1>
+        </div>
+    </DIV>
+        
+    <br>
 
     <!--comienzo del formulario de nuevo tipo de usuario-->
 
     <div class="container mt-4">
         <div class="card border-secondary">
-            <div class="card-header">Ingresar nuevo tipo de usuario</div>
+            <div class="card-header" id="titlecard">Ingresar nuevo tipo de usuario</div>
             <div class="card-body">
                 <form action="/createUserType" method="POST">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre"  tabindex='1'>
                     </div>
-                    <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
-                    <a href="/crudtipo" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn" id="submit-btn" tabindex="5">Guardar</button>
+                    <a href="/crudtipo" class="btn" id="cancel-btn">Cancelar</a>
                 </form>
             </div>
         </div>
@@ -84,5 +97,35 @@
             })
         </script>
     <% } %>
+
+
+    <div class="containter-fluid p-5 pb-2" style="background-color: #3a4cd5; color: white; padding: 20px;bottom: 0; position: fixed; width: 100%;" >
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h3>Nuestro Nombre</h3>
+                <p> Yuntas Asociados </p>
+            </div>
+
+            <div class="col-lg-3">
+                <h3>Dirección de la empresa</h3>
+                <p> Picarquin, Pasaje 1 - #1388 </p>
+            </div>
+
+            <div class="col-lg-3">
+                <h3>Correo electrónico</h3>
+                <p>info@empresa.com</p>
+            </div>
+
+            <div class="col-lg-3">
+                <h3>Teléfono</h3>
+                <p>+1 123-456-7890</p>
+            </div>
+            
+
+        </div>
+    </div>
+
+
 </body>
 </html>
