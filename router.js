@@ -42,6 +42,100 @@ router.get('/registros',  (req, res)=>{
 
 
 
+router.get('/crudsalas',  (req, res)=>{
+
+
+    conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id  and estadosalas.estado != "Deshabilitada" ', (error, results) => {
+
+        if (error){
+            throw error;            
+        }else{
+            res.render('crudsalas', {results: results});
+        }
+
+    });
+
+})
+
+router.get('/crearsalas',  (req, res)=>{
+
+
+    conexion.query('SELECT * FROM estadosalas where estado != "Ocupada" ', (error, results) => {
+
+        if (error){
+            throw error;            
+        }else{
+            res.render('crearsalas', {results: results});
+            console.log('results', results)
+        }
+
+    });
+
+})
+
+//Deshabilitar sala
+
+router.get('/deshabilitarSala/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('UPDATE salas SET estado_sala_id_fk = 3 where sala_id = ?', [id], (error)=>{
+        if(error){
+            throw error;
+        }else{
+            res.redirect('/crudsalas')
+        }
+    })
+})
+
+//Vista Habilitar sala
+
+router.get('/habiSalas', (req, res)=>{
+
+
+    conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id  and estadosalas.estado = "Deshabilitada" ', (error, results) => {
+
+        if (error){
+            throw error;            
+        }else{
+            res.render('salasDeshabilitadas', {results: results});
+        }
+
+    });
+            
+
+})
+
+//Funcion habilitar sala
+router.get('/habilitarSala/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('UPDATE salas SET estado_sala_id_fk = 1 where sala_id = ?', [id], (error)=>{
+        if(error){
+            throw error;
+        }else{
+            res.redirect('/crudsalas')
+        }
+    })
+
+})
+
+//Editar Sala
+router.get('/editarSalas/:id', (req, res)=>{
+
+    const id = req.params.id;
+    conexion.query('Select * FROM salas WHERE sala_id = ?', [id], (error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            res.render('updateSalas' , {results: results[0]})
+            console.log('results', results[0])
+        }
+    })
+
+
+})
+
+
 router.get('/registrofinalizado',  (req, res)=>{
 
     res.redirect('registrofinalizado');
@@ -287,6 +381,7 @@ router.get('/habilitar/:id', (req, res)=>{
 //FIN CRUD DE TIPOUSUARIOS
 
 const crud = require('./controllers/crud');
+const { defineLocale } = require('moment');
 
 router.post('/GuardarSolicitud',crud.GuardarSolicitud);
 router.post('/CambioEstadoSala',crud.CambioEstadoSala);
@@ -295,7 +390,9 @@ router.post('/CrearNuevoUsuario',crud.CrearNuevoUsuario);
 router.post('/updateUsuario', crud.updateUsuario);
 
 router.post('/updateUserType', crud.updateUserType);
-router.post('/createUserType',crud.createUserType)
+router.post('/createUserType',crud.createUserType);
+router.post('/createsalas',crud.createsalas);
+router.post('/updateSalas',crud.updateSalas);
 
 router.post('/login', crud.login);
 

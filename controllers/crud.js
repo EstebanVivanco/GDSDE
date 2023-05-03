@@ -44,7 +44,7 @@ exports.GuardarSolicitud = (req,res)=>{
 
                                     let fecha_solicitud = moment().add(0, 'hours').format("YYYY:MM:DD");     
                                     let hora_inicio = moment().format("hh:mm:ss");
-                                    let hora_final = moment().add(1, 'minutes').format('hh:mm:ss')
+                                    let hora_final = moment().add(30, 'seconds').format('hh:mm:ss')
 
                                     conexion.query('INSERT INTO solicitud SET ?', { usuario_id_fk: usuario_id, sala_id_fk: sala_id, codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
                                         
@@ -87,7 +87,7 @@ exports.GuardarSolicitud = (req,res)=>{
 }
 
 
-    exports.CambioEstadoSala = (req , res) =>{
+exports.CambioEstadoSala = (req , res) =>{
         const sala_id = req.body.idsala;
         const estado_id = req.body.estadosala;
 
@@ -101,7 +101,7 @@ exports.GuardarSolicitud = (req,res)=>{
             }
         }) 
 
-    }
+}
 
 //CREAR NUEVO USUARIO
 exports.CrearNuevoUsuario = (req, res)=>{
@@ -271,6 +271,67 @@ exports.login = (req,res)=>{
             }
         })
     }
+}
+
+exports.createsalas = (req, res)=>{
+
+    const numero = req.body.numero;
+    const capacidad = req.body.capacidad;
+    const estado = req.body.estado;
+
+    conexion.query('INSERT INTO salas SET ?',{numero_sala:numero, estado_sala_id_fk :estado, capacidad:capacidad}, (error, results)=>{
+
+        conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id ', (error, results) => {
+
+            if(error){
+                console.log(error);
+            }else{
+                res.render('crearsalas',{
+                    alert:true,
+                    alertTitle: 'Todo correcto',
+                    alertMessage: 'Tipo de usuario ingresado correctamente!',
+                    alertIcon:'succes',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    ruta: 'crudsalas',
+                    results:results
+                })
+                //res.redirect('crudtipo');
+            }
+
+        })
+    })
+}
+
+//EDITAR TIPO DE USUARIO
+exports.updateSalas = (req, res)=>{
+
+    const id = req.body.id;
+    const capacidad = req.body.capacidad;
+    const numero = req.body.numero;
+
+    conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id  and estadosalas.estado != "Deshabilitada" ', (error, results) => {
+
+
+        conexion.query('UPDATE salas SET ? WHERE sala_id = ?', [{capacidad:capacidad, numero_sala:numero}, id], (error, resultsa)=>{
+            if(error){
+                throw error;
+            }
+            else{
+                res.render('updateSalas',{
+                    alert:true,
+                    alertTitle: 'Todo correcto',
+                    alertMessage: 'Sala actualizada correctamente!',
+                    alertIcon:'success',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    ruta: 'crudsalas',
+                    results:results
+                })
+            }
+        })
+
+    })
 }
 
 

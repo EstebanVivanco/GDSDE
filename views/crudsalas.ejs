@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Tipos de usuario</title>
+</head>
+
+<body>
+
+        <!-- INICIO NAV-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav px-5">
+
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="/inicio"> INICIO </a>
+                        </li>
+
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="registros"> REGISTROS </a>
+                        </li>
+
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="/crudusuario"> USUARIOS </a>
+                        </li>
+
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="/crudtipo"> TIPOS USUARIOS </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div>
+
+                <a class="navbar-brand" href="">
+                    <img src="usuario.png" style="width: 40px; height: 40px;" alt="">
+                </a>
+            </div>
+        </nav>
+        <!-- FIN NAV-->
+
+    <!--Inicio lista de tipos de usuario-->
+
+    
+    <br>
+    
+    <div class="container-fluid">
+
+            <a href="/crearsalas" class="btn btn-outline-info">Crear Sala</a>
+            <a href="/habiSalas" class="btn btn-outline-info">Habilitar Salas</a>
+        <table class="table table-striped text-center mt-4 ">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Número Salas</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Capacidad</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% results.forEach((salas)=>{ %>
+
+                    <tr>
+                        <td>
+                            <%= salas.id%>
+                        </td>
+                        <td>
+                            <%= salas.numero%>
+                        </td>
+                        <td>
+                            <%= salas.estado%>
+
+                        </td>
+                        <td>
+                            <%= salas.capacidad%>
+                        </td>
+ 
+                        <td>
+                            <a href="/editarSalas/<%= salas.id %>" class="btn btn-outline-info">editar</a>
+                            <a href="/deshabilitarSala/<%= salas.id %>" class="btn btn-outline-danger">eliminar</a>
+                        </td>
+                        
+
+                    </tr>
+
+                    <% }) %>
+            </tbody>
+
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+
+</html>
