@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
     <title>Editar</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!-- INICIO NAV-->
+    <nav class="navbar navbar-expand-lg navbar-dark morado">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -38,16 +40,29 @@
                         <a class="nav-link" href="/crudtipo"> TIPOS USUARIOS </a>
                     </li>
 
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/crudsalas"> SALAS </a>
+                    </li>
+
                 </ul>
             </div>
         </div>
         <div>
 
             <a class="navbar-brand" href="">
-                <img src="usuario.png" style="width: 40px; height: 40px;" alt="">
+                <img src="/usuario.png" style="width: 40px; height: 40px;" alt="">
             </a>
         </div>
     </nav>
+    <!-- FIN NAV-->
+    
+<br>
+
+<DIV>
+    <div class="text-c">
+        <H1>FORMULARIO DE EDICION DE TIPO</H1>
+    </div>
+</DIV>
 
 
 
@@ -55,7 +70,7 @@
     <% if(tipo){ %>
         <div class="container mt-4">
             <div class="card border-secondary">
-                <div class="card-header">Editar registro</div>
+                <div class="card-header" id="titlecard">Editar registro</div>
                 <div class="card-body">
                     <form action="/updateUserType" method="POST">
                         <input id="id" name="id" value="<%= tipo.tipo_id %>" hidden>
@@ -63,8 +78,8 @@
                             <label for="user" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" value="<%= tipo.nombre %>" tabindex='1'">
                         </div>
-                        <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
-                        <a href="/crudtipo" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary" id="submit-btn" tabindex="5">Guardar</button>
+                        <a href="/crudtipo" class="btn btn-secondary" id="cancel-btn">Cancelar</a>
                     </form>
                 </div>
             </div>
@@ -83,8 +98,34 @@
             })
         </script>
     <% } %>
- 
 
+    
+    <div class="containter-fluid p-5 pb-2" style="background-color: #3a4cd5; color: white; padding: 20px;bottom: 0; position: fixed; width: 100%;" >
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h3>Nuestro Nombre</h3>
+                <p> Yuntas Asociados </p>
+            </div>
+
+            <div class="col-lg-3">
+                <h3>Dirección de la empresa</h3>
+                <p> Picarquin, Pasaje 1 - #1388 </p>
+            </div>
+
+            <div class="col-lg-3">
+                <h3>Correo electrónico</h3>
+                <p>info@empresa.com</p>
+            </div>
+
+            <div class="col-lg-3">
+                <h3>Teléfono</h3>
+                <p>+1 123-456-7890</p>
+            </div>
+            
+
+        </div>
+    </div>
     
     
 </body>
