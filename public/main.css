@@ -39,6 +39,15 @@
     color: white;
 }
 
+#titletable{
+    background-color: #172cd7;
+    color: white;
+}
+
+#margintable{
+    margin: 0% 5% 0% 5%;
+}
+
 #submit-btn{
     background-color:   #0656ce ;
     color: white;

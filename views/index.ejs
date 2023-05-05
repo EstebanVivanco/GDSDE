@@ -14,39 +14,47 @@
 <body>
     
     <!-- INICIO NAV-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+    <nav class="navbar navbar-expand-lg navbar-dark morado">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SALAS DE ESTUDIO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
 
-                    <ul class="navbar-nav px-5">
+                <ul class="navbar-nav px-5">
 
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="/inicio"> INICIO </a>
-                        </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/inicio"> INICIO </a>
+                    </li>
 
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="registros"> REGISTROS </a>
-                        </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="registros"> REGISTROS </a>
+                    </li>
 
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="/crudusuario"> USUARIOS </a>
-                        </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/crudusuario"> USUARIOS </a>
+                    </li>
 
-                    </ul>
-                </div>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/crudtipo"> TIPOS USUARIOS </a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/crudsalas"> SALAS </a>
+                    </li>
+
+                </ul>
             </div>
-            <div>
+        </div>
+        <div>
 
-                <a class="navbar-brand" href="">
-                    <img src="usuario.png" style="width: 40px; height: 40px;" alt="">
-                </a>
-            </div>
-        </nav>
+            <a class="navbar-brand" href="">
+                <img src="/usuario.png" style="width: 40px; height: 40px;" alt="">
+            </a>
+        </div>
+    </nav>
     <!-- FIN NAV-->
     <br>
 
@@ -62,7 +70,7 @@
                         <p class="card-text">Sala de estudio con capacidad para <%= salas.capacidad %> personas</p>
                         
                         <% if(salas.estado == 'Disponible'){ %>
-                        <a href="/solicitud/<%= salas.sala_id %>" class="btn btn-primary w-100 pt-2 btn-101">Solicitar sala de estudio</a>
+                        <a href="/solicitud/<%= salas.sala_id %>" class="btn btn-primary w-100 pt-2 btn-101" id="submit-btn">Solicitar sala de estudio</a>
                         <% }else if(salas.estado == 'Deshabilitada'){ %>
                         <a class="btn btn-danger w-100">Imposible Solicitar</a>
                         <% }else{%>
