@@ -35,6 +35,10 @@
     -moz-transform: translatey(-20px);
 }
 
+.m-l-50{
+    margin-left: 50px;
+}
+
 #titlecard {
     background-color: #3a4cd5;
     color: white;
