@@ -14,12 +14,13 @@
     background-color: #78a3f1;
 }
 
-.text-c{
+.text-c {
     text-align: center;
 }
 
-.text-c h1{
-    font-family: bebas neue; color: #3a4cd5;
+.text-c h1 {
+    font-family: bebas neue;
+    color: #3a4cd5;
 }
 
 .transUp {
@@ -34,17 +35,17 @@
     -moz-transform: translatey(-20px);
 }
 
-#titlecard{
+#titlecard {
     background-color: #3a4cd5;
     color: white;
 }
 
-#submit-btn{
-    background-color:   #0656ce ;
+#submit-btn {
+    background-color: #0656ce;
     color: white;
 }
 
-#cancel-btn{
-    background-color:   #648c9c;
+#cancel-btn {
+    background-color: #648c9c;
     color: white;
 }
