@@ -293,7 +293,7 @@ router.get('/login', (req, res) =>{
 //CRUD DE TIPO
 router.get('/crudtipo', (req,res)=>{
 
-    conexion.query('SELECT * FROM tipousuarios WHERE estadoTipoUsuario_id_fk = 1;',(error, results)=>{
+    conexion.query('SELECT * FROM tipousuarios WHERE NOT tipo_id = 1 AND estadoTipoUsuario_id_fk = 1;',(error, results)=>{
         if(error){
             throw error;
         }else{
