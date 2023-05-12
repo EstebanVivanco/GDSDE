@@ -21,6 +21,16 @@
     <!--DATATABLE-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
+    <Style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 500,
+                'GRAD' 0,
+                'opsz' 48
+        }
+    </Style>
+
     <title>Tipos de usuario</title>
 </head>
 
@@ -113,8 +123,7 @@
                             <a href="/editusertype/<%= tipo.tipo_id %>" class="btn" id="submit-btn"><span
                                     class="material-symbols-outlined">edit_square</span></a>
                             <!-- <a href="/deleteUserType/<%= tipo.tipo_id %>" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a> -->
-                            <a onclick="confirmar(<%= tipo.tipo_id %>)" class="btn btn-danger"><span
-                                    class="material-symbols-outlined">delete</span></a>
+                            <a onclick="confirmar(<%= tipo.tipo_id %>)" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
                         </td>
 
                     </tr>
@@ -161,9 +170,9 @@
     <script>
         $(document).ready(function () {
             $('#table').DataTable();
-            
+
         });
-        
+
 
         function confirmar(id) {
             Swal.fire({
