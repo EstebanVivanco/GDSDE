@@ -289,8 +289,8 @@ exports.createsalas = (req, res)=>{
                 res.render('crearsalas',{
                     alert:true,
                     alertTitle: 'Todo correcto',
-                    alertMessage: 'Tipo de usuario ingresado correctamente!',
-                    alertIcon:'succes',
+                    alertMessage: 'Sala registrada correctamente!',
+                    alertIcon:'success',
                     showConfirmButton: false,
                     timer: 1500,
                     ruta: 'crudsalas',

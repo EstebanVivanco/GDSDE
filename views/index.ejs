@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <script async src="camcode.js"></script>
+    <link rel="icon" type="image/jpg" href="favicon.png"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Sala de estudio</title>
@@ -76,6 +78,18 @@
             <% results.forEach((salas) => { %>
             <div class="col-md-4">
                 <div class="card text-dark bg-light mt-5 " style="width: 28rem;">
+                    
+                    <% if(salas.camcode) { %>
+
+                        <div class="camera-card" data-id="<%= salas.camcode %>">
+                            <div style="width: 100%;" id="containerv_<%= salas.camcode %>"></div>
+                            <input type="text" name="camcodes" id="camcodes" value="<%= salas.camcode %>" hidden>
+                        </div>
+
+                    <%} else{%>
+                        <img width="445px" height="250px" class="card-img-top" src="https://images.wondershare.com/recoverit/article/2019/06/there-is-no-connected-camera-mac-1.jpg" alt="">
+                    <%}%>
+
                     <div class="card-body">
                         <h5 class="card-title">Sala de estudio numero <%= salas.numero_sala %></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Estado: <%= salas.estado %></h6>
