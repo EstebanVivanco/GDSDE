@@ -14,6 +14,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+    <!--DATATABLE-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
     <title>Tipos de usuario</title>
 </head>
@@ -81,7 +83,8 @@
 
         <a href="/crearNuevoUsuario" class="btn" id="submit-btn">Crear nuevo usuario</a>
         <a href="/usuarioDeshabilitado" class="btn" id="submit-btn">Habilitar usuario</a>
-        <table class="table table-striped text-center mt-4 ">
+        <br><br>
+        <table id="table" class="table table-striped text-center mt-4 ">
             <thead id="titletable">
                 <tr>
                     <th scope="col">Id</th>
