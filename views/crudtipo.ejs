@@ -22,6 +22,16 @@
     <!--DATATABLE-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
+    <Style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 500,
+                'GRAD' 0,
+                'opsz' 48
+        }
+    </Style>
+
     <title>Tipos de usuario</title>
 </head>
 
@@ -39,42 +49,37 @@
 
                 <ul class="navbar-nav px-5">
 
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="/inicio"> INICIO </a>
-                    </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-light" href="/inicio"> INICIO </a>
+                        </li>
+    
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-light" href="/registros"> REGISTROS </a>
+                        </li>
+    
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-light" href="/crudusuario"> USUARIOS </a>
+                        </li>
+    
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-light" href="/crudtipo"> TIPOS USUARIOS </a>
+                        </li>
+    
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-light" href="/crudsalas"> SALAS </a>
+                        </li>
 
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="registros"> REGISTROS </a>
-                    </li>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="/crudusuario"> USUARIOS </a>
-                    </li>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="/crudtipo"> TIPOS USUARIOS </a>
-                    </li>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="/crudsalas"> SALAS </a>
-                    </li>
 
                 </ul>
             </div>
         </div>
-        <div>
-
-            <a class="navbar-brand" href="">
-                <img src="usuario.png" style="width: 40px; height: 40px;" alt="">
-            </a>
-        </div>
     </nav>
     <!-- FIN NAV-->
 
-    <br><br>
+    <br><br><br><br><br>
 
     <DIV>
-        <div class="text-c">
+        <div class="text-c pt-4">
             <H1>LISTA DE TIPOS DE USUARIOS</H1>
         </div>
     </DIV>
@@ -82,14 +87,12 @@
     <!--Inicio lista de tipos de usuario-->
 
 
-    <br>
 
-    <div class="container-fluid">
+    <div class="table-responsive container-fluid">
 
-        <a href="/ingresarTipoUsuario" class="btn" id="submit-btn">Añadir un nuevo tipo de usuario</a>
-        <a href="/tipoUserDeshabilitado" class="btn" id="submit-btn">Tipo de usuarios deshabilitados</a>
-        <br>
-        <br>
+            <a href="/ingresarTipoUsuario" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Añadir un nuevo tipo de usuario</a>
+            <a href="/tipoUserDeshabilitado" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Tipo de usuarios deshabilitados</a>
+
 
         <table id="table" class="table table-striped text-center mt-4">
             <thead id="titletable">
@@ -111,11 +114,9 @@
                             <%= tipo.nombre %>
                         </td>
                         <td>
-                            <a href="/editusertype/<%= tipo.tipo_id %>" class="btn" id="submit-btn"><span
-                                    class="material-symbols-outlined">edit_square</span></a>
+                            <a href="/editusertype/<%= tipo.tipo_id %>" class="btn" id="submit-btn"><span class="material-symbols-outlined">edit_square</span></a>
                             <!-- <a href="/deleteUserType/<%= tipo.tipo_id %>" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a> -->
-                            <a onclick="confirmar(<%= tipo.tipo_id %>)" class="btn btn-danger"><span
-                                    class="material-symbols-outlined">delete</span></a>
+                            <a onclick="confirmar(<%= tipo.tipo_id %>)" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
                         </td>
 
                     </tr>
@@ -126,7 +127,7 @@
     </div>
     <br><br>
 
-    <footer class="text-center text-white" id="submit-btn" style="bottom: 0; width: 100%; margin-top: auto;">
+    <footer class="text-center text-white" id="submit-btn" style="bottom: 0; width: 100%; margin-top: 10%;">
         <div class="container p-2 pb-0">
             <div class="row">
                 <div class="col-lg-6">
@@ -161,10 +162,12 @@
 
     <script>
         $(document).ready(function () {
-            $('#table').DataTable();
-            
+            $('#table').DataTable({
+                
+            });
+
         });
-        
+
 
         function confirmar(id) {
             Swal.fire({

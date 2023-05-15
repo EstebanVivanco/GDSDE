@@ -39,6 +39,18 @@
     margin-left: 50px;
 }
 
+.pt-4{
+    padding-top: 4%;
+}
+
+.mtb-1{
+    margin: 0.5% 0% 1% 0%;
+}
+
+.w-100{
+    width: 100%;
+}
+
 #titlecard {
     background-color: #3a4cd5;
     color: white;
@@ -51,6 +63,7 @@
 
 #margintable{
     margin: 0% 5% 0% 5%;
+    padding-bottom: 2%;
 }
 
 #submit-btn{

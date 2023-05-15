@@ -28,33 +28,28 @@
                 <ul class="navbar-nav px-5">
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="/inicio"> INICIO </a>
+        
+                        <a class="nav-link text-light fs-5" href="/inicio"><img class="text-link-center" src="home.png" height="40px" style="margin: 0;" alt=""> INICIO </a>
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="registros"> REGISTROS </a>
+                        <a class="nav-link text-light fs-5" href="registros"> REGISTROS </a>
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="/crudusuario"> USUARIOS </a>
+                        <a class="nav-link text-light fs-5" href="/crudusuario"> USUARIOS </a>
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="/crudtipo"> TIPOS USUARIOS </a>
+                        <a class="nav-link text-light fs-5" href="/crudtipo"> TIPOS USUARIOS </a>
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="/crudsalas"> SALAS </a>
+                        <a class="nav-link text-light fs-5" href="/crudsalas"> SALAS </a>
                     </li>
 
                 </ul>
             </div>
-        </div>
-        <div>
-
-            <a class="navbar-brand" href="">
-                <img src="/usuario.png" style="width: 40px; height: 40px;" alt="">
-            </a>
         </div>
     </nav>
     <!-- FIN NAV-->
@@ -76,8 +71,8 @@
         
         <div class="row">
             <% results.forEach((salas) => { %>
-            <div class="col-md-4">
-                <div class="card text-dark bg-light mt-5 " style="width: 28rem;">
+                <div class="col-md-4 col-sm-12 col-12">
+                    <div class="card text-dark shadow bg-light p-3 mt-5 ">
                     
                     <% if(salas.camcode) { %>
 
