@@ -278,28 +278,55 @@ exports.createsalas = (req, res)=>{
     const numero = req.body.numero;
     const capacidad = req.body.capacidad;
     const estado = req.body.estado;
+    const camcode = req.body.selectCam;
 
-    conexion.query('INSERT INTO salas SET ?',{numero_sala:numero, estado_sala_id_fk :estado, capacidad:capacidad}, (error, results)=>{
+    conexion.query('SELECT COUNT(*) AS  total_salas FROM salas WHERE numero_sala = ?', [numero], (error, resultsi)=>{
 
-        conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id ', (error, results) => {
+        
+        
+        if (resultsi[0].total_salas != 0 ) {
 
-            if(error){
-                console.log(error);
-            }else{
+
+            conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id ', (error, results) => {
+
                 res.render('crearsalas',{
                     alert:true,
-                    alertTitle: 'Todo correcto',
-                    alertMessage: 'Sala registrada correctamente!',
-                    alertIcon:'success',
+                    alertTitle: 'Error al Registrar',
+                    alertMessage: 'Número de sala existente, ingrese otro número!',
+                    alertIcon:'error',
                     showConfirmButton: false,
                     timer: 1500,
-                    ruta: 'crudsalas',
+                    ruta: 'crearsalas',
                     results:results
                 })
-                //res.redirect('crudtipo');
-            }
+            })
 
-        })
+        }else{
+
+            conexion.query('INSERT INTO salas SET ?',{numero_sala:numero, estado_sala_id_fk :estado, capacidad:capacidad, camcode: camcode}, (error, results)=>{
+
+                conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id ', (error, results) => {
+
+                    if(error){
+                        console.log(error);
+                    }else{
+                        res.render('crearsalas',{
+                            alert:true,
+                            alertTitle: 'Todo correcto',
+                            alertMessage: 'Sala registrada correctamente!',
+                            alertIcon:'success',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            ruta: 'crudsalas',
+                            results:results
+                        })
+                        //res.redirect('crudtipo');
+                    }
+
+                })
+            })
+
+        }
     })
 }
 
