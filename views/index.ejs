@@ -77,11 +77,11 @@
                     <% if(salas.camcode) { %>
 
                         <div class="camera-card" data-id="<%= salas.camcode %>">
-                            <div style="width: 100%;" id="containerv_<%= salas.camcode %>"></div>
+                            <div  id="containerv_<%= salas.camcode %>"></div>
                             <input type="text" name="camcodes" id="camcodes" value="<%= salas.camcode %>" hidden>
                         </div>
 
-                    <%} else{%>
+                    <%} if(salas.camcode === null) {%>
                         <img width="445px" height="250px" class="card-img-top" src="https://images.wondershare.com/recoverit/article/2019/06/there-is-no-connected-camera-mac-1.jpg" alt="">
                     <%}%>
 
@@ -101,6 +101,7 @@
                     </div>
                 </div>
             </div>
+
             <%})%>
         </div>
     </div>

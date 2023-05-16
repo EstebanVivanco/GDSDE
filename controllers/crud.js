@@ -289,15 +289,21 @@ exports.createsalas = (req, res)=>{
 
             conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id ', (error, results) => {
 
-                res.render('crearsalas',{
-                    alert:true,
-                    alertTitle: 'Error al Registrar',
-                    alertMessage: 'Número de sala existente, ingrese otro número!',
-                    alertIcon:'error',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    ruta: 'crearsalas',
-                    results:results
+                conexion.query('SELECT camcode FROM salas ', (error, results2) => {
+
+                    res.render('crearsalas',{
+                        alert:true,
+                        alertTitle: 'Error al Registrar',
+                        alertMessage: 'Número de sala existente, ingrese otro número!',
+                        alertIcon:'error',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        ruta: 'crearsalas',
+                        results:results,
+                        results2: results2
+                    })
+
+                
                 })
             })
 

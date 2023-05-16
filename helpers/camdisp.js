@@ -1,3 +1,16 @@
+const inputs = document.querySelectorAll('input[id="codelin"]');
+const camsExistentes = [];
+
+for (let i = 0; i < inputs.length; i++) {
+
+  const element = inputs[i];
+  if (element.value.length > 0) {
+    camsExistentes.push(element.value);
+  }
+
+}
+
+// console.log('camsExistentes', camsExistentes)
 
 function cargarOption() {
 
@@ -10,7 +23,7 @@ function cargarOption() {
       devices.forEach(device => {
 
         if (device.kind == 'videoinput') {
-        
+          
           arraysOption.push({
             id: device.deviceId,
             name: device.label
@@ -19,6 +32,15 @@ function cargarOption() {
         }
 
       });
+
+      for (let i = 0; i < arraysOption.length; i++) {
+        if (camsExistentes.includes(arraysOption[i].id)) {
+          arraysOption.splice(i, 1);
+          i--; // Disminuir el contador para ajustar el índice después de eliminar un elemento
+        }
+      }
+
+      // console.log('arraysOption ELIMINADO', arraysOption)
 
       arraysOption.forEach(cam => {
 
@@ -29,7 +51,7 @@ function cargarOption() {
     
       });
 
-      console.log('objectCams', arraysOption)
+      // console.log('objectCams', arraysOption)
 
     })
     .catch(error => {

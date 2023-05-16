@@ -104,6 +104,10 @@
                         </select>
                     </div>
 
+                    <% results2.forEach((codelin) => { %>
+                            <input value="<%= codelin.camcode %>" id="codelin" name="codelin" hidden>
+                    <% }) %>
+
                     <div class="">
                         <button type="submit" class="btn mt-3 w-100" id="submit-btn">Crear Salas</button>
                     </div>
