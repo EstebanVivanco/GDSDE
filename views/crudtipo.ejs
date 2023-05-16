@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/jpg" href="favicon.png"/>
+    <link rel="icon" type="image/jpg" href="favicon.png" />
     <link rel="stylesheet" href="main.css">
 
     <!--BOOTSTRAP-->
@@ -21,17 +21,6 @@
 
     <!--DATATABLE-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-
-    <Style>
-        .material-symbols-outlined {
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 500,
-                'GRAD' 0,
-                'opsz' 48
-        }
-    </Style>
-
     <title>Tipos de usuario</title>
 </head>
 
@@ -49,25 +38,25 @@
 
                 <ul class="navbar-nav px-5">
 
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" href="/inicio"> INICIO </a>
-                        </li>
-    
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" href="/registros"> REGISTROS </a>
-                        </li>
-    
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" href="/crudusuario"> USUARIOS </a>
-                        </li>
-    
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" href="/crudtipo"> TIPOS USUARIOS </a>
-                        </li>
-    
-                        <li class="nav-item mx-2">
-                            <a class="nav-link text-light" href="/crudsalas"> SALAS </a>
-                        </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light" href="/inicio"> INICIO </a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light" href="/registros"> REGISTROS </a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light" href="/crudusuario"> USUARIOS </a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light" href="/crudtipo"> TIPOS USUARIOS </a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light" href="/crudsalas"> SALAS </a>
+                    </li>
 
 
                 </ul>
@@ -76,7 +65,7 @@
     </nav>
     <!-- FIN NAV-->
 
-    <br><br><br><br><br>
+    <br><br>
 
     <DIV>
         <div class="text-c pt-4">
@@ -90,8 +79,10 @@
 
     <div class="table-responsive container-fluid">
 
-        <a href="/ingresarTipoUsuario" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Añadir un nuevo tipo de usuario</a>
-        <a href="/tipoUserDeshabilitado" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Tipo de usuarios deshabilitados</a>
+        <a href="/ingresarTipoUsuario" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Añadir un nuevo tipo de
+            usuario</a>
+        <a href="/tipoUserDeshabilitado" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Tipo de usuarios
+            deshabilitados</a>
 
         <table id="table" class="table table-striped text-center mt-4">
             <thead id="titletable">
@@ -113,9 +104,11 @@
                             <%= tipo.nombre %>
                         </td>
                         <td>
-                            <a href="/editusertype/<%= tipo.tipo_id %>" class="btn" id="submit-btn"><span class="material-symbols-outlined">edit_square</span></a>
+                            <a href="/editusertype/<%= tipo.tipo_id %>" class="btn" id="submit-btn"><span
+                                    class="material-symbols-outlined">edit_square</span></a>
                             <!-- <a href="/deleteUserType/<%= tipo.tipo_id %>" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a> -->
-                            <a onclick="confirmar(<%= tipo.tipo_id %>)" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
+                            <a onclick="confirmar(<%= tipo.tipo_id %>)" class="btn btn-danger"><span
+                                    class="material-symbols-outlined">delete</span></a>
                         </td>
 
                     </tr>
@@ -126,7 +119,7 @@
     </div>
     <br><br>
 
-    <footer class="text-center text-white" id="submit-btn" style="bottom: 0; width: 100%; margin-top: 10%;">
+    <footer class="text-center text-white" id="submit-btn" style="bottom: 0; width: 100%; margin-top: auto;">
         <div class="container p-2 pb-0">
             <div class="row">
                 <div class="col-lg-6">
@@ -161,10 +154,66 @@
 
     <script>
         $(document).ready(function () {
-            $('#table').DataTable();
+            $('#table').DataTable({
+                "language": espanol,
+
+                pageLength:5,
+                lengthMenu:[[5,10,20,-1],[5,10,20,'Todo']]
+            });
 
         });
 
+        var espanol = {
+            "processing": "Procesando...",
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "zeroRecords": "No se encontraron resultados",
+            "emptyTable": "Ningún dato disponible en esta tabla",
+            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "search": "Buscar:",
+            "infoThousands": ",",
+            "loadingRecords": "Cargando...",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            "stateRestore": {
+                "creationModal": {
+                    "button": "Crear",
+                    "name": "Nombre:",
+                    "order": "Clasificación",
+                    "paging": "Paginación",
+                    "search": "Busqueda",
+                    "select": "Seleccionar",
+                    "columns": {
+                        "search": "Búsqueda de Columna",
+                        "visible": "Visibilidad de Columna"
+                    },
+                    "title": "Crear Nuevo Estado",
+                    "toggleLabel": "Incluir:"
+                },
+                "emptyError": "El nombre no puede estar vacio",
+                "removeConfirm": "¿Seguro que quiere eliminar este %s?",
+                "removeError": "Error al eliminar el registro",
+                "removeJoiner": "y",
+                "removeSubmit": "Eliminar",
+                "renameButton": "Cambiar Nombre",
+                "renameLabel": "Nuevo nombre para %s",
+                "duplicateError": "Ya existe un Estado con este nombre.",
+                "emptyStates": "No hay Estados guardados",
+                "removeTitle": "Remover Estado",
+                "renameTitle": "Cambiar Nombre Estado"
+            }
+
+
+
+
+        }
+    </script>
+    <script>
 
         function confirmar(id) {
             Swal.fire({
