@@ -8,7 +8,7 @@ Lo primero es tener instalado Node, obviamente, después hacen el pull del repo 
 
 Luego de eso debemos instalar las dependencias que vamos a ocupar, de momento no estan todas pero son las siguientes: 
 
-    1. npm i  ejs express nodemon mysql
+    1. npm i  ejs express nodemon mysql express-session
 
 Para el manejo de las fechas y horas tenemos que instalar la dependencia momentjs aparte.
 
