@@ -62,12 +62,16 @@ router.get('/crearsalas',  (req, res)=>{
 
     conexion.query('SELECT * FROM estadosalas where estado != "Ocupada" ', (error, results) => {
 
-        if (error){
-            throw error;            
-        }else{
-            res.render('crearsalas', {results: results});
-        }
+        conexion.query('SELECT camcode FROM salas ', (error, results2) => {
 
+            if (error){
+                throw error;            
+            }else{
+                res.render('crearsalas', {results: results, results2:results2});
+            }
+        
+
+        })
     });
 
 })
