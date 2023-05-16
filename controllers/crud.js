@@ -342,11 +342,13 @@ exports.updateSalas = (req, res)=>{
     const id = req.body.id;
     const capacidad = req.body.capacidad;
     const numero = req.body.numero;
+    const camcode = req.body.selectCam;
+    
 
     conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id  and estadosalas.estado != "Deshabilitada" ', (error, results) => {
 
 
-        conexion.query('UPDATE salas SET ? WHERE sala_id = ?', [{capacidad:capacidad, numero_sala:numero}, id], (error, resultsa)=>{
+        conexion.query('UPDATE salas SET ? WHERE sala_id = ?', [{capacidad:capacidad, numero_sala:numero, camcode:camcode}, id], (error, resultsa)=>{
             if(error){
                 throw error;
             }

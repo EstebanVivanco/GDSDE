@@ -35,19 +35,19 @@
     -moz-transform: translatey(-20px);
 }
 
-.m-l-50{
+.m-l-50 {
     margin-left: 50px;
 }
 
-.pt-4{
+.pt-4 {
     padding-top: 4%;
 }
 
-.mtb-1{
+.mtb-1 {
     margin: 0.5% 0% 1% 0%;
 }
 
-.w-100{
+.w-100 {
     width: 100%;
 }
 
@@ -56,17 +56,17 @@
     color: white;
 }
 
-#titletable{
+#titletable {
     background-color: #172cd7;
     color: white;
 }
 
-#margintable{
+#margintable {
     margin: 0% 5% 0% 5%;
     padding-bottom: 2%;
 }
 
-#submit-btn{
+#submit-btn {
     background-color: #0656ce;
     color: white;
 }
