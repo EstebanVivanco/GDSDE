@@ -89,6 +89,11 @@
 <div class="container mt-4">
     <div class="card border-secondary">
         <div class="card-header" id="titlecard">CREAR NUEVO USUARIO</div>
+        <%if(rut){%>
+
+            <h1>RUTS A REGISTRAR <%= rut%></h1>
+
+        <%}%>
         <div class="card-body">
             <form action="/CrearNuevoUsuario" method="POST">
                 <div class="row">
@@ -137,12 +142,6 @@
 
     <div class="container text-center martop">
         
-
-                
-
-
-                
-            
 
 
             </div>
