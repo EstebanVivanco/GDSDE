@@ -202,7 +202,7 @@ router.get('/crearNuevoUsuario',(req, res) =>{
         if(error){
             throw error;
         }else{
-            res.render('crearNuevoUsuario', {results:results});
+            res.render('crearNuevoUsuario', {results:results, rut: 1});
         }
     })
 
