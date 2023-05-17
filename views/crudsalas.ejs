@@ -128,7 +128,7 @@
                         <td>
                             <a href="/editarSalas/<%= salas.id %>" class="btn" id="submit-btn"><span
                                     class="material-symbols-outlined">edit_square</span></a>
-                            <a onclick="confirmar(<%= salas.id %>)" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
+                            <a onclick="confirmar(<%= salas.id %>, '<%= salas.numero%>')" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
                         </td>
 
 
@@ -234,10 +234,10 @@
         }
     </script>
     <script>
-        function confirmar(id) {
+        function confirmar(id, nombre) {
             Swal.fire({
                 title: 'Atencion!',
-                text: "Estas seguro de querer eliminar la sala numero " + id + "?",
+                text: "¿Estas seguro de querer eliminar la sala numero " + nombre + "?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

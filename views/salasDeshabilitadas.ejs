@@ -115,8 +115,7 @@
                         </td>
 
                         <td>
-                            <a href="/habilitarSala/<%= salas.id %>" class="btn btn-success"><span
-                                    class="material-symbols-outlined">add_task</span></a>
+                            <a onclick="confirmar(<%= salas.id%>, '<%= salas.numero%>')" class="btn btn-success"><span class="material-symbols-outlined">add_task</span></a>
                         </td>
 
 
@@ -222,10 +221,10 @@
         }
     </script>
     <script>
-        function confirmar(id) {
+        function confirmar(id, nombre) {
             Swal.fire({
                 title: 'Atencion!',
-                text: "Estas seguro de querer habilitar la sala numero:  " + id + "?",
+                text: "¿Estas seguro de querer habilitar la sala numero:  " + nombre + "?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -235,7 +234,7 @@
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    window.location = '/habilitar/' + id;
+                    window.location = '/habilitarSala/' + id;
 
                 }
 

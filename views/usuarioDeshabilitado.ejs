@@ -93,8 +93,8 @@
                     <th scope="col">Rut</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Estado</th>
                     <th scope="col">Tipo</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -123,7 +123,7 @@
                         </td>
                         
                         <td>
-                            <a onclick="confirmar(<%= user.usuario_id %>)" class="btn btn-success"><span class="material-symbols-outlined">add_task</span></a>
+                            <a onclick="confirmar(<%= user.usuario_id %>, '<%= user.nombre %>')" class="btn btn-success"><span class="material-symbols-outlined">add_task</span></a>
                         </td>
 
 
@@ -231,10 +231,10 @@
     <script>
 
 
-        function confirmar(id) {
+        function confirmar(id, nombre) {
             Swal.fire({
                 title: 'Atencion!',
-                text: "Estas seguro de querer habilitar el el usuario:  " + id + "?",
+                text: "¿Estas seguro de querer habilitar el usuario:  " + nombre + "?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
