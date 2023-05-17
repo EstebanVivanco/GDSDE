@@ -19,7 +19,7 @@ router.get('/inicio',  (req, res)=>{
         if (error){
             throw error;            
         }else{
-            res.render('index', {results: results});
+            res.render('index', {results: results, user: req.session.user});
         }
 
     });
@@ -50,7 +50,7 @@ router.get('/crudsalas',  (req, res)=>{
         if (error){
             throw error;            
         }else{
-            res.render('crudsalas', {results: results});
+            res.render('crudsalas', {results: results, user: req.session.user});
         }
 
     });
@@ -381,6 +381,12 @@ router.get('/habilitar/:id', (req, res)=>{
     })
 })
 //FIN CRUD DE TIPOUSUARIOS
+
+router.get('/denegado',  (req, res)=>{
+
+    res.render('denegado');
+
+})
 
 const crud = require('./controllers/crud');
 const { defineLocale } = require('moment');

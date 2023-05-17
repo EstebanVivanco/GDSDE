@@ -1,10 +1,11 @@
 const { query } = require('../database/bd');
 const conexion = require('../database/bd');
-const { validate, clean, format, getCheckDigit } = require('rut.js')
+const session = require('express-session');
 const router = require('../router');
 const moment = require('moment')
 const { v4: uuidv4 } = require('uuid');
 let pasa = 0;
+
 
 
 exports.GuardarSolicitud = (req,res)=>{
@@ -233,6 +234,7 @@ exports.createUserType = (req, res)=>{
 //RUTA DE VALIDACION
 
 exports.login = (req,res)=>{
+
     const email = req.body.correo;
     const pass = req.body.password;
 
@@ -241,16 +243,19 @@ exports.login = (req,res)=>{
             if(error){
                 console.log('error :>> ', error);
             }else{
+
+
                 if(results.length > 0){
-                    //ENTRA
+
                     res.render('login',{
                         alert:true,
                         alertTitle: 'Conexion exitosa',
-                        alertMessage: 'Credenciales correctas!',
+                        alertMessage: 'Bienvenido ' + results[0].nombre + '!',
                         alertIcon:'succes',
                         showConfirmButton: false,
                         timer: 1500,
-                        ruta: 'inicio'
+                        ruta: 'inicio',
+                        user: req.session.user = results[0],
                     })
                 
                 }else{

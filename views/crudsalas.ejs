@@ -1,3 +1,5 @@
+<% if(user) { %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -253,6 +255,19 @@
         }
 
     </script>
+
+
+
 </body>
 
 </html>
+
+<%}else{%>
+    
+    <script>
+        window.onload = function() {
+            window.location.href = "denegado";
+        };
+    </script>
+
+<%}%>
