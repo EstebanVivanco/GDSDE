@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpg" href="favicon.png"/>
 
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/main.css">
     <script src="navbarC.js"></script>
     <!--FONT AWESOME -->
     <script src="https://kit.fontawesome.com/ca048bf1d7.js" crossorigin="anonymous"></script>
@@ -34,15 +34,13 @@
     <nabin-bombin></nabin-bombin>
     
     <!-- FIN NAV-->
-    <br><br><br>
-    <main>
     <DIV>
-        <div class="text-c">
+        <div class="text-c ptb-3">
             <H1 style="font-size: 50px;">SALAS DE ESTUDIO</H1>
             <p>
-                <span class="col-12" style="background-color: #0656ce; padding: 0.2em 0.8em; margin: 1em 1em; border-radius: 100%;"></span>DISPONIBLE
-                <span class="col-12" style="background-color: #ffc107; padding: 0.2em 0.8em; margin: 1em 1em; border-radius: 100%;"></span>OCUPADA
-                <span class="col-12" style="background-color: #dc3545; padding: 0.2em 0.8em; margin: 1em 1em; border-radius: 100%;"></span>INHABILITADO
+                <span style="background-color: #1c8454 ; padding: 0.2em 0.8em; margin: 1em 1em; border-radius: 100%;"></span>DISPONIBLE
+                <span style="background-color: #ffc107; padding: 0.2em 0.8em; margin: 1em 1em; border-radius: 100%;"></span>OCUPADA
+                <span style="background-color: #dc3545; padding: 0.2em 0.8em; margin: 1em 1em; border-radius: 100%;"></span>INHABILITADO
             </p>
         </div>
     </DIV>
@@ -72,7 +70,7 @@
                         <p class="card-text">Sala de estudio con capacidad para <%= salas.capacidad %> personas</p>
                         
                         <% if(salas.estado == 'Disponible'){ %>
-                        <a href="/solicitud/<%= salas.sala_id %>" class="btn w-100 pt-2 btn-101" id="submit-btn">Solicitar sala de estudio</a>
+                        <a href="/solicitud/<%= salas.sala_id %>" class="btn w-100 pt-2 btn-101 btn-success">Solicitar sala de estudio</a>
                         <% }else if(salas.estado == 'Deshabilitada'){ %>
                         <a class="btn btn-danger w-100">Imposible Solicitar</a>
                         <% }else{%>
@@ -106,22 +104,6 @@
           © 2023 Copyright: Gestor de salas, derechos reservados
         </div>
     </footer>
-
-
-    <script>
-        /* Set the width of the side navigation to 250px */
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-        }
-
-        /* Set the width of the side navigation to 0 */
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-        } 
-    </script>
-    
 
     <!--cdn bootstrap js-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
