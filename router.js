@@ -5,12 +5,25 @@ const router = express.Router();
 
 router.get('/',  (req, res)=>{
 
-
- 
-            res.render('login');
- 
+    res.render('login');
 
 })
+
+router.get('/logout',  (req, res)=>{
+
+
+    req.session.destroy((err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect('/login'); // Redirige a la página de inicio de sesión u otra página adecuada
+        }
+    });
+
+
+})
+
+
 
 router.get('/inicio',  (req, res)=>{
 
@@ -35,7 +48,7 @@ router.get('/registros',  (req, res)=>{
         if (error){
             throw error;            
         }else{
-            res.render('registros', {results: results});
+            res.render('registros', {results: results, user: req.session.user});
         }
 
     });
@@ -69,7 +82,7 @@ router.get('/crearsalas',  (req, res)=>{
             if (error){
                 throw error;            
             }else{
-                res.render('crearsalas', {results: results, results2:results2});
+                res.render('crearsalas', {results: results, results2:results2, user: req.session.user});
             }
         
 
@@ -102,7 +115,7 @@ router.get('/habiSalas', (req, res)=>{
         if (error){
             throw error;            
         }else{
-            res.render('salasDeshabilitadas', {results: results});
+            res.render('salasDeshabilitadas', {results: results, user: req.session.user});
         }
 
     });
@@ -132,7 +145,7 @@ router.get('/editarSalas/:id', (req, res)=>{
         if(error){
             throw error;
         }else{
-            res.render('updateSalas' , {results: results[0]})
+            res.render('updateSalas' , {results: results[0], user: req.session.user})
         }
     })
 
@@ -178,7 +191,7 @@ router.get('/cambioestado/:id',  (req, res)=>{
         if (error){
             throw error;            
         }else{
-            res.render('cambioestado', { sala : results[0]});
+            res.render('cambioestado', { sala : results[0], user: req.session.user});
         }
 
     });
@@ -187,7 +200,7 @@ router.get('/cambioestado/:id',  (req, res)=>{
 
 router.get('/error',  (req, res)=>{
 
-       res.render('error');
+        res.render('error',{user: req.session.user});
  
 })
 
@@ -204,7 +217,7 @@ router.get('/crearNuevoUsuario',(req, res) =>{
         if(error){
             throw error;
         }else{
-            res.render('crearNuevoUsuario', {results:results, rut: 1});
+            res.render('crearNuevoUsuario', {results:results, rut: 1, user: req.session.user});
         }
     })
 
@@ -217,7 +230,7 @@ router.get('/crudusuario',(req, res) =>{
         if(error){
             throw error;
         }else{
-            res.render('crudusuario', {results:results});
+            res.render('crudusuario', {results:results, user: req.session.user});
         }
     })
 })
@@ -229,7 +242,7 @@ router.get('/usuarioDeshabilitado',(req, res) =>{
         if(error){
             throw error;
         }else{
-            res.render('usuarioDeshabilitado', {results:results});
+            res.render('usuarioDeshabilitado', {results:results, user: req.session.user});
         }
     })
 })
@@ -253,9 +266,7 @@ router.get('/editarUsuarios/:id', (req, res)=>{
 
                 if (errortipo) throw errortipo;
     
-                res.render('editarUsuarios', { results : results[0] , tipox:tipos, aidi:aidi} )
-                
-                
+                res.render('editarUsuarios', { results : results[0] , tipox:tipos, aidi:aidi, user: req.session.user} )
     
             })
          
@@ -303,7 +314,7 @@ router.get('/crudtipo', (req,res)=>{
         if(error){
             throw error;
         }else{
-            res.render('crudtipo', {results:results});
+            res.render('crudtipo', {results:results, user: req.session.user});
         }
     })
 })
@@ -330,7 +341,7 @@ router.get('/editusertype/:id', (req, res)=>{
         if(error){
             throw error;
         }else{
-            res.render('editusertype', {tipo:results[0]});
+            res.render('editusertype', {tipo:results[0], user: req.session.user});
         }
     })
 })
@@ -352,7 +363,7 @@ router.get('/deleteUserType/:id', (req, res)=>{
 //RUTA PARA AÑADIR UN NUEVO TIPO DE USUARIO
 
 router.get('/ingresarTipoUsuario', (req,res)=>{
-    res.render('ingresarTipoUsuario');
+    res.render('ingresarTipoUsuario',{ user: req.session.user});
 })
 
 
@@ -364,7 +375,7 @@ router.get('/tipoUserDeshabilitado', (req,res)=>{
         if(error){
             throw error;
         }else{
-            res.render('tipoUsuariosDeshabilitados', {results:results});
+            res.render('tipoUsuariosDeshabilitados', {results:results, user: req.session.user});
         }
     })
 })

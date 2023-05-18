@@ -2,21 +2,26 @@ const { query } = require('../database/bd');
 const conexion = require('../database/bd');
 const session = require('express-session');
 const router = require('../router');
+
 const moment = require('moment')
 const { v4: uuidv4 } = require('uuid');
 let pasa = 0;
 
+
 exports.GuardarSolicitud = (req,res)=>{
+
 
     const id = req.body.params;
     const ruts = req.body.contenedordatos;
+    const user = req.session.user;
     const sala_id = req.body.idsala;
     const codigo_solicitud = uuidv4().replace(/-/g, ''); 
     let arrayruts = ruts.split(",");
 
     let fecha_solicitud = moment().add(0, 'hours').format("YYYY:MM:DD");     
     let hora_inicio = moment().format("hh:mm:ss");
-    let hora_final = moment().add(30, 'seconds').format('hh:mm:ss')
+    let hora_final = moment().add(30, 'seconds').format('hh:mm:ss');
+
 
         conexion.query('SELECT rut FROM usuarios WHERE rut IN (?)', [arrayruts] , (error, results) => {
 
@@ -48,20 +53,31 @@ exports.GuardarSolicitud = (req,res)=>{
                 conexion.query('SELECT usuario_id FROM usuarios WHERE RUT = ? ', rutexistentes[i] , (error, resultsa) => {
                 
                     usuario_id = resultsa[0]['usuario_id'] ;
+
                     conexion.query('INSERT INTO solicitud SET ?', { usuario_id_fk: usuario_id, sala_id_fk: sala_id, codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final},(error, results)=>{
-                        
 
-                            res.render('registrofinalizado');
+                    conexion.query('SELECT * FROM salas INNER JOIN estadosalas ON estadosalas.estado_sala_id = salas.estado_sala_id_fk order by numero_sala asc ', (error, results) => {
 
-                        
+                        res.render('index',{
+                            alert:true,
+                            alertTitle: 'Todo correcto',
+                            alertMessage: 'Nuevo usuario ingresado correctamente!',
+                            alertIcon:'succes',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            ruta: 'solicitud',
+                            results:results,
+                            user
+                        })
                     
                         //Actualizar BD
-                     conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
+                        conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
                             if(error){
-                                throw error;
+                              throw error;
                              }
                         }); 
                         
+                        })
                     })
 
                 })
@@ -242,7 +258,8 @@ exports.updateUsuario = (req, res)=>{
                             ruta: 'crudusuario',
                             results:results,
                             tipox:tipos,
-                            aidi:aidi
+                            aidi:aidi,
+                            user: req.session.user
                         })
                     }
                 })
@@ -357,6 +374,9 @@ exports.createsalas = (req, res)=>{
     const capacidad = req.body.capacidad;
     const estado = req.body.estado;
     const camcode = req.body.selectCam;
+    const user = req.session.user;
+
+    console.log('user :>> ', user);
 
     conexion.query('SELECT COUNT(*) AS  total_salas FROM salas WHERE numero_sala = ?', [numero], (error, resultsi)=>{
 
@@ -378,7 +398,8 @@ exports.createsalas = (req, res)=>{
                         timer: 1500,
                         ruta: 'crearsalas',
                         results:results,
-                        results2: results2
+                        results2: results2,
+                        user
                     })
 
                 
@@ -391,21 +412,26 @@ exports.createsalas = (req, res)=>{
 
                 conexion.query('SELECT salas.sala_id AS id,salas.numero_sala AS numero, estadosalas.estado AS estado, salas.capacidad FROM salas INNER JOIN estadosalas WHERE salas.estado_sala_id_fk = estadosalas.estado_sala_id ', (error, results) => {
 
-                    if(error){
-                        console.log(error);
-                    }else{
-                        res.render('crearsalas',{
-                            alert:true,
-                            alertTitle: 'Todo correcto',
-                            alertMessage: 'Sala registrada correctamente!',
-                            alertIcon:'success',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            ruta: 'crudsalas',
-                            results:results
-                        })
-                        //res.redirect('crudtipo');
-                    }
+                    conexion.query('SELECT camcode FROM salas ', (error, results2) => {
+                        if(error){
+                            console.log(error);
+                        }else{
+                            res.render('crearsalas',{
+                                alert:true,
+                                alertTitle: 'Todo correcto',
+                                alertMessage: 'Sala registrada correctamente!',
+                                alertIcon:'success',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                ruta: 'crudsalas',
+                                results:results,
+                                results2: results2,
+                                user
+                            })
+                            //res.redirect('crudtipo');
+                        }
+
+                    })
 
                 })
             })
