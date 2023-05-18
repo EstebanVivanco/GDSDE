@@ -1,3 +1,4 @@
+<%if(user){%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +66,7 @@
 
                     <div class="col-md-6 col-sm-12 mt-3">
                         <label for="exampleFormControlInput1" class="form-label">Asignar Cámara a la Sala: </label>
-                        <select class="form-select form-control-lg" aria-label="Default select example" id="selectCam" name="selectCam" required>
+                        <select class="form-select form-control-lg" aria-label="Default select example" id="selectCam" name="selectCam" >
                             <option value="" disabled selected> Seleccione una Cámara</option>
                         </select>
                     </div>
@@ -124,3 +125,13 @@
 
 </body>
 </html>
+
+<%}else{%>
+        
+    <script>
+        window.onload = function() {
+            window.location.href = "denegado";
+        };
+    </script>
+
+<%}%>
