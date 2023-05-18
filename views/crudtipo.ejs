@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpg" href="favicon.png" />
-    
+
     <link rel="stylesheet" href="main.css">
     <script src="navbarC.js"></script>
 
@@ -32,7 +32,7 @@
 <body style="display: flex; flex-direction: column; min-height: 100vh;">
 
     <!-- INICIO NAV-->
-    
+
     <nabin-bombin></nabin-bombin>
 
     <!-- FIN NAV-->
@@ -49,11 +49,9 @@
 
     <div class="table-responsive container-fluid">
 
-        <a href="/ingresarTipoUsuario" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Añadir un nuevo tipo de
-            usuario</a>
-        <a href="/tipoUserDeshabilitado" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Tipo de usuarios
-            deshabilitados</a>
-
+        <a title="Añadir un nuevo tipo de usuario" data-bs-toggle="tooltip" href="/ingresarTipoUsuario" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Crear tipo de usuario</a>
+        <a title="Listar los tipos de usuarios deshabilitados" data-bs-toggle="tooltip" href="/tipoUserDeshabilitado" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Habilitar tipo de usuario</a>
+        <br><br>
         <table id="table" class="table table-striped text-center mt-4">
             <thead id="titletable">
                 <tr>
@@ -74,9 +72,11 @@
                             <%= tipo.nombre %>
                         </td>
                         <td>
-                            <a title="Esto es un tooltip" href="/editusertype/<%= tipo.tipo_id %>" class="btn" id="submit-btn"><span class="material-symbols-outlined">edit_square</span></a>
-                           
-                            <a onclick="confirmar(<%= tipo.tipo_id %>, '<%= tipo.nombre %>')" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
+                            <a title="Editar el tipo de usuario" data-bs-toggle="tooltip"
+                                href="/editusertype/<%= tipo.tipo_id %>" class="btn" id="submit-btn"><span
+                                    class="material-symbols-outlined">edit_square</span></a>
+
+                            <a title="Eliminar el tipo de usuario" data-bs-toggle="tooltip" onclick="confirmar(<%= tipo.tipo_id %>, '<%= tipo.nombre %>')" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
                         </td>
 
                     </tr>
@@ -129,8 +129,8 @@
             $('#table').DataTable({
                 "language": espanol,
 
-                pageLength:5,
-                lengthMenu:[[5,10,20,-1],[5,10,20,'Todo']]
+                pageLength: 5,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todo']]
             });
 
         });
@@ -207,6 +207,13 @@
             })
         }
 
+    </script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
 </body>
 

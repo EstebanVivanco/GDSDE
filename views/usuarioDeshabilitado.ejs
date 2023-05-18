@@ -36,17 +36,17 @@
 
     <!-- FIN NAV-->
 
-    <DIV>
+    <div>
         <div class="text-c ptb-3">
             <H1>LISTA DE USUARIOS DESHABILITADOS</H1>
         </div>
-    </DIV>
+    </div>
 
     <!--Inicio lista de usuarios-->
 
     <div class="table-responsive container-fluid">
-        <a href="/crudusuario" class="btn" id="submit-btn"><span class="material-symbols-outlined">undo</span></a>
-
+        <a title="Volver" data-bs-toggle="tooltip" href="/crudusuario" class="btn" id="submit-btn"><span class="material-symbols-outlined">undo</span></a>
+        <br><br>
         <table id="table" class="table table-striped text-center mt-4">
             <thead id="titletable"  >
                 <tr>
@@ -84,7 +84,7 @@
                         </td>
                         
                         <td>
-                            <a onclick="confirmar(<%= user.usuario_id %>, '<%= user.nombre %>')" class="btn btn-success"><span class="material-symbols-outlined">add_task</span></a>
+                            <a title="Habilitar usuario" data-bs-toggle="tooltip" onclick="confirmar(<%= user.usuario_id %>, '<%= user.nombre %>')" class="btn btn-success"><span class="material-symbols-outlined">add_task</span></a>
                         </td>
 
 
@@ -188,6 +188,12 @@
 
 
         }
+    </script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
     <script>
 

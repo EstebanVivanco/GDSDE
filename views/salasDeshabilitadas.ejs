@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="icon" type="image/jpg" href="favicon.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/main.css">
     <script src="/navbarC.js"></script>
-    
+
     <!--FONT AWESOME -->
     <script src="https://kit.fontawesome.com/ca048bf1d7.js" crossorigin="anonymous"></script>
-    
+
 
     <!--GOOGLE FONTS -->
     <link rel="stylesheet"
@@ -31,7 +31,7 @@
 <body style="display: flex; flex-direction: column; min-height: 100vh;">
 
     <!-- INICIO NAV-->
-    
+
     <nabin-bombin></nabin-bombin>
 
     <!-- FIN NAV-->
@@ -48,8 +48,8 @@
 
     <div class="table-responsive container-fluid">
 
-        <a href="/crudsalas" class="btn" id="submit-btn"><span class="material-symbols-outlined">undo</span></a>
-
+        <a title="Volver" data-bs-toggle="tooltip" href="/crudsalas" class="btn" id="submit-btn"><span class="material-symbols-outlined">undo</span></a>
+        <br><br>
         <table id="table" class="table table-striped text-center mt-4 ">
             <thead id="titletable">
                 <tr>
@@ -80,7 +80,7 @@
                         </td>
 
                         <td>
-                            <a onclick="confirmar(<%= salas.id%>, '<%= salas.numero%>')" class="btn btn-success"><span class="material-symbols-outlined">add_task</span></a>
+                            <a title="Habilitar sala" data-bs-toggle="tooltip" onclick="confirmar(<%= salas.id%>, '<%= salas.numero%>')" class="btn btn-success"><span class="material-symbols-outlined">add_task</span></a>
                         </td>
 
 
@@ -123,6 +123,13 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -208,9 +215,10 @@
 
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

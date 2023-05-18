@@ -56,8 +56,9 @@
 
     <div class="table-responsive container-fluid">
 
-        <a href="/crearsalas" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Crear Sala</a>
-        <a href="/habiSalas" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Habilitar Salas</a>
+        <a title="Añadir nueva sala" data-bs-toggle="tooltip" href="/crearsalas" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Crear Sala</a>
+        <a title="Lista de salas deshabilitadas" data-bs-toggle="tooltip" href="/habiSalas" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Habilitar Salas</a>
+
         <br>
         <br>
         <table id="table" class="table table-striped text-center mt-4 ">
@@ -90,9 +91,8 @@
                         </td>
 
                         <td>
-                            <a href="/editarSalas/<%= salas.id %>" class="btn" id="submit-btn"><span
-                                    class="material-symbols-outlined">edit_square</span></a>
-                            <a onclick="confirmar(<%= salas.id %>, '<%= salas.numero%>')" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
+                            <a title="Editar sala" data-bs-toggle="tooltip" href="/editarSalas/<%= salas.id %>" class="btn" id="submit-btn"><span class="material-symbols-outlined">edit_square</span></a>
+                            <a title="Eliminar sala" data-bs-toggle="tooltip" onclick="confirmar(<%= salas.id %>, '<%= salas.numero%>')" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
                         </td>
 
 
@@ -218,6 +218,12 @@
             })
         }
 
+    </script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
 
 

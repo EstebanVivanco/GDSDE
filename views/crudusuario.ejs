@@ -11,10 +11,10 @@
 
     <link rel="stylesheet" href="main.css">
     <script src="navbarC.js"></script>
-    
+
     <!--FONT AWESOME -->
     <script src="https://kit.fontawesome.com/ca048bf1d7.js" crossorigin="anonymous"></script>
-    
+
     <!--GOOGLE FONTS -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -28,7 +28,7 @@
 <body style="display: flex; flex-direction: column; min-height: 100vh;">
 
     <!-- INICIO NAV-->
-    
+
     <nabin-bombin></nabin-bombin>
 
     <!-- FIN NAV-->
@@ -45,8 +45,8 @@
 
     <div class="table-responsive container-fluid">
 
-        <a href="/crearNuevoUsuario" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Crear nuevo usuario</a>
-        <a href="/usuarioDeshabilitado" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Habilitar usuario</a>
+        <a title="Añadir usuario" data-bs-toggle="tooltip" href="/crearNuevoUsuario" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Crear nuevo usuario</a>
+        <a title="Lista de usuarios deshabilitados" data-bs-toggle="tooltip" href="/usuarioDeshabilitado" class="btn mtb-1 col-md-2 col-12" id="submit-btn">Habilitar usuario</a>
         <br><br>
         <table id="table" class="table table-striped text-center mt-4 ">
             <thead id="titletable">
@@ -81,8 +81,9 @@
                         </td>
 
                         <td>
-                            <a href="/editarUsuarios/<%= user.usuario_id %>" class="btn" id="submit-btn"><span class="material-symbols-outlined">edit_square</span></a>
-                            <a onclick="confirmar(<%= user.usuario_id %>, '<%= user.nombre %>')" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
+                            <a title="Editar usuario" data-bs-toggle="tooltip" href="/editarUsuarios/<%= user.usuario_id %>" class="btn" id="submit-btn"><span
+                                    class="material-symbols-outlined">edit_square</span></a>
+                            <a title="Eliminar usuario" data-bs-toggle="tooltip" onclick="confirmar(<%= user.usuario_id %>, '<%= user.nombre %>')" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></a>
                         </td>
 
 
@@ -131,8 +132,8 @@
             $('#table').DataTable({
                 "language": espanol,
 
-                pageLength:5,
-                lengthMenu:[[5,10,20,-1],[5,10,20,'Todo']]
+                pageLength: 5,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todo']]
             });
 
         });
@@ -186,6 +187,12 @@
 
 
         }
+    </script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
     <script>
 
