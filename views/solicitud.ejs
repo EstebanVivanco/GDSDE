@@ -1,5 +1,3 @@
-<% if(user){ %>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -176,8 +174,8 @@
                     <%}%>
 
                     <button type="button" onclick="addelement();" id="submit-btn-vali" class="btn btn-primary mt-4 btn-block">Agregar</button>
-                     
-                      
+                    
+                    
                   </div>
                 </div>
                 </div>
@@ -355,7 +353,7 @@ function validarRut(rut) {
 
 
 <script>
-   var ruts = [];
+    var ruts = [];
 
 
 </script>
@@ -364,11 +362,12 @@ function validarRut(rut) {
 
 </html>
 
+
 <%}else{%>
-      
+    
   <script>
       window.onload = function() {
-          window.location.href = "/denegado";
+          window.location.href = "denegado";
       };
   </script>
 
