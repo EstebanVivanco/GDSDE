@@ -6,8 +6,6 @@ const moment = require('moment')
 const { v4: uuidv4 } = require('uuid');
 let pasa = 0;
 
-
-
 exports.GuardarSolicitud = (req,res)=>{
 
     const ruts = req.body.contenedordatos;
@@ -15,15 +13,16 @@ exports.GuardarSolicitud = (req,res)=>{
     const codigo_solicitud = uuidv4().replace(/-/g, ''); 
     let arrayruts = ruts.split(",");
 
+    let fecha_solicitud = moment().add(0, 'hours').format("YYYY:MM:DD");     
+    let hora_inicio = moment().format("hh:mm:ss");
+    let hora_final = moment().add(30, 'seconds').format('hh:mm:ss')
 
         conexion.query('SELECT rut FROM usuarios WHERE rut IN (?)', [arrayruts] , (error, results) => {
 
             let rutexistentes = [];
 
             for (let i = 0; i < results.length; i++) {
-                
                 rutexistentes.push(results[i].rut)
-
             }
 
             //Limpiar y dejar solo los ruts no registrados en arrayruts
@@ -31,30 +30,74 @@ exports.GuardarSolicitud = (req,res)=>{
             let cadena = arrayruts.join(", ");
 
 
-            if (arrayruts.length > 0) { //Lógica en caso de que existan ingresos de rut invalidos, redirigirlos al registro
+            //Ciclo para recorrer y registrar los rut que no existen como visita
+            for (let i = 0; i < arrayruts.length; i++) {
+                conexion.query(' CALL insertar_con_foranea(?,   ?,          ?,      ?,          ?,      ?) ',[arrayruts[i], sala_id, codigo_solicitud, fecha_solicitud, hora_inicio, hora_final],(error, results)=>{
+                    if(error){
+                        throw error;
+                     }
+                })
+            }
 
-                conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(error, results)=>{
+
+            //Ciclo para recorrer y registrar los rut que si existen
+            for (let i = 0; i < rutexistentes.length; i++) {
+               
+                conexion.query('SELECT usuario_id FROM usuarios WHERE RUT = ? ', rutexistentes[i] , (error, results) => {
                 
-                    res.render('crearNuevoUsuario',{
-                        alert:true,
-                        alertTitle: 'RUT(S) INEXISTENTES',
-                        alertMessage: 'Los siguientes rut no existen en nuestro registro ' + cadena,
-                        alertIcon:'error',
-                        showConfirmButton: false,
-                        timer: 5000,
-                        ruta: 'crearNuevoUsuario',
-                        results:results,
-                        user: req.session.user,
-                        rut: cadena
+                    usuario_id = results[0]['usuario_id'] ;
+                    conexion.query('INSERT INTO solicitud SET ?', { usuario_id_fk: usuario_id, sala_id_fk: sala_id, codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final},(error, results)=>{
+                            
+                        conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(error, results)=>{
+                        
+                            res.render('crearNuevoUsuario',{
+                                alert:true,
+                                alertTitle: 'Registro finalizado',
+                                alertMessage: 'Los siguientes rut no existían en nuestra BD y fueron registrados como invitados ' + cadena,
+                                alertIcon:'success',
+                                showConfirmButton: false,
+                                timer: 5000,
+                                ruta: 'crearNuevoUsuario',
+                                results:results,
+                                user: req.session.user
+                            })
+                        
+                        })
+                    
+                        //Actualizar BD
+                        conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
+                            if(error){
+                                throw error;
+                             }
+                        }); 
+                        
                     })
-                
+
                 })
 
             }
 
         })
 
+        // if (arrayruts.length > 0) { //Lógica en caso de que existan ingresos de rut invalidos, redirigirlos al registro
 
+        //     conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(error, results)=>{
+            
+        //         res.render('crearNuevoUsuario',{
+        //             alert:true,
+        //             alertTitle: 'RUT(S) INEXISTENTES',
+        //             alertMessage: 'Los siguientes rut no existen en nuestro registro ' + cadena,
+        //             alertIcon:'error',
+        //             showConfirmButton: false,
+        //             timer: 5000,
+        //             ruta: 'crearNuevoUsuario',
+        //             results:results,
+        //             user: req.session.user
+        //         })
+            
+        //     })
+
+        // }
 
 
 
@@ -122,10 +165,6 @@ exports.GuardarSolicitud = (req,res)=>{
     //         }
             
     // });
-
-
-
-
         
 }
 
@@ -174,7 +213,7 @@ exports.CrearNuevoUsuario = (req, res)=>{
             timer: 1500,
             ruta: 'crearNuevoUsuario',
             results:results,
-            rut: 1
+            rut : 1
         })
         }
     })

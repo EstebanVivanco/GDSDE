@@ -5,13 +5,32 @@
   <script>
     var ruts = [];
     function addelement(){
+
+
+
+      let capacidadsala = document.getElementById('capacidadsala');
       let rut = document.getElementById('rut').value;
       let rutinput = document.getElementById('rut');
-      ruts.push(rut);
+      let msg = document.getElementById('msg-full');
+      let labelrut = document.getElementById('labelrut');
+
+
+      if (capacidadsala.value != ruts.length) {
+        console.log('A AAAAAAAAAAAAAAAAAA:>> ');
+        ruts.push(rut);
+      }else{
+
+        submitBtn.hidden = true;
+        rutInput.hidden = true;
+        msg.hidden = false;
+        labelrut.hidden = true;
+
+      }
       rutinput.value = "";
       let resultado = document.getElementById('resultado');
       resultado.innerHTML = '';
       var cont = 1;
+      
       for( const ruta of ruts){
           let datoparrafo = document.createElement('input');
           let pretext = document.createElement('li');
@@ -24,6 +43,8 @@
       }
       let container = document.getElementById('contenedordatos');
       container.value = ruts;
+
+      
     }
   </script>
   <script src="../html5-qrcode.min.js"></script>
@@ -169,14 +190,22 @@
                   <hr>
                     <div class="form-group">
       
-                      <label for="rut">RUT</label>
+                      <label for="" id="labelrut">RUT</label>
                       <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" maxlength="10" required>
                       <span id="validacion-rut"></span>
-      
+                      
+                      <h4 id="msg-full" hidden>REGISTRO MÁXIMO DE ALUMNOS POR LA CAPACIDAD DE LA SALA</h4>
+
                     </div>
 
                     <div id="verificacionmsg"></div>
-                    <button type="button" onclick="addelement();" id="submit-btn" class="btn mt-4 btn-block" style="color: white; width: 100%;">Agregar</button>
+                    <%  if(sala){%>
+                      <input type="text" value="<%= sala.capacidad %>" hidden id="capacidadsala">
+                    <%}%>
+
+                    <button type="button" onclick="addelement();" id="submit-btn-vali" class="btn btn-primary mt-4 btn-block">Agregar</button>
+                     
+                      
                   </div>
                 </div>
                 </div>
@@ -246,7 +275,6 @@
 
   var ruts = [];
 
-
   function obtenerRUN(url) {
     const regex = /RUN=([^&]*)/;
     const match = url.match(regex);
@@ -258,16 +286,12 @@
   }
 
 
-
-
   function onScanSuccess(qrCodeMessage) {
 
       const rutovich = obtenerRUN(qrCodeMessage);
       let container = document.getElementById('contenedordatos');
       let btnreg = document.getElementById('btn-gen');
       ruts.push(rutovich);
-
-
 
       document.getElementById('result').innerHTML = '<span class="result"> Se ha añadido el rut: '+rutovich+'</span>';
 
@@ -281,7 +305,6 @@
 
 
       for( const ruta of ruts){
-
 
           let datoparrafo = document.createElement('input');
           let pretext = document.createElement('li');
@@ -310,7 +333,7 @@
   //VALIDADOR DE RUT
 
 let rutInput = document.getElementById('rut');
-let submitBtn = document.getElementById('submit-btn');
+let submitBtn = document.getElementById('submit-btn-vali');
 let validacionRut = document.getElementById('validacion-rut');
 
 rutInput.addEventListener('input', function() {
@@ -354,6 +377,13 @@ function validarRut(rut) {
     let [numero] = rut.split('-');
     return numero.split('').every(d => d === numero[0]);
 }
+
+
+</script>
+
+
+<script>
+   var ruts = [];
 
 
 </script>
