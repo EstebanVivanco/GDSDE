@@ -17,7 +17,9 @@ router.get('/inicio',  (req, res)=>{
     conexion.query('SELECT * FROM salas INNER JOIN estadosalas ON estadosalas.estado_sala_id = salas.estado_sala_id_fk order by numero_sala asc ', (error, results) => {
 
         if (error){
-            throw error;            
+
+            throw error; 
+
         }else{
             res.render('index', {results: results, user: req.session.user});
         }
@@ -160,7 +162,7 @@ router.get('/solicitud/:id',  (req, res)=>{
         if (error){
             throw error;            
         }else{
-            res.render('solicitud', { sala : results[0]});
+            res.render('solicitud', { sala : results[0], user: req.session.user});
         }
 
     });

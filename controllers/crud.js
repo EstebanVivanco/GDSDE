@@ -8,6 +8,7 @@ let pasa = 0;
 
 exports.GuardarSolicitud = (req,res)=>{
 
+    const id = req.body.params;
     const ruts = req.body.contenedordatos;
     const sala_id = req.body.idsala;
     const codigo_solicitud = uuidv4().replace(/-/g, ''); 
@@ -29,43 +30,33 @@ exports.GuardarSolicitud = (req,res)=>{
             arrayruts = arrayruts.filter(elemento => !rutexistentes.includes(elemento));
             let cadena = arrayruts.join(", ");
 
+            //Variable para alerta
+            let alertavisita = 'Registro finalizado con Exito';
 
             //Ciclo para recorrer y registrar los rut que no existen como visita
             for (let i = 0; i < arrayruts.length; i++) {
                 conexion.query(' CALL insertar_con_foranea(?,   ?,          ?,      ?,          ?,      ?) ',[arrayruts[i], sala_id, codigo_solicitud, fecha_solicitud, hora_inicio, hora_final],(error, results)=>{
-                    if(error){
-                        throw error;
-                     }
+                    
+                    alertavisita = 'Los siguientes rut no existían en nuestra BD y fueron registrados como invitados ' + cadena;
+
                 })
             }
-
 
             //Ciclo para recorrer y registrar los rut que si existen
             for (let i = 0; i < rutexistentes.length; i++) {
                
-                conexion.query('SELECT usuario_id FROM usuarios WHERE RUT = ? ', rutexistentes[i] , (error, results) => {
+                conexion.query('SELECT usuario_id FROM usuarios WHERE RUT = ? ', rutexistentes[i] , (error, resultsa) => {
                 
-                    usuario_id = results[0]['usuario_id'] ;
+                    usuario_id = resultsa[0]['usuario_id'] ;
                     conexion.query('INSERT INTO solicitud SET ?', { usuario_id_fk: usuario_id, sala_id_fk: sala_id, codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final},(error, results)=>{
-                            
-                        conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(error, results)=>{
                         
-                            res.render('crearNuevoUsuario',{
-                                alert:true,
-                                alertTitle: 'Registro finalizado',
-                                alertMessage: 'Los siguientes rut no existían en nuestra BD y fueron registrados como invitados ' + cadena,
-                                alertIcon:'success',
-                                showConfirmButton: false,
-                                timer: 5000,
-                                ruta: 'crearNuevoUsuario',
-                                results:results,
-                                user: req.session.user
-                            })
+
+                            res.render('registrofinalizado');
+
                         
-                        })
                     
                         //Actualizar BD
-                        conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
+                     conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
                             if(error){
                                 throw error;
                              }
