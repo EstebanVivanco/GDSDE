@@ -1,3 +1,4 @@
+<% if(user){%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +6,6 @@
   <script>
     var ruts = [];
     function addelement(){
-
 
 
       let capacidadsala = document.getElementById('capacidadsala');
@@ -156,7 +156,8 @@
                 <div class="collapse" id="collapseExample2">
                 <div class="card"> 
                   <div class="card-body">
-                  <h5 class="card-title">INGRESO MANUAL DE RUT</h5>
+               
+                    <h5 class="card-title">INGRESO MANUAL DE RUT</h5>
                   <hr>
                     <div class="form-group">
       
@@ -191,7 +192,10 @@
               <div class="card-body">
                 
                 <form action="/GuardarSolicitud" method="POST">
-    
+                  <% if(user){ %>
+                    <input type="text" value="<%= user.usuario_id%>" hidden id="idses" name="idses">
+                  <% } %>
+
                   <%  if(sala){%>
     
                     <input type="text" value="<%= sala.sala_id%>" id="idsala" name="idsala" hidden><br>

@@ -17,6 +17,12 @@ navigator.mediaDevices.enumerateDevices()
 function startup() {
     const camcode = document.getElementsByName('camcodes');
     const cards = document.querySelectorAll('.camera-card');
+    const sizes = document.getElementById('img-reference');
+
+    var ancho = sizes.offsetWidth;
+    var alto = sizes.offsetHeight;
+
+
   
     for (let i = 0; i < camcode.length; i++) {
       const id = camcode[i].value;
@@ -24,8 +30,8 @@ function startup() {
       navigator.mediaDevices.getUserMedia({
         audio: false,
         video: { 
-          width: 445, 
-          height: 250,
+          width: ancho, 
+          height: alto,
           deviceId: { exact: id }
         }
       })
@@ -43,6 +49,7 @@ function startup() {
   
         // agrega el elemento de video al contenedor de video del card correspondiente
         videoContainer.appendChild(video);
+
       })
       .catch(console.error);
     }

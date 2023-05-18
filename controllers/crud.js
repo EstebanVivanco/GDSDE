@@ -13,7 +13,6 @@ exports.GuardarSolicitud = (req,res)=>{
 
     const id = req.body.params;
     const ruts = req.body.contenedordatos;
-    const user = req.session.user;
     const sala_id = req.body.idsala;
     const codigo_solicitud = uuidv4().replace(/-/g, ''); 
     let arrayruts = ruts.split(",");
@@ -43,7 +42,6 @@ exports.GuardarSolicitud = (req,res)=>{
                 conexion.query(' CALL insertar_con_foranea(?,   ?,          ?,      ?,          ?,      ?) ',[arrayruts[i], sala_id, codigo_solicitud, fecha_solicitud, hora_inicio, hora_final],(error, results)=>{
                     
                     alertavisita = 'Los siguientes rut no existían en nuestra BD y fueron registrados como invitados ' + cadena;
-
                 })
             }
 
@@ -56,28 +54,14 @@ exports.GuardarSolicitud = (req,res)=>{
 
                     conexion.query('INSERT INTO solicitud SET ?', { usuario_id_fk: usuario_id, sala_id_fk: sala_id, codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final},(error, results)=>{
 
-                    conexion.query('SELECT * FROM salas INNER JOIN estadosalas ON estadosalas.estado_sala_id = salas.estado_sala_id_fk order by numero_sala asc ', (error, results) => {
+                        res.render('registrofinalizado',{
+                            data: alertavisita,
+                            results: results,
+                            user: req.session.user
+                        })
 
-                        res.render('index',{
-                            alert:true,
-                            alertTitle: 'Todo correcto',
-                            alertMessage: 'Nuevo usuario ingresado correctamente!',
-                            alertIcon:'succes',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            ruta: 'solicitud',
-                            results:results,
-                            user
-                        })
-                    
-                        //Actualizar BD
-                        conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
-                            if(error){
-                              throw error;
-                             }
-                        }); 
-                        
-                        })
+                        conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [sala_id], (error, resultsup) => {});
+
                     })
 
                 })
@@ -85,93 +69,6 @@ exports.GuardarSolicitud = (req,res)=>{
             }
 
         })
-
-        // if (arrayruts.length > 0) { //Lógica en caso de que existan ingresos de rut invalidos, redirigirlos al registro
-
-        //     conexion.query('SELECT * FROM tipousuarios where estadoTipoUsuario_id_fk = 1',(error, results)=>{
-            
-        //         res.render('crearNuevoUsuario',{
-        //             alert:true,
-        //             alertTitle: 'RUT(S) INEXISTENTES',
-        //             alertMessage: 'Los siguientes rut no existen en nuestro registro ' + cadena,
-        //             alertIcon:'error',
-        //             showConfirmButton: false,
-        //             timer: 5000,
-        //             ruta: 'crearNuevoUsuario',
-        //             results:results,
-        //             user: req.session.user
-        //         })
-            
-        //     })
-
-        // }
-
-
-
-    
-    // conexion.query('SELECT COUNT(*) AS count FROM usuarios WHERE rut IN (?)',[arrayruts] , (error, results) => {
-        
-        
-    //     const counts = results[0].count;
-    //     const sexo = arrayruts.length;
-
-    //         if (error){
-    //             console.log('error :>> ', error);
-    //         }else{
-                
-
-    //             if (sexo === counts) {
-                    
-    //                 for (const rutovich of arrayruts){
-
-
-    //                     console.log(rutovich);
-
-    //                         conexion.query('SELECT usuario_id FROM usuarios WHERE RUT = ? ', [rutovich] , (error, results) => {
-
-    //                             if (error){
-    //                                 throw error;            
-    //                             }else{
-
-    //                                 usuario_id = results[0]['usuario_id'] ;
-
-    //                                 let fecha_solicitud = moment().add(0, 'hours').format("YYYY:MM:DD");     
-    //                                 let hora_inicio = moment().format("hh:mm:ss");
-    //                                 let hora_final = moment().add(30, 'seconds').format('hh:mm:ss')
-
-    //                                 conexion.query('INSERT INTO solicitud SET ?', { usuario_id_fk: usuario_id, sala_id_fk: sala_id, codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final} , (error, results) => {
-                                        
-    //                                     if (error){
-    //                                         throw error;            
-    //                                     }else{
-                                            
-
-    //                                         conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [ sala_id], (error, results) => {
-    //                                             if(error){
-    //                                                 throw error;
-    //                                             }
-    //                                         }); 
-
-    //                                     }
-    //                                 });
-
-    //                             }
-
-
-    //                     }); 
-                        
-    //                 }
-
-    //                 res.render('registrofinalizado');  
-
-
-    //             }else{
-    //                 res.render('error',{msg : ruts})
-    //             }
-
-    //         }
-            
-    // });
         
 }
 
