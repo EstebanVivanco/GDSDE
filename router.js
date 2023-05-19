@@ -410,7 +410,7 @@ router.get('/denegado',  (req, res)=>{
 
 router.get('/manual', (req, res)=>{
 
-    res.render('manual');
+    res.render('manual', { user: req.session.user} );
 
 })
 
