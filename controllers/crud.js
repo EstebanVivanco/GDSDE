@@ -83,7 +83,7 @@ exports.CambioEstadoSala = (req , res) =>{
                 throw error;
             }
             else{
-                res.redirect('/inicio');
+                
             }
         }) 
 

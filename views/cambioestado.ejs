@@ -52,7 +52,12 @@
             setTimeout(function(){
                     var button = document.getElementById('cambioValores');
                     button.form.submit();
-                },20000);
+                    
+                    setTimeout(function(){
+                        window.close();
+                    },2000);
+                    
+                },7000);
             };
         }
     cambioDeHoraAutomatico();
