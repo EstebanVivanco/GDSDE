@@ -206,7 +206,7 @@
                     
                   </div>
     
-                  <input type="text" value="" id="contenedordatos" name="contenedordatos"  hidden>
+                  <input type="text" value="" id="contenedordatos" name="contenedordatos"  >
                   <br>
 
                   <button onclick="paginaEstado()" id="btn-gen" type="submit" class="btn mt-2 btn-block" style="background-color: #0656ce; color: white; width: 100%;">Generar Solicitud</button>
@@ -317,6 +317,7 @@
           pretext.innerText = cont + '. Datos de ingresante: '
           datoparrafo.value = ruta;
           cont = cont + 1;
+
 
           resultado.appendChild(pretext).appendChild(datoparrafo);
 

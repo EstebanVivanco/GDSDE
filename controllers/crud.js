@@ -17,6 +17,8 @@ exports.GuardarSolicitud = (req,res)=>{
     const codigo_solicitud = uuidv4().replace(/-/g, ''); 
     let arrayruts = ruts.split(",");
 
+    console.log('arrayruts :>> ', arrayruts);
+
     let fecha_solicitud = moment().add(0, 'hours').format("YYYY:MM:DD");     
     let hora_inicio = moment().format("hh:mm:ss");
     let hora_final = moment().add(30, 'seconds').format('hh:mm:ss');
@@ -25,6 +27,8 @@ exports.GuardarSolicitud = (req,res)=>{
         conexion.query('SELECT rut FROM usuarios WHERE rut IN (?)', [arrayruts] , (error, results) => {
 
             let rutexistentes = [];
+
+            console.log('rutexistentes :>> ', rutexistentes);
 
             for (let i = 0; i < results.length; i++) {
                 rutexistentes.push(results[i].rut)
@@ -37,14 +41,6 @@ exports.GuardarSolicitud = (req,res)=>{
             //Variable para alerta
             let alertavisita = 'Registro finalizado con Exito';
 
-            //Ciclo para recorrer y registrar los rut que no existen como visita
-            for (let i = 0; i < arrayruts.length; i++) {
-                conexion.query(' CALL insertar_con_foranea(?,   ?,          ?,      ?,          ?,      ?) ',[arrayruts[i], sala_id, codigo_solicitud, fecha_solicitud, hora_inicio, hora_final],(error, results)=>{
-                    
-                    alertavisita = 'Los siguientes rut no existían en nuestra BD y fueron registrados como invitados ' + cadena;
-                })
-            }
-
             //Ciclo para recorrer y registrar los rut que si existen
             for (let i = 0; i < rutexistentes.length; i++) {
                
@@ -53,22 +49,34 @@ exports.GuardarSolicitud = (req,res)=>{
                     usuario_id = resultsa[0]['usuario_id'] ;
 
                     conexion.query('INSERT INTO solicitud SET ?', { usuario_id_fk: usuario_id, sala_id_fk: sala_id, codigo_solicitud : codigo_solicitud , fecha_solicitud : fecha_solicitud ,hora_inicio : hora_inicio, hora_final : hora_final},(error, results)=>{
-
+                        
                         res.render('registrofinalizado',{
                             data: alertavisita,
-                            results: results,
                             user: req.session.user
                         })
 
-                        conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [sala_id], (error, resultsup) => {});
-
                     })
-
+                    
                 })
-
+                
+            }
+            
+            //Ciclo para recorrer y registrar los rut que no existen como visita
+            for (let i = 0; i < arrayruts.length; i++) {
+                conexion.query(' CALL insertar_con_foranea(?,   ?,          ?,      ?,          ?,      ?) ',[arrayruts[i], sala_id, codigo_solicitud, fecha_solicitud, hora_inicio, hora_final],(error, results)=>{
+                    alertavisita = 'Los siguientes rut no existían en nuestra BD y fueron registrados como invitados ' + cadena;
+                    res.render('registrofinalizado',{
+                        data: alertavisita,
+                        user: req.session.user
+                    })
+                })
             }
 
+
         })
+
+        conexion.query('UPDATE salas SET estado_sala_id_fk = 2 WHERE sala_id = ?; ', [sala_id], (error, resultsup) => {});
+
         
 }
 
