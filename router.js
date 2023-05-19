@@ -82,7 +82,7 @@ router.get('/crearsalas',  (req, res)=>{
             if (error){
                 throw error;            
             }else{
-                res.render('crearsalas', {results: results, results2:results2, user: req.session.user});
+                res.render('crearsalas', {results: results, results2:results2 , user: req.session.user});
             }
         
 
@@ -96,7 +96,7 @@ router.get('/crearsalas',  (req, res)=>{
 router.get('/deshabilitarSala/:id', (req, res)=>{
 
     const id = req.params.id;
-    conexion.query('UPDATE salas SET estado_sala_id_fk = 3 where sala_id = ?', [id], (error)=>{
+    conexion.query('UPDATE salas SET estado_sala_i_fk d= 3 where sala_id = ?', [id], (error)=>{
         if(error){
             throw error;
         }else{
@@ -142,11 +142,16 @@ router.get('/editarSalas/:id', (req, res)=>{
 
     const id = req.params.id;
     conexion.query('Select * FROM salas WHERE sala_id = ?', [id], (error, results)=>{
-        if(error){
-            throw error;
-        }else{
-            res.render('updateSalas' , {results: results[0], user: req.session.user})
-        }
+        conexion.query('SELECT camcode FROM salas ', (error, results2) => {
+
+            if(error){
+                throw error;
+            }else{
+                res.render('updateSalas' , {results: results[0], results2:results2, user: req.session.user})
+            }
+
+        })
+
     })
 
 

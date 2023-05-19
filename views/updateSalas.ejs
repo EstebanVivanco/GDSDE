@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" type="image/jpg" href="favicon.png"/>
-    <script async src="/camchange.js"></script>
-
+    <script async src="/camdisp.js"></script>
     <link rel="stylesheet" href="/main.css">
     <script src="/navbarC.js"></script>
     
@@ -56,10 +55,16 @@
                         <input class="form-control form-control-lg" type="text" placeholder="Ej: 4 personas" value="<%= results.capacidad %>" aria-label="default input example" id="capacidad" name="capacidad" required>
                     </div>
 
+
+                   <% results2.forEach((codelin) => { %>
+                     <input value="<%= codelin.camcode %>" id="codelin" name="codelin" hidden>
+                    <% }) %>
+                    
                     <div class="col-md-6 col-sm-12 mt-3">
                         <label for="exampleFormControlInput1" class="form-label"> Cámara: </label>
-                        <select class="form-select form-control-lg" aria-label="Default select example" id="selectCam" name="selectCam" required>
+                        <select class="form-select form-control-lg" aria-label="Default select example" id="selectCam" name="selectCam" >
                             <option value="" disabled selected> Seleccione una Cámara</option>
+                            <option value="0"> Quitar Cámara</option>
                         </select>
                     </div>
 

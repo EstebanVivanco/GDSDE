@@ -188,7 +188,8 @@ exports.updateUserType = (req, res)=>{
                 alertIcon:'succes',
                 showConfirmButton: false,
                 timer: 1500,
-                ruta: 'crudtipo'
+                ruta: 'crudtipo',
+                user: req.session.user
             })
         }
     })
@@ -211,7 +212,8 @@ exports.createUserType = (req, res)=>{
                 alertIcon:'succes',
                 showConfirmButton: false,
                 timer: 1500,
-                ruta: 'crudtipo'
+                ruta: 'crudtipo',
+                user: req.session.user
             })
             //res.redirect('crudtipo');
         }
@@ -350,21 +352,28 @@ exports.updateSalas = (req, res)=>{
 
 
         conexion.query('UPDATE salas SET ? WHERE sala_id = ?', [{capacidad:capacidad, numero_sala:numero, camcode:camcode}, id], (error, resultsa)=>{
-            if(error){
-                throw error;
-            }
-            else{
-                res.render('updateSalas',{
-                    alert:true,
-                    alertTitle: 'Todo correcto',
-                    alertMessage: 'Sala actualizada correctamente!',
-                    alertIcon:'success',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    ruta: 'crudsalas',
-                    results:results
-                })
-            }
+        
+            conexion.query('SELECT camcode FROM salas ', (error, results2) => {
+        
+                if(error){
+                    throw error;
+                }
+                else{
+                    res.render('updateSalas',{
+                        alert:true,
+                        alertTitle: 'Todo correcto',
+                        alertMessage: 'Sala actualizada correctamente!',
+                        alertIcon:'success',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        ruta: 'crudsalas',
+                        results:results,
+                        results2:results2,
+                        user : req.session.user
+                    })
+                }
+            })
+
         })
 
     })
