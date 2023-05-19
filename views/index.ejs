@@ -80,10 +80,13 @@
                         <img width="auto" height="auto" id="img-reference" class="card-img-top" src="https://images.wondershare.com/recoverit/article/2019/06/there-is-no-connected-camera-mac-1.jpg" alt="">
                     <%}%>
 
+                    <div class="card-img-overlay mt-3 ms-3">
+                        <h4 style="color: white"> SALA  <%= salas.numero_sala %></h4>
+                    </div>
+
                     <div class="card-body">
-                        <h5 class="card-title">Sala de estudio numero <%= salas.numero_sala %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Estado: <%= salas.estado %></h6>
-                        <p class="card-text">Sala de estudio con capacidad para <%= salas.capacidad %> personas</p>
+                        <p class="fs-4 mb-2  text-muted" >Estado: <%= salas.estado %></p>
+                        <p class="card-text">Capacidad de la Sala: <%= salas.capacidad %></p>
                         
                         <% if(salas.estado == 'Disponible'){ %>
                         <a href="/solicitud/<%= salas.sala_id %>" class="btn w-100 pt-2 btn-101 btn-success">Solicitar sala de estudio</a>
@@ -95,6 +98,7 @@
                         
                     </div>
                 </div>
+            
             </div>
 
             <%})%>
