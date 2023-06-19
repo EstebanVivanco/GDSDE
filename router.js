@@ -421,6 +421,14 @@ router.get('/denegado',  (req, res)=>{
 
 })
 
+//RUTA MANUAL DE USUARIO
+
+router.get('/manual', (req, res)=>{
+
+    res.render('manual', { user: req.session.user} );
+
+})
+
 const crud = require('./controllers/crud');
 const { defineLocale } = require('moment');
 

@@ -163,7 +163,6 @@
       
                       <label for="" id="labelrut">RUT</label>
                       <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese el rut" maxlength="10" required>
-                      <span id="validacion-rut"></span>
                       
                       <h4 id="msg-full" hidden>REGISTRO MÁXIMO DE ALUMNOS POR LA CAPACIDAD DE LA SALA</h4>
 
@@ -259,8 +258,9 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <h5>Correo Soporte</h5>
-                    <p>gestor.salas@cliente.com </p>
+                  <h5>Correo Soporte</h5>
+                  <p>gestor.salas@cliente.com </p>
+                  <a class="nav-link text-light fs-5" href="/manual"><i class="fa-regular fa-bookmark" style="color: #ffffff;"></i> Manual de usuario </a>
                 </div>
 
                 
@@ -322,6 +322,7 @@
           pretext.innerText = cont + '. Datos de ingresante: '
           datoparrafo.value = ruta;
           cont = cont + 1;
+
 
           resultado.appendChild(pretext).appendChild(datoparrafo);
 
