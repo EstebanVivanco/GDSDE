@@ -171,6 +171,21 @@ router.get('/CrudUser',  (req, res)=>{
 
 })
 
+router.get('/cola',  (req, res)=>{
+
+
+    conexion.query('SELECT numero_sala, capacidad, estadosalas.estado, hora_final FROM `salas` left JOIN solicitud ON salas.sala_id = solicitud.sala_id_fk INNER JOIN estadosalas ON estadosalas.estado_sala_id = salas.estado_sala_id_fk GROUP by numero_sala ORDER BY numero_sala ASC;', (error, results) => {
+
+        if (error){
+            throw error;            
+        }else{
+            res.render('cola', {results: results, user: req.session.user});
+        }
+
+    });
+
+})
+
 router.get('/solicitud/:id',  (req, res)=>{
 
     const id = req.params.id;

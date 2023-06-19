@@ -295,6 +295,11 @@
       const rutovich = obtenerRUN(qrCodeMessage);
       let container = document.getElementById('contenedordatos');
       let btnreg = document.getElementById('btn-gen');
+
+      if (ruts.includes(rutovich)) {
+      alert('El rut ya se encuentra ingresado.');
+      return; // Detiene la ejecución de la función
+      } 
       ruts.push(rutovich);
 
       document.getElementById('result').innerHTML = '<span class="result"> Se ha añadido el rut: '+rutovich+'</span>';
