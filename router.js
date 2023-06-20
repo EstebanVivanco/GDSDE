@@ -96,7 +96,7 @@ router.get('/crearsalas',  (req, res)=>{
 router.get('/deshabilitarSala/:id', (req, res)=>{
 
     const id = req.params.id;
-    conexion.query('UPDATE salas SET estado_sala_i_fk d= 3 where sala_id = ?', [id], (error)=>{
+    conexion.query('UPDATE salas SET estado_sala_id_fk = 3 where sala_id = ?', [id], (error)=>{
         if(error){
             throw error;
         }else{
